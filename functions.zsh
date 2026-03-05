@@ -15,6 +15,7 @@ wp-theme-unit-data() {
 	wp plugin install wordpress-importer --activate
 	wp import theme-unit-test-data.xml --authors=create
 	rm theme-unit-test-data.xml
+	wp plugin uninstall wordpress-importer --deactivate
 	cd $WORKING_DIR
 }
 
@@ -108,6 +109,12 @@ wp-init() {
 	for pageid in $(wp post list --order="ASC" --orderby="date" --post_type=page --post_status=publish --posts_per_page=-1 --field=ID --format=ids); do
 		wp menu item add-post main-navigation $pageid
 	done
+
+	# Remove preinstalled themes
+	wp theme uninstall twentytwentyfive twentytwentyfour twentytwentythree
+
+	# Remove preinstalled plugins
+	wp plugin uninstall hello akismet
 
 	echo "\n\nDon't forget to:"
 	echo "Update your style.css file in the base theme"
