@@ -1,0 +1,21 @@
+@use '../helpers' as *;
+
+.main-menu {
+	background-color: $accent-1;
+	margin: 0;
+
+	li {
+		display: inline-block;
+		list-style-type: none;
+	}
+
+	a {
+		color: $black;
+		display: block;
+		padding: 10px 20px;
+
+		&:hover {
+			background-color: $medium-gray;
+		}
+	}
+}

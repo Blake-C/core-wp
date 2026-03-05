@@ -1,0 +1,57 @@
+services:
+    cli_tools:
+        image: digitalblake/light-cli:4.0.0
+        volumes:
+            - ./wp-content:/home/webdev/www/public_html/wp-content
+            - ./functions.zsh:/home/webdev/.config/zsh/functions.zsh
+            - ./wordpress:/home/webdev/www/public_html
+              # - ./:/home/webdev/www/public_html
+              # - ./.pnpm-store:/home/webdev/node/.local/share/pnpm/store
+        tty: true
+        environment:
+            WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+            WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+            WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+            WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+            WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+
+    wordpress:
+        image: wordpress:6.9-php8.3
+        restart: always
+        ports:
+            - 80:80
+        environment:
+            WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+            WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+            WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+            WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+            WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+        volumes:
+            - ./wp-content:/var/www/html/wp-content
+            - ./wordpress:/var/www/html
+
+    db:
+        image: mariadb:12
+        restart: always
+        volumes:
+            - ./data/mysql:/var/lib/mysql
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        depends_on:
+            - db
+        ports:
+            - '8000:80'
+        environment:
+            PMA_ARBITRARY: 1
+            UPLOAD_LIMIT: 1500M
+
+# volumes:
+#   wordpress:

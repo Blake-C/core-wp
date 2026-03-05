@@ -1,0 +1,93 @@
+data
+.env
+/vendor
+/wordpress
+
+### WordPress Ignores by https://github.com/github/gitignore/blob/master/WordPress.gitignore ###
+/wp-content/*/*
+/wp-content/mu-plugins/*
+/wp-content/plugins/*
+/wp-content/themes/*
+
+!/wp-content/themes/core-wp
+!/wp-content/themes/core-wp/*
+!/wp-content/mu-plugins/index.php
+!/wp-content/plugins/index.php
+!/wp-content/themes/index.php
+!/wp-content/plugins/core-wp
+
+/wp-content/themes/core-wp/assets
+/wp-content/themes/core-wp-build
+
+### Docker ###
+docker_php_error_log
+/data/*/*
+/ejected/*/*
+/html/
+/logs/**/*
+
+### Bower ###
+bower_components
+
+### Vagrant stuff ###
+.vagrant
+acceptance_config.yml
+vagrant-spec.config.rb
+
+### OSX ###
+.AppleDouble
+.DS_Store
+.LSOverride
+
+### Icon must end with two \r ###
+Icon
+
+### Thumbnails ###
+._*
+
+### Files that might appear on external disk ###
+.Spotlight-V100
+.Trashes
+
+### Directories potentially created on remote AFP share ###
+.apdisk
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+
+### Videos ###
+*.wmv
+*.mpg
+*.mpeg
+*.mp4
+*.mov
+*.flv
+*.avi
+*.ogv
+*.ogg
+*.webm
+
+### Audio ###
+*.wav
+*.mp3
+*.wma
+
+### Created by http://www.gitignore.io ###
+*.css.map
+*.log
+*.sql
+*.zip
+.phpintel
+.sass-cache
+.tmp
+advanced-cache.php
+cache
+.cache
+db.php
+dist
+node_modules
+npm-debug.log
+object-cache.php
+.idea
+.pnpm-store

@@ -1,0 +1,41 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "Core WP Theme",
+		},
+		{
+			"path": "../../plugins/core-wp",
+			"name": "Core WP Plugin",
+		},
+		{
+			"path": "../../../",
+			"name": "Root",
+		},
+	],
+	"extensions": {
+		"recommendations": [
+			"bmewburn.vscode-intelephense-client",
+			"dbaeumer.vscode-eslint",
+			"editorconfig.editorconfig",
+			"esbenp.prettier-vscode",
+			"xdebug.php-debug",
+			"ikappas.phpcs",
+			"neilbrayfield.php-docblocker",
+			"stylelint.vscode-stylelint",
+		],
+	},
+	"settings": {
+		"css.validate": false,
+		"editor.rulers": [80, 120],
+		"files.associations": {
+			".stylelintrc": "json",
+		},
+		"intelephense.format.enable": false,
+		"less.validate": false,
+		"php.suggest.basic": false,
+		"php.validate.enable": false,
+		"scss.validate": false,
+		"stylelint.validate": ["css", "less", "sass", "scss"],
+	},
+}

@@ -1,0 +1,14 @@
+/**
+ * http://thesassway.com/intermediate/understanding-placeholder-selectors
+ * http://www.sitepoint.com/sass-mixin-placeholder/
+ *
+ * Removed %hidden-text, use foundations `@include element-invisible;` or
+ * `.show-for-sr`
+ */
+
+%cover {
+	// http://css-tricks.com/perfect-full-page-background-image/
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+} // to use: @extend %cover;
