@@ -20,7 +20,7 @@
 			"editorconfig.editorconfig",
 			"esbenp.prettier-vscode",
 			"xdebug.php-debug",
-			"ikappas.phpcs",
+			"obliviousharmony.vscode-php-codesniffer",
 			"neilbrayfield.php-docblocker",
 			"stylelint.vscode-stylelint",
 		],
