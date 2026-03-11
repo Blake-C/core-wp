@@ -37,5 +37,16 @@
 		"php.validate.enable": false,
 		"scss.validate": false,
 		"stylelint.validate": ["css", "less", "sass", "scss"],
+		"files.exclude": {
+			"**/fonts": true,
+		},
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.stylelint": "explicit",
+		},
+		"[scss]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+		},
 	},
 }
