@@ -1,6 +1,6 @@
 services:
     cli_tools:
-        image: digitalblake/light-cli:4.0.1
+        image: digitalblake/light-cli:5.0.0
         volumes:
             - ./wp-content:/home/webdev/www/public_html/wp-content
             - ./functions.zsh:/home/webdev/.config/zsh/functions.zsh
