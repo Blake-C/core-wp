@@ -46,7 +46,7 @@ wp-init() {
 
 	echo "\n================================================================="
 	echo "Running Composer to install WordPress Files"
-	echo "================================================================="
+	echo "=================================================================\n"
 	cd $SERVER_DIR/wp-content
 	composer install
 
@@ -121,6 +121,9 @@ wp-init() {
 
 	# Remove preinstalled plugins
 	wp plugin uninstall hello akismet
+
+	# Activate plugins
+	wp plugin activate query-monitor
 
 	echo "\n\nDon't forget to:"
 	echo "Update your style.css file in the base theme"
