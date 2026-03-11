@@ -15,7 +15,9 @@ services:
             WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
 
     wordpress:
-        image: wordpress:6.9-php8.3
+        build:
+            context: ./docker/wordpress
+            dockerfile: Dockerfile
         restart: always
         ports:
             - 80:80

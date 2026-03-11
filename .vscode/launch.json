@@ -8,21 +8,12 @@
 			"name": "Listen for XDebug",
 			"type": "php",
 			"request": "launch",
-			"port": 9000,
+			"port": 9003,
 			"ignore": ["**/vendor/**/*.php"],
 			"pathMappings": {
-				"/home/webdev/www/public_html": "${workspaceFolder}/public_html"
+				"/var/www/html/wp-content": "${workspaceFolder}/wp-content",
+				"/var/www/html": "${workspaceFolder}/wordpress"
 			}
-			// "log": true,
-			// "externalConsole": false,
-		},
-		{
-			"name": "Launch currently open script",
-			"type": "php",
-			"request": "launch",
-			"program": "${file}",
-			"cwd": "${fileDirname}",
-			"port": 9000
 		}
 	]
 }
