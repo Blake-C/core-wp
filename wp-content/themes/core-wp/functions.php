@@ -60,61 +60,10 @@ if ( ! function_exists( 'core_wp_setup' ) ) {
 		);
 
 		/**
-		 * Switch default core markup for search form, comment form, and comments
-		 * to output valid HTML5.
+		 * Opt into WordPress core block styles for better out-of-box block rendering.
+		 * Color palette and global styles are defined in theme.json.
 		 */
-		add_theme_support(
-			'html5',
-			array(
-				'search-form',
-				'comment-form',
-				'comment-list',
-				'gallery',
-				'caption',
-			)
-		);
-
-		/**
-		 * Add custom theme color palette.
-		 * Remove anything you don't need.
-		 */
-		add_theme_support(
-			'editor-color-palette',
-			array(
-				array(
-					'name'  => __( 'Primary', 'core_wp' ),
-					'slug'  => 'primary',
-					'color' => '#ffffff',
-				),
-				array(
-					'name'  => __( 'Secondary', 'core_wp' ),
-					'slug'  => 'secondary',
-					'color' => '#ffffff',
-				),
-				array(
-					'name'  => __( 'Tricerary', 'core_wp' ),
-					'slug'  => 'tricerary',
-					'color' => '#ffffff',
-				),
-				array(
-					'name'  => __( 'White', 'core_wp' ),
-					'slug'  => 'white',
-					'color' => '#ffffff',
-				),
-				array(
-					'name'  => __( 'Black', 'core_wp' ),
-					'slug'  => 'black',
-					'color' => '#222222',
-				),
-			)
-		);
-
-		/**
-		 * Sample disables:
-		 * add_theme_support( 'disable-custom-colors' );
-		 * add_theme_support( 'disable-custom-gradients' );
-		 * add_theme_support( 'editor-gradient-presets', array() );
-		 */
+		add_theme_support( 'wp-block-styles' );
 
 		/**
 		 * Remove wp_header meta
@@ -156,28 +105,6 @@ add_filter( 'the_generator', '__return_false' );
  */
 add_editor_style( 'assets/css/editor-styles.min.css' );
 
-
-if ( ! function_exists( 'core_wp_widgets_init' ) ) {
-	/**
-	 * Register widget area.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
-	 */
-	function core_wp_widgets_init() {
-		register_sidebar(
-			array(
-				'name'          => __( 'Primary Sidebar', 'core_wp' ),
-				'id'            => 'sidebar-1',
-				'description'   => '',
-				'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-				'after_widget'  => '</aside>',
-				'before_title'  => '<h2 class="widget-title">',
-				'after_title'   => '</h2>',
-			)
-		);
-	}
-}
-add_action( 'widgets_init', 'core_wp_widgets_init' );
 
 
 if ( ! function_exists( 'core_wp_scripts' ) ) {
