@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- `compose.yml` — `wordpress` service now builds from a custom Dockerfile instead of pulling the official image directly
+- `compose.yml` — `wordpress` service now builds from a custom Dockerfile; `cli_tools` updated to `digitalblake/light-cli:4.0.1`
 - `.vscode/launch.json` — updated XDebug port from `9000` (XDebug 2) to `9003` (XDebug 3) and fixed path mappings to match actual Docker volume mounts (`/var/www/html/wp-content` → `./wp-content`, `/var/www/html` → `./wordpress`)
 - `wp-content/themes/core-wp/functions.php` — removed legacy `add_theme_support('html5')`, `add_theme_support('editor-color-palette')`, and `register_sidebar()` calls; added `add_theme_support('wp-block-styles')`; color palette moved to `theme.json`
 
