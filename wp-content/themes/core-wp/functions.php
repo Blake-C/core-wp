@@ -118,7 +118,6 @@ add_filter( 'the_generator', '__return_false' );
 add_editor_style( 'assets/css/editor-styles.min.css' );
 
 
-
 if ( ! function_exists( 'core_wp_scripts' ) ) {
 	/**
 	 * Enqueue scripts and styles.
@@ -150,16 +149,16 @@ if ( ! function_exists( 'core_wp_scripts' ) ) {
 add_action( 'wp_enqueue_scripts', 'core_wp_scripts' );
 
 
-
-
-/**
- * Register custom block pattern categories.
- */
-function core_wp_register_pattern_categories() {
-	register_block_pattern_category(
-		'core-wp-sections',
-		array( 'label' => __( 'Sections', 'core_wp' ) )
-	);
+if ( ! function_exists( 'core_wp_register_pattern_categories' ) ) {
+	/**
+	 * Register custom block pattern categories.
+	 */
+	function core_wp_register_pattern_categories() {
+		register_block_pattern_category(
+			'core-wp-sections',
+			array( 'label' => __( 'Sections', 'core_wp' ) )
+		);
+	}
 }
 add_action( 'init', 'core_wp_register_pattern_categories' );
 
