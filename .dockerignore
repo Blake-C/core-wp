@@ -1,0 +1,24 @@
+# WordPress core — provided by the base image, not copied
+wordpress/
+
+# Persistent data — not part of the image
+data/
+
+# Dev tooling — not needed in the production image
+wp-content/themes/*/node_modules/
+wp-content/themes/*/.pnpm-store/
+.pnpm-store/
+
+# User uploads — managed via named volume at runtime
+wp-content/uploads/
+
+# Built/installed by Docker stages — excluded from host context
+wp-content/themes/*/assets/
+wp-content/plugins/
+wp-content/vendor/
+
+# Git and local config
+.git/
+.githooks/
+.env
+.env-example

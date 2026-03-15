@@ -1,0 +1,28 @@
+# Stage 1: Compile theme assets (same tools as dev environment)
+FROM digitalblake/light-cli:5.0.0 AS theme-builder
+WORKDIR /theme
+COPY wp-content/themes/core-wp/package.json wp-content/themes/core-wp/pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+COPY wp-content/themes/core-wp/ ./
+RUN pnpm run build
+
+# Stage 2: Install PHP production dependencies (same tools as dev environment)
+FROM digitalblake/light-cli:5.0.0 AS composer-builder
+WORKDIR /app
+COPY wp-content/composer.json wp-content/composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
+# Stage 3: Production image
+FROM wordpress:6.9-php8.3
+
+# Copy wp-content (themes source, patterns, inc, etc.)
+COPY wp-content/ /var/www/html/wp-content/
+
+# Overwrite with composer-installed plugins and vendor autoloader
+COPY --from=composer-builder /app/plugins/ /var/www/html/wp-content/plugins/
+COPY --from=composer-builder /app/vendor/ /var/www/html/wp-content/vendor/
+
+# Overwrite with compiled theme assets
+COPY --from=theme-builder /theme/assets/ /var/www/html/wp-content/themes/core-wp/assets/
+
+RUN chown -R www-data:www-data /var/www/html/wp-content

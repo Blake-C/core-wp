@@ -1,0 +1,55 @@
+services:
+    wordpress:
+        build:
+            context: .
+            dockerfile: docker/wordpress/Dockerfile.prod
+        restart: always
+        ports:
+            - 80:80
+        environment:
+            WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+            WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+            WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+            WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+            WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+            # Harden WordPress for production.
+            # DISALLOW_FILE_MODS prevents plugin/theme installs via wp-admin,
+            # which is correct — all code changes must go through a redeploy.
+            WORDPRESS_CONFIG_EXTRA: |
+                define('WP_DEBUG', false);
+                define('WP_DEBUG_DISPLAY', false);
+                define('WP_DEBUG_LOG', false);
+                define('DISALLOW_FILE_EDIT', true);
+                define('DISALLOW_FILE_MODS', true);
+        volumes:
+            - uploads:/var/www/html/wp-content/uploads
+        depends_on:
+            db:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost/"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 30s
+
+    db:
+        image: mariadb:11.8
+        restart: always
+        volumes:
+            - db_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+            MYSQL_USER: ${WORDPRESS_DB_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        healthcheck:
+            test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+
+volumes:
+    uploads:
+    db_data:
