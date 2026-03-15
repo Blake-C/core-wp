@@ -35,6 +35,7 @@
     "phpcs:fix": "php ../../vendor/bin/phpcbf --standard=phpcs.xml --basepath=./",
     "phpcs:watch": "nodemon -e php --exec \"npm run phpcs && npx browser-sync reload\"",
     "phpcs": "echo \"Starting PHPCS & PHPCBF Tasks\" && npm run phpcs:fix && npm run phpcs:lint",
+    "html:watch": "nodemon -e html --watch . --exec \"npx browser-sync reload\"",
     "images:copy": "cp -r ./theme_components/images ./assets/ && echo \"Completed: Image Copy\"",
     "images:mogrify:check": "command -v mogrify >/dev/null 2>&1 && npm run images:optimize || { echo \"Run 'brew install imagemagick' first. Or use your package manager to install imagemagick. Images will be copied but not optimized.\" >&2; return; }",
     "images:optimize": "find ./assets/images -type f | grep -E \"png|jpg|jpeg\" | xargs -I '{}' mogrify -strip -resize '1500x1500>' -quality 70 '{}' && echo \"Completed: Image Optimizations\"",
@@ -44,10 +45,11 @@
     "build": "npm run build:message && npm run clean && mkdir -p ./assets/ && (npm run static:assets & npm run scripts & npm run styles & npm run images & wait) && echo \"\nBuild Complete\"",
     "build:pro": "npm run build && mkdir -p ../core-wp-build && ls | grep -Ev \"node|gulp|workspace|webpack|postcss|package|modernizr|theme_components|pnpm|todo\" | xargs -I '{}' cp -r '{}' ../core-wp-build/",
     "livereload": "npx browser-sync start --no-notify --no-open --proxy 'http://localhost'",
+    "serve:all": "npm run livereload & npm run watch:all",
     "serve": "npm run livereload & npm run watch",
     "watch:code": "npm run scripts:watch & npm run styles:watch",
-    "watch:all": "npm run scripts:watch & npm run styles:watch & npm run static:assets:watch & npm run phpcs:watch & npm run images:watch",
-    "watch": "npm run scripts:watch & npm run styles:watch & npm run static:assets:watch & npm run images:watch"
+    "watch:all": "npm run scripts:watch & npm run styles:watch & npm run static:assets:watch & npm run phpcs:watch & npm run html:watch & npm run images:watch",
+    "watch": "npm run scripts:watch & npm run styles:watch & npm run static:assets:watch & npm run images:watch & npm run html:watch"
   },
   "devDependencies": {
     "@babel/core": "7.29.0",
