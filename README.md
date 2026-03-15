@@ -16,6 +16,7 @@ cd your-project-name
 rm -rf .git
 git init && git add -A
 git commit -m "Initial Commit"
+git config core.hooksPath .githooks
 docker compose up -d
 ```
 
@@ -218,7 +219,7 @@ docker compose down
 | Service | Image | Port | Notes |
 | --- | --- | --- | --- |
 | WordPress (PHP 8.3) | Custom — `docker/wordpress/Dockerfile` | `80` | XDebug 3 installed |
-| Database | `mariadb:12` | `3306` | — |
+| Database | `mariadb:11.8` | `3306` | — |
 | phpMyAdmin | `phpmyadmin` | `8000` | — |
 | CLI Tools | `digitalblake/light-cli:5.0.0` | — | pnpm, WP-CLI, Composer, ImageMagick |
 
