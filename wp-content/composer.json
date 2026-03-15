@@ -10,7 +10,8 @@
 		"composer/installers": "*",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
 		"wpackagist-plugin/redirection": "^5.7",
-		"wpackagist-plugin/wordfence": "^8.1"
+		"wpackagist-plugin/wordfence": "^8.1",
+		"wpackagist-plugin/wordpress-seo": "^27.1"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.5",
