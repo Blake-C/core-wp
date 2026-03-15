@@ -66,21 +66,28 @@ pre {
 
 .screen-reader-text {
 	@include element-invisible;
+}
+
+/* Skip link */
+.skip-link {
+	display: block;
+	left: -9999rem;
+	overflow: hidden;
+	padding: 15px 23px 14px;
+	position: absolute;
+	top: -9999rem;
 
 	&:focus {
 		background-color: $white;
-		clip: auto;
-		clip-path: none;
 		color: $black;
-		display: block;
 		font-size: 1rem;
 		font-weight: 700;
 		height: auto;
-		left: 5px;
-		line-height: normal;
-		padding: 15px 23px 14px;
+		left: 8px;
+		overflow: auto;
+		position: fixed;
 		text-decoration: none;
-		top: 5px;
+		top: 8px;
 		width: auto;
 		z-index: 100000;
 	}
