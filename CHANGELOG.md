@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 - Added health checks for `wordpress` and `db` services; `wordpress` now depends on `db` being healthy - `compose.yml`
 - Added `XDEBUG_MODE: debug` environment variable to control XDebug without rebuilding - `compose.yml`
 - Changed `xdebug.mode` default to `off`; mode now controlled by the `XDEBUG_MODE` env var - `docker/wordpress/xdebug.ini`
-- Added `add_theme_support('html5', [...])`, `add_theme_support('custom-logo')`, and pattern category registration - `functions.php`
+- Added `add_theme_support('html5', [...])` and pattern category registration - `functions.php`
 - Added `no-js` class to `<html>` via `language_attributes` filter; JS swaps it to `js` on load - `inc/components/body-classes.php`
 - Added `clearfix` mixin replacing Foundation's version - `theme_components/sass/helpers/_mixins.scss`
 - Replaced `@include button()` Foundation mixin with explicit CSS - `theme_components/sass/editor/_general-styles.scss`

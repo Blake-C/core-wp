@@ -82,12 +82,6 @@ if ( ! function_exists( 'core_wp_setup' ) ) {
 		);
 
 		/**
-		 * Allow admins to upload a custom logo via Appearance → Customize.
-		 * Use get_custom_logo() or the_custom_logo() in templates.
-		 */
-		add_theme_support( 'custom-logo' );
-
-		/**
 		 * Remove wp_header meta
 		 */
 		remove_action( 'wp_head', 'feed_links_extra', 3 ); // Display the links to the extra feeds such as category feeds.
