@@ -41,7 +41,7 @@ if ( ! function_exists( 'core_wp_div_wrapper' ) ) {
 			'div'
 		);
 
-		return '<div class="' . $attributes['class'] . '">' . do_shortcode( $content ) . '</div>';
+		return '<div class="' . esc_attr( $attributes['class'] ) . '">' . do_shortcode( $content ) . '</div>';
 	}
 }
 add_shortcode( 'div', 'core_wp_div_wrapper' );

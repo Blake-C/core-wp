@@ -16,7 +16,7 @@ if ( ! function_exists( 'core_wp_add_login_favicon' ) ) {
 	function core_wp_add_login_favicon() {
 		$favicon_path = get_template_directory_uri() . '/assets/icons/favicon.ico';
 
-		echo '<link rel="shortcut icon" href="' . esc_html( $favicon_path ) . '" />';
+		echo '<link rel="shortcut icon" href="' . esc_url( $favicon_path ) . '" />';
 	}
 }
 add_action( 'login_head', 'core_wp_add_login_favicon' );

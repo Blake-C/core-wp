@@ -20,10 +20,10 @@ if ( ! function_exists( 'core_wp_search_results_meta_description' ) ) {
 					'Search results for search page meta description',
 					'core_wp'
 				),
-				get_search_query()
+				esc_attr( get_search_query() )
 			);
 
-         echo '<meta name="description" content="' . $core_wp_search_page_meta_description . '" />'; // phpcs:ignore
+			echo '<meta name="description" content="' . $core_wp_search_page_meta_description . '" />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 }

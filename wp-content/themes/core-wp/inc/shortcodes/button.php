@@ -32,7 +32,7 @@ if ( ! function_exists( 'core_wp_button' ) ) {
 			'button'
 		);
 
-		$content = str_replace( '<a ', '<a class="' . $attributes['class'] . '"', do_shortcode( $content ) );
+		$content = str_replace( '<a ', '<a class="' . esc_attr( $attributes['class'] ) . '"', do_shortcode( $content ) );
 
 		return $content;
 	}
