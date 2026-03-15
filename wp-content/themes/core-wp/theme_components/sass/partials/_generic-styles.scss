@@ -66,6 +66,30 @@ pre {
 
 .screen-reader-text {
 	@include element-invisible;
+
+	&:focus {
+		background-color: $white;
+		clip: auto;
+		clip-path: none;
+		color: $black;
+		display: block;
+		font-size: 1rem;
+		font-weight: 700;
+		height: auto;
+		left: 5px;
+		line-height: normal;
+		padding: 15px 23px 14px;
+		text-decoration: none;
+		top: 5px;
+		width: auto;
+		z-index: 100000;
+	}
+}
+
+/* Skip link focus target */
+.skip-link-target:focus-visible {
+	outline: 3px solid var(--wp--preset--color--primary, #1779ba);
+	outline-offset: 4px;
 }
 
 /* Callout */
