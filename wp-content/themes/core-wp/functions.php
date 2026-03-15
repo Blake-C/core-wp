@@ -185,6 +185,18 @@ if ( ! function_exists( 'core_wp_site_icons' ) ) {
 add_action( 'wp_head', 'core_wp_site_icons', 1 );
 
 
+/**
+ * Register custom block pattern categories.
+ */
+function core_wp_register_pattern_categories() {
+	register_block_pattern_category(
+		'core-wp-sections',
+		array( 'label' => __( 'Sections', 'core_wp' ) )
+	);
+}
+add_action( 'init', 'core_wp_register_pattern_categories' );
+
+
 // Include components.
 require get_template_directory() . '/inc/includes.php';
 
