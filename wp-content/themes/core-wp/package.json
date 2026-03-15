@@ -16,7 +16,6 @@
     "styles:sass":         "sass theme_components/sass/:assets/css --load-path=node_modules --style=compressed --no-error-css --charset --silence-deprecation=import --silence-deprecation=global-builtin --silence-deprecation=if-function",
     "scripts":             "sh scripts/scripts.sh",
     "scripts:webpack":     "webpack --env output=\"./assets/js\"",
-    "scripts:modernizr":   "modernizr -c modernizr-config.json -d ./assets/js/vendors/modernizr.js",
     "images":              "sh scripts/images.sh",
     "images:optimize":     "find ./assets/images -type f | grep -E \"png|jpg|jpeg\" | xargs -P 4 -I '{}' mogrify -strip -resize '1500x1500>' -quality 70 '{}'",
     "static:assets":       "cp -r ./theme_components/fonts ./assets/ && cp -r ./theme_components/icons ./assets/",
@@ -24,7 +23,7 @@
     "phpcs:fix":           "php ../../vendor/bin/phpcbf --standard=phpcs.xml --basepath=./",
     "phpcs:lint":          "php ../../vendor/bin/phpcs --standard=phpcs.xml --basepath=./",
     "build":               "sh scripts/build.sh",
-    "build:pro":           "pnpm run build && mkdir -p ../core-wp-build && ls | grep -Ev \"node|gulp|workspace|webpack|postcss|package|modernizr|theme_components|pnpm|todo\" | xargs -I '{}' cp -r '{}' ../core-wp-build/",
+    "build:pro":           "pnpm run build && mkdir -p ../core-wp-build && ls | grep -Ev \"node|gulp|workspace|webpack|postcss|package|theme_components|pnpm|todo\" | xargs -I '{}' cp -r '{}' ../core-wp-build/",
     "reload":              "browser-sync reload --port ${BROWSER_SYNC_PORT:-3010}",
     "livereload":          "browser-sync start --config bs-config.cjs",
     "serve":               "NODE_NO_WARNINGS=1 pnpm run livereload & NODE_NO_WARNINGS=1 pnpm run watch",
@@ -67,8 +66,7 @@
     "what-input": "5.2.12"
   },
   "dependencies": {
-    "detect-browser": "5.3.0",
-    "modernizr": "3.13.1"
+    "detect-browser": "5.3.0"
   },
   "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
 }

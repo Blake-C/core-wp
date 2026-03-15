@@ -22,7 +22,6 @@ const webpackConfig = env => {
 		},
 		externals: {
 			jquery: 'jQuery',
-			modernizr: 'Modernizr',
 		},
 		devtool: 'source-map',
 		stats: {

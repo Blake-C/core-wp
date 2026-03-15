@@ -130,7 +130,7 @@ cd wp-content/themes/core-wp
 | --- | --- |
 | `pnpm run build` | Full build — styles, scripts, images, static assets |
 | `pnpm run styles` | Compile SCSS → CSS (lint → Sass → PostCSS → rename) |
-| `pnpm run scripts` | Bundle JS (Prettier → Webpack → Modernizr) |
+| `pnpm run scripts` | Bundle JS (Prettier → Webpack) |
 | `pnpm run images` | Copy and optimize images via ImageMagick |
 | `pnpm run static:assets` | Copy fonts and icons |
 | `pnpm run watch` | Watch mode for styles, scripts, images, and static assets |
@@ -396,7 +396,6 @@ XDebug 3 is baked into the WordPress service image (`docker/wordpress/Dockerfile
 | ESLint 10 | JS linting (flat config) |
 | Stylelint 16 | SCSS linting |
 | Browser-Sync 3 | Live reload proxy with CSS injection |
-| Modernizr | Feature detection bundle |
 | ImageMagick | Image optimization via `mogrify` |
 
 ---

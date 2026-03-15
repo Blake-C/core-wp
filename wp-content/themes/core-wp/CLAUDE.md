@@ -18,7 +18,7 @@ WordPress **block theme** (Full Site Editing). There is no `header.php` or `foot
 | `pnpm run serve` | browser-sync + file watchers (JS, SCSS, icons, images, HTML) |
 | `pnpm run serve:all` | Same as `serve` but also runs per-file PHPCS on save |
 | `pnpm run styles` | SCSS → minified CSS (lint → Sass → rename → PostCSS) |
-| `pnpm run scripts` | JS → bundled (Prettier → Webpack + Modernizr in parallel) |
+| `pnpm run scripts` | JS → bundled (Prettier → Webpack) |
 | `pnpm run phpcs` | PHPCBF auto-fix then PHPCS lint |
 | `pnpm run build:pro` | Production build + copy to `../core-wp-build/` |
 
