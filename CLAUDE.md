@@ -9,7 +9,7 @@ A WordPress development environment running in Docker. The theme and plugin sour
 | Service | Image | Purpose | Ports |
 |---|---|---|---|
 | `wordpress` | Custom (built from `docker/wordpress/Dockerfile`) | Apache + PHP 8.3 + XDebug | 80 |
-| `db` | `mariadb:12` | Database | 3306 |
+| `db` | `mariadb:11.8` | Database | 3306 |
 | `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 |
 | `cli_tools` | `digitalblake/light-cli:5.0.0` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
 
@@ -43,6 +43,8 @@ PHPCS `installed_paths` for WordPress and PHPCompatibility standards is configur
 ## XDebug
 
 The `wordpress` service has XDebug 3 installed and configured (`docker/wordpress/xdebug.ini`). It connects back to the host on port 9003. The VSCode "Listen for XDebug" launch configuration in `.vscode/launch.json` is pre-configured. XDebug is dev-only — do not use this Dockerfile in production.
+
+XDebug defaults to `off` in `xdebug.ini`. It is enabled in `compose.yml` via `XDEBUG_MODE=debug`. Comment that line out when you don't need it to avoid the PHP performance overhead.
 
 ## Path mappings (for debugging / reference)
 

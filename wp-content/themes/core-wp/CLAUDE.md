@@ -46,6 +46,7 @@ Dual-mode: behaviour changes based on `APP_ENV=docker` environment variable.
 - Config: `phpcs.xml` — parallel=8, cache=`.phpcs.cache` (gitignored)
 - Custom sniff: `phpcs/CoreWP/Sniffs/Debug/NoDebugFunctionsSniff.php`
   - Warns if `core_wp_print_pre()` or `core_wp_theme_error_log()` are called outside `utility-functions.php`
+  - Both functions are gated by `WP_DEBUG` — they silently no-op in production
   - The `phpcs/` directory is excluded from linting (PHPCS PSR-4 naming conflicts with WordPress conventions)
 - PHPCBF exits non-zero when it successfully fixes files — the `phpcs.sh` script intentionally ignores this with `; true`
 - Cache behavior: locally PHPCBF only re-scans changed files (fast); in Docker the cache doesn't persist so all 35 files are always scanned
@@ -79,8 +80,16 @@ phpcs/                 — Custom PHPCS sniffs (excluded from linting)
 scripts/               — POSIX sh build pipeline scripts
 parts/                 — Block template parts (FSE)
 templates/             — Block templates (FSE)
-patterns/              — Block patterns
+patterns/              — Block patterns (content-* for post/page/search/none; hero/cta/feature-grid in Sections category)
 ```
+
+## Accessibility
+
+- Skip link (`<a class="skip-link screen-reader-text" href="#main-content">`) lives in `parts/header.html`
+- All `<main>` landmarks have `id="main-content"` set via the `anchor` block attribute
+- `inc/components/skip-link-tabindex.php` injects `tabindex="-1"` and class `skip-link-target` onto the main element via `render_block` filter, making it programmatically focusable
+- `theme_components/js/modules/_skip-link.js` hides the skip link after it is activated
+- Focus ring for the skip link target is defined in `partials/_generic-styles.scss` (`.skip-link-target:focus-visible`)
 
 ## Dependencies of note
 
