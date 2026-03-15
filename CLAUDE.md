@@ -20,6 +20,16 @@ A WordPress development environment running in Docker. The theme and plugin sour
 docker compose exec cli_tools zsh
 ```
 
+## Pre-commit hooks
+
+Lint checks run automatically before each commit. Activate once per clone:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+The hook (`.githooks/pre-commit`) runs phpcs on staged PHP files, eslint on staged JS files, and stylelint on staged SCSS files. It requires `composer install` and `pnpm install` to have been run first.
+
 ## Environment variables
 
 Credentials live in `.env` (gitignored). Copy `.env-example` and fill in values. Never commit `.env`.
