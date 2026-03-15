@@ -26,19 +26,12 @@ require get_template_directory() . '/inc/components/excerpt-length.php';
 require get_template_directory() . '/inc/components/excerpt-more.php';
 require get_template_directory() . '/inc/components/gform-filters.php';
 require get_template_directory() . '/inc/components/password-form.php';
-require get_template_directory() . '/inc/components/post-classes.php';
 require get_template_directory() . '/inc/components/thumbnail-upscale.php';
-require get_template_directory() . '/inc/components/tinymce-custom-styles.php';
 
 
 /**
  * Template Tags
  */
-require get_template_directory() . '/inc/template-tags/categorized-blog.php';
-require get_template_directory() . '/inc/template-tags/category-transient-flusher.php';
-require get_template_directory() . '/inc/template-tags/entry-footer.php';
-require get_template_directory() . '/inc/template-tags/posted-on.php';
-require get_template_directory() . '/inc/template-tags/search-results-meta-description.php';
 
 
 /**
@@ -54,6 +47,4 @@ require get_template_directory() . '/inc/custom-admin-functions/login-page-style
 /**
  * Shortcodes
  */
-require get_template_directory() . '/inc/shortcodes/button.php';
 require get_template_directory() . '/inc/shortcodes/copyright.php';
-require get_template_directory() . '/inc/shortcodes/div-wrapper.php';
