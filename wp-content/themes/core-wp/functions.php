@@ -49,15 +49,17 @@ if ( ! function_exists( 'core_wp_setup' ) ) {
 		 * add_image_size( 'unique_name', 490, 240, array( 'center', 'top' ) );
 		 */
 
-		/**
-		 * This theme uses wp_nav_menu() in one location.
+		/*
+		 * Navigation block manages menus in FSE.
+		 * Re-enable if wp_nav_menu() is needed.
+		 *
+		 * register_nav_menus(
+		 *     array(
+		 *         'primary' => __( 'Primary Menu', 'core_wp' ),
+		 *         'footer'  => __( 'Footer Menu', 'core_wp' ),
+		 *     )
+		 * );
 		 */
-		register_nav_menus(
-			array(
-				'primary' => __( 'Primary Menu', 'core_wp' ),
-				'footer'  => __( 'Footer Menu', 'core_wp' ),
-			)
-		);
 
 		/**
 		 * Opt into WordPress core block styles for better out-of-box block rendering.
