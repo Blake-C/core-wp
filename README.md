@@ -133,7 +133,19 @@ cd wp-content/themes/core-wp
 | `pnpm run images` | Copy and optimize images via ImageMagick |
 | `pnpm run static:assets` | Copy fonts and icons |
 | `pnpm run watch` | Watch mode for styles, scripts, images, and static assets |
-| `pnpm run serve` | Watch + Browser-Sync livereload proxy at `http://localhost` |
+| `pnpm run serve` | Watch + Browser-Sync livereload (CSS injected without reload) |
+| `pnpm run serve:all` | Same as `serve` plus PHP (PHPCS/PHPCBF) and HTML file watching |
+
+### Browser-Sync Ports
+
+Browser-Sync is environment-aware via `bs-config.cjs`:
+
+| Environment | URL | Notes |
+| --- | --- | --- |
+| Docker (inside container) | `http://localhost:3000` | Proxies the `wordpress` service |
+| Local (outside container) | `http://localhost:3010` | Proxies `http://localhost` |
+
+CSS changes are injected directly into the browser without a full page reload. All other changes (JS, PHP, HTML, images) trigger a full reload.
 
 ### Aliases (inside CLI container)
 
@@ -208,7 +220,7 @@ docker compose down
 | WordPress (PHP 8.3) | Custom — `docker/wordpress/Dockerfile` | `80` | XDebug 3 installed |
 | Database | `mariadb:12` | `3306` | — |
 | phpMyAdmin | `phpmyadmin` | `8000` | — |
-| CLI Tools | `digitalblake/light-cli:4.0.1` | — | pnpm, WP-CLI, Composer, ImageMagick |
+| CLI Tools | `digitalblake/light-cli:5.0.0` | — | pnpm, WP-CLI, Composer, ImageMagick |
 
 XDebug 3 is baked into the WordPress service image (`docker/wordpress/Dockerfile`) and listens on port `9003`. See the [PHP Debugging](#php-debugging-xdebug) section for VSCode setup.
 
@@ -234,6 +246,7 @@ XDebug 3 is baked into the WordPress service image (`docker/wordpress/Dockerfile
 | Prettier | JS + SCSS formatting |
 | ESLint 10 | JS linting (flat config) |
 | Stylelint 16 | SCSS linting |
+| Browser-Sync 3 | Live reload proxy with CSS injection |
 | Modernizr | Feature detection bundle |
 | ImageMagick | Image optimization via `mogrify` |
 
