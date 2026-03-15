@@ -11,6 +11,13 @@
 THEME_DIR="wp-content/themes/core-wp"
 FAILED=0
 
+# Git hooks run with a minimal PATH. Add common node binary locations so
+# tools installed via nvm, Homebrew, or system packages are all findable.
+if ! command -v node > /dev/null 2>&1; then
+    NVM_NODE=$(find "$HOME/.nvm/versions/node" -type f -name "node" -maxdepth 3 2>/dev/null | head -1)
+    [ -n "$NVM_NODE" ] && export PATH="$(dirname "$NVM_NODE"):$PATH"
+fi
+
 # Staged files by type, paths relative to theme root
 PHP_FILES=$(git diff --cached --name-only --diff-filter=ACMR \
     | grep "^${THEME_DIR}/.*\.php$" \

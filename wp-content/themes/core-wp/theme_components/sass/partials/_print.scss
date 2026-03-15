@@ -1,0 +1,54 @@
+@use '../helpers' as *;
+
+// Print Styles
+// ------------
+// Hide non-essential UI and optimise layout for printing.
+// Add project-specific rules below as needed.
+
+@media print {
+	// Hide navigation, buttons, and interactive chrome.
+	header,
+	footer,
+	nav,
+	.wp-block-navigation,
+	.skip-link,
+	.wp-block-buttons {
+		display: none !important; // stylelint-disable-line declaration-no-important
+	}
+
+	// Ensure body text prints in black on white.
+	body {
+		background: #fff;
+		color: #000;
+		font-size: 12pt;
+	}
+
+	// Expand links to show full URL after link text.
+	a[href]::after {
+		content: ' (' attr(href) ')';
+		font-size: 0.8em;
+		word-break: break-all;
+	}
+
+	// Don't expand internal hash links or mailto links.
+	a[href^='#']::after,
+	a[href^='mailto:']::after {
+		content: '';
+	}
+
+	// Avoid page breaks inside key content blocks.
+	article,
+	blockquote,
+	figure,
+	img,
+	table {
+		break-inside: avoid;
+	}
+
+	// Always start headings on a new page if possible.
+	h1,
+	h2,
+	h3 {
+		break-after: avoid;
+	}
+}
