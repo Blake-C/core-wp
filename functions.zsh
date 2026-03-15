@@ -37,7 +37,7 @@ wp-db-export() {
 		wp option update siteurl "http://$REPLACEURLCLEAN" --allow-root
 	fi
 
-	wp db export ./wp-content/wp_foundation_six_$(date +"%Y%m%d%H%M%s")_database.sql --allow-root
+	wp db export ./wp-content/core_wp_$(date +"%Y%m%d%H%M%s")_database.sql --allow-root
 
 	if [[ "$REPLACEURLCLEAN" != "" ]]; then
 		wp search-replace "$REPLACEURLCLEAN" "localhost" --allow-root
