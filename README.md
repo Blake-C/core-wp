@@ -212,6 +212,101 @@ docker compose down
 
 ---
 
+## Troubleshooting
+
+### Docker / Services
+
+**Port already in use (80, 3306, or 8000)**
+
+Another process on your machine is using the port. Stop it, or change the host-side port in `compose.yml` (e.g. `8080:80`).
+
+**WordPress container keeps restarting**
+
+The database health check hasn't passed yet. Wait ~30 seconds, or check logs:
+
+```bash
+docker compose logs db
+```
+
+**Changed `.env` credentials and the database won't connect**
+
+MariaDB initializes its root password and database on first run. If you change credentials after the first `docker compose up`, delete the persisted data and recreate:
+
+```bash
+docker compose down
+rm -rf data/mysql
+docker compose up -d
+```
+
+### Build Tools
+
+**`pnpm: command not found`**
+
+Build commands must run inside the `cli_tools` container, not on your host machine:
+
+```bash
+docker compose exec cli_tools zsh
+cd wp-content/themes/core-wp
+pnpm run build
+```
+
+**Build fails with missing packages**
+
+Run `pnpm install` from the theme directory first.
+
+### Pre-commit Hooks
+
+**Hooks not running on commit**
+
+The hooks path must be configured once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+**Hook fails: `node: command not found`**
+
+The hook auto-detects nvm. If you use a non-standard Node install, ensure `node` is on your `PATH` before committing.
+
+**Hook fails with PHPCS errors**
+
+Run `composer install` from `wp-content/` first to install PHPCS and the coding standards.
+
+### XDebug
+
+**Breakpoints not being hit**
+
+1. Confirm `XDEBUG_MODE: debug` is set (not commented out) in `compose.yml`
+2. Install the [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug) VSCode extension
+3. Start the **"Listen for XDebug"** configuration (`F5`) before loading the page
+
+**Check the XDebug log**
+
+```bash
+docker compose exec wordpress cat /tmp/xdebug.log
+```
+
+### WordPress / WP-CLI
+
+**`wp` commands not found**
+
+WP-CLI runs inside the `cli_tools` container:
+
+```bash
+docker compose exec cli_tools zsh
+wp option get siteurl
+```
+
+**Site not loading after database import**
+
+The imported database still has the production URL. Run a search-replace:
+
+```bash
+wp search-replace https://production.com http://localhost --precise --all-tables
+```
+
+---
+
 ## Stack
 
 ### Docker Services
