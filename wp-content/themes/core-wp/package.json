@@ -13,7 +13,7 @@
     "clean":               "rm -rf assets ../core-wp-build",
     "styles":              "sh scripts/styles.sh",
     "styles:lint":         "prettier --write --log-level warn './theme_components/sass/**/*.scss' && stylelint './theme_components/sass/**/*.scss' --fix",
-    "styles:sass":         "sass theme_components/sass/:assets/css --load-path=node_modules --style=compressed --no-error-css --charset --silence-deprecation=import --silence-deprecation=global-builtin --silence-deprecation=if-function",
+    "styles:sass":         "sass theme_components/sass/:assets/css --load-path=node_modules --style=compressed --no-error-css --charset",
     "scripts":             "sh scripts/scripts.sh",
     "scripts:webpack":     "webpack --env output=\"./assets/js\"",
     "images":              "sh scripts/images.sh",

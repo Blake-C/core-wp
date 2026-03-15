@@ -23,10 +23,7 @@ sass theme_components/sass/:assets/css \
 	--load-path=node_modules \
 	--style=compressed \
 	--no-error-css \
-	--charset \
-	--silence-deprecation=import \
-	--silence-deprecation=global-builtin \
-	--silence-deprecation=if-function
+	--charset
 
 echo "Renaming to .min.css..."
 ls ./assets/css \
