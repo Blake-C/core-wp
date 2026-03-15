@@ -45,8 +45,8 @@
     "build": "npm run build:message && npm run clean && mkdir -p ./assets/ && (npm run static:assets & npm run scripts & npm run styles & npm run images & wait) && echo \"\nBuild Complete\"",
     "build:pro": "npm run build && mkdir -p ../core-wp-build && ls | grep -Ev \"node|gulp|workspace|webpack|postcss|package|modernizr|theme_components|pnpm|todo\" | xargs -I '{}' cp -r '{}' ../core-wp-build/",
     "livereload": "npx browser-sync start --no-notify --no-open --proxy 'http://localhost'",
-    "serve:all": "npm run livereload & npm run watch:all",
-    "serve": "npm run livereload & npm run watch",
+    "serve:all": "NODE_NO_WARNINGS=1 npm run livereload & NODE_NO_WARNINGS=1 npm run watch:all",
+    "serve": "NODE_NO_WARNINGS=1 npm run livereload & NODE_NO_WARNINGS=1 npm run watch",
     "watch:code": "npm run scripts:watch & npm run styles:watch",
     "watch:all": "npm run scripts:watch & npm run styles:watch & npm run static:assets:watch & npm run phpcs:watch & npm run html:watch & npm run images:watch",
     "watch": "npm run scripts:watch & npm run styles:watch & npm run static:assets:watch & npm run images:watch & npm run html:watch"
