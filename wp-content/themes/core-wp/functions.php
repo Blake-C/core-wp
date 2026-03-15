@@ -80,12 +80,6 @@ if ( ! function_exists( 'core_wp_setup' ) ) {
 		remove_action( 'wp_head', 'wp_generator' ); // Display the XHTML generator that is generated on the wp_head hook, WP version.
 	}
 
-	/**
-	 * If you don't want to see inline debug code for
-	 * what file generated a region of a page, set this
-	 * constant to false.
-	 */
-	define( 'CORE_WP_INLINE_DEBUG', true );
 }
 add_action( 'after_setup_theme', 'core_wp_setup' );
 

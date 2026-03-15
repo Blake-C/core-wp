@@ -36,10 +36,3 @@ import './modules/_foundation-scripts.js'
 
 $('html').removeClass('no-js')
 $('html').addClass('js')
-
-/*************** Template part region toggle button ***************/
-$('#theme_debug_regions').on('click', function (event) {
-	event.preventDefault()
-
-	$('.placeHolderPosition').slideToggle()
-})

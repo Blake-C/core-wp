@@ -5,20 +5,6 @@
  * @package core_wp
  */
 
-if ( ! function_exists( 'core_wp_dev_helper' ) ) {
-	/**
-	 * Used to help identify template file.
-	 *
-	 * @method core_wp_dev_helper
-	 * @param  [string] $file - Takes in the file name.
-	 */
-	function core_wp_dev_helper( $file ) {
-		if ( is_super_admin() && CORE_WP_INLINE_DEBUG ) {
-			echo '<div class="placeHolderPosition" style="top: 0; background: rgb(236, 234, 234); color: rgba(0, 0, 0, 0.4); font-size: 12px; padding: 5px 25px; display: none;">' . esc_html( $file ) . '.php</div>';
-		}
-	}
-}
-
 if ( ! function_exists( 'core_wp_cache_bust' ) ) {
 	/**
 	 * Gets the time when the content of the file was changed.
