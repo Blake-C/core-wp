@@ -15,7 +15,7 @@
 		 v flag: Print verbose output.
 		 n flag: Do not print warnings.
 	-->
-	<arg value="psv"/>
+	<arg value="ps"/>
 
 	<!-- Strip the filepaths down to the relevant bit. -->
 	<!-- <arg name="basepath" value="./"/> -->
@@ -24,7 +24,10 @@
 	<arg name="colors" />
 
 	<!-- Check up to 8 files simultanously. -->
-	<!-- <arg name="parallel" value="8"/> -->
+	<arg name="parallel" value="8"/>
+
+	<!-- Cache results between runs — only re-checks changed files. -->
+	<arg name="cache" value=".phpcs.cache"/>
 
 	<!-- Only check the PHP files. JS files are checked separately with JSCS and JSHint. -->
 	<arg name="extensions" value="php"/>

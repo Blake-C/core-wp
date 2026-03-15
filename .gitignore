@@ -79,6 +79,7 @@ Temporary Items
 *.sql
 *.zip
 .phpintel
+.phpcs.cache
 .sass-cache
 .tmp
 advanced-cache.php
