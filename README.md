@@ -212,6 +212,59 @@ docker compose down
 
 ---
 
+## Production Deployment
+
+Production uses `compose.prod.yml` with a multi-stage Docker build. WordPress core comes from the official image; theme assets are compiled and plugins installed inside the build — no bind mounts, no dev tools in the final image.
+
+### First-time Server Setup
+
+Requirements: a server with Docker and Docker Compose installed, and Git access to the repo.
+
+```bash
+git clone your-project.git
+cd your-project
+cp .env-example .env
+nano .env        # fill in production credentials
+chmod 600 .env   # restrict to owner only
+./deploy.sh
+```
+
+### Deploying Updates
+
+```bash
+git pull
+./deploy.sh
+```
+
+`deploy.sh` always pulls the latest base images (`--pull`), rebuilds the WordPress image with the latest code, and restarts the services with zero manual steps.
+
+### What persists across deploys
+
+Named Docker volumes survive rebuilds and container replacements:
+
+| Volume | Contents |
+| --- | --- |
+| `uploads` | `wp-content/uploads/` — user-uploaded media |
+| `db_data` | MariaDB data directory |
+
+All other content (theme, plugins, PHP code) is baked into the image and replaced on every deploy.
+
+### HTTPS
+
+`compose.prod.yml` serves on port `80` only. For HTTPS, place a reverse proxy (nginx + Certbot, or Traefik) in front of the WordPress container to handle SSL termination. The WordPress container does not need to change.
+
+### Rolling back
+
+To roll back to a previous build, re-tag or re-run the previous image:
+
+```bash
+docker compose -f compose.prod.yml down
+# restore the previous image tag, then:
+docker compose -f compose.prod.yml up -d
+```
+
+---
+
 ## Troubleshooting
 
 ### Docker / Services
