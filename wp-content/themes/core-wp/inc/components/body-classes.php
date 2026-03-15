@@ -27,3 +27,15 @@ if ( ! function_exists( 'core_wp_body_classes' ) ) {
 	}
 }
 add_filter( 'body_class', 'core_wp_body_classes' );
+
+/**
+ * Add no-js class to the <html> element.
+ * global-scripts.js swaps this to 'js' once JavaScript has loaded.
+ *
+ * @param string $output The existing language attributes string.
+ * @return string
+ */
+function core_wp_html_no_js_class( $output ) {
+	return 'class="no-js" ' . $output;
+}
+add_filter( 'language_attributes', 'core_wp_html_no_js_class' );
