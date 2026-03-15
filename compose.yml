@@ -6,8 +6,13 @@ services:
             - ./functions.zsh:/home/webdev/.config/zsh/functions.zsh
             - ./wordpress:/home/webdev/www/public_html
             - ./.pnpm-store:/home/webdev/node/.local/share/pnpm/store
+        ports:
+            - '3000:3000'
+            - '3001:3001'
         tty: true
         environment:
+            APP_ENV: docker
+            BROWSER_SYNC_PORT: 3000
             WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
             WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
             WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}

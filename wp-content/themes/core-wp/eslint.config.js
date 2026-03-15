@@ -20,4 +20,13 @@ export default [
 			},
 		},
 	},
+	{
+		files: ['*.cjs', 'webpack.config.babel.js'],
+		languageOptions: {
+			sourceType: 'commonjs',
+			globals: {
+				...globals.node,
+			},
+		},
+	},
 ]
