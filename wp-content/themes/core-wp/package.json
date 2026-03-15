@@ -28,7 +28,7 @@
     "styles:rename": " ls ./assets/css | grep -Ev \"\\.min.css|.map\" | xargs -I '{}' basename '{}' .css | xargs -I '{}' mv ./assets/css/{}.css ./assets/css/{}.min.css",
     "styles:postcss": "postcss ./assets/css/*.css --replace && echo \"Completed: Postcss\"",
     "styles:cleanup": "find ./assets/css -type f \\( -iname '*.css.map' ! -iname \"*.min.*\" \\) -exec rm -rf {} +",
-    "styles:watch": "chokidar 'theme_components/sass/**/*.scss' -c 'pnpm run styles && pnpm run reload'",
+    "styles:watch": "chokidar 'theme_components/sass/**/*.scss' -c 'pnpm run styles'",
     "styles": "pnpm run clean:styles && pnpm run styles:lint && pnpm run styles:sass && pnpm run styles:rename && pnpm run styles:postcss && pnpm run styles:cleanup && echo \"Completed: Styles Task\"",
     "static:assets:watch": "chokidar 'theme_components/icons/**' 'theme_components/fonts/**' -c 'pnpm run static:assets && pnpm run reload'",
     "static:assets": "cp -r ./theme_components/fonts ./assets/ && cp -r ./theme_components/icons ./assets/ && echo \"Completed: Static Assets Copy \"",

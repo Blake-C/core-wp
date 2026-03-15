@@ -14,6 +14,7 @@ module.exports = {
 	host: isDocker ? '0.0.0.0' : 'localhost',
 	port: port,
 	ui: { port: port + 1 },
+	files: ['assets/css/**/*.min.css'],
 	open: false,
 	notify: false,
 	rewriteRules: isDocker
