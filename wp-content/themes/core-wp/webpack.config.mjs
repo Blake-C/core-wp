@@ -8,7 +8,6 @@
  * @link https://github.com/eslint/eslint/issues/4787
  */
 import path from 'path'
-import ESLintPlugin from 'eslint-webpack-plugin'
 import scriptsList from './theme_components/js/scripts-list.js'
 
 const __dirname = path.resolve(path.dirname(''))
@@ -65,17 +64,6 @@ const webpackConfig = env => {
 				},
 			],
 		},
-		plugins: [
-			new ESLintPlugin({
-				extensions: ['js', 'jsx'],
-				exclude: 'node_modules',
-				fix: true,
-				emitWarning: true,
-				failOnWarning: false,
-				emitError: true,
-				failOnError: true,
-			}),
-		],
 	}
 }
 

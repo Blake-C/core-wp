@@ -1,4 +1,3 @@
-/* global module require */
 const cssnano = require('cssnano')
 const autoprefixer = require('autoprefixer')
 
