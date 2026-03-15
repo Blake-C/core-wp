@@ -4,84 +4,158 @@
 @use 'layout';
 @use 'partials';
 
-@mixin foundation-everything($flex: true, $prototype: false, $xy-grid: $xy-grid) {
-	@if $flex {
-		$global-flexbox: true !global;
-	}
+// Base Reset
+// ----------
 
-	@if $xy-grid {
-		$xy-grid: true !global;
-	}
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
 
-	// Global styles
-	@include foundation-global-styles;
-	@include foundation-forms;
-	@include foundation-typography;
+// Base
+// ----
 
-	// Grids
-	@if not $flex {
-		@include foundation-grid;
-	} @else {
-		@if $xy-grid {
-			@include foundation-xy-grid-classes;
-		} @else {
-			@include foundation-flex-grid;
-		}
-	}
+html {
+	font-size: $global-font-size;
+}
 
-	// Generic components
-	@include foundation-button;
-	// @include foundation-button-group;
-	// @include foundation-close-button;
-	// @include foundation-label;
-	// @include foundation-progress-bar;
-	// @include foundation-slider;
-	// @include foundation-switch;
-	@include foundation-table;
+body {
+	background: $body-background;
+	color: $body-font-color;
+	font-family: $body-font-family;
+	font-size: 1rem;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	line-height: $global-lineheight;
+}
 
-	// Basic components
-	// @include foundation-badge;
-	// @include foundation-breadcrumbs;
-	@include foundation-callout;
-	// @include foundation-card;
-	// @include foundation-dropdown;
-	// @include foundation-pagination;
-	// @include foundation-tooltip;
+// Typography
+// ----------
 
-	// Containers
-	// @include foundation-accordion;
-	// @include foundation-media-object;
-	// @include foundation-orbit;
-	@include foundation-responsive-embed;
-	// @include foundation-tabs;
-	// @include foundation-thumbnail;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $header-font-family;
+	font-weight: 400;
+	line-height: $header-lineheight;
+	margin-bottom: 0.5rem;
+	margin-top: 0;
+}
 
-	// Menu-based containers
-	// @include foundation-menu;
-	// @include foundation-menu-icon;
-	// @include foundation-accordion-menu;
-	// @include foundation-drilldown-menu;
-	// @include foundation-dropdown-menu;
+p {
+	line-height: $paragraph-lineheight;
+	margin-bottom: $global-margin;
+}
 
-	// Layout components
-	// @include foundation-off-canvas;
-	// @include foundation-reveal;
-	// @include foundation-sticky;
-	// @include foundation-title-bar;
-	// @include foundation-top-bar;
+a {
+	color: var(--wp--preset--color--primary, #1779ba);
+	text-decoration: none;
 
-	// Helpers
-	@include foundation-float-classes;
-
-	@if $flex {
-		@include foundation-flex-classes;
-	}
-
-	@include foundation-visibility-classes;
-
-	@if $prototype {
-		@include foundation-prototype-classes;
+	&:hover,
+	&:focus {
+		text-decoration: underline;
 	}
 }
 
-@include foundation-everything($flex: false, $prototype: false);
+ul,
+ol {
+	margin-bottom: $global-margin;
+	padding-left: 1.25rem;
+}
+
+// Tables
+// ------
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th,
+td {
+	padding: 0.5rem 0.625rem 0.625rem;
+	text-align: left;
+}
+
+th {
+	background-color: $light-gray;
+	font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+	background-color: $light-gray;
+}
+
+// Buttons
+// -------
+// Base .button class. The WordPress comment submit button also uses .submit —
+// see layout/_comments.scss.
+
+.button {
+	background-color: var(--wp--preset--color--primary, #1779ba);
+	border: 1px solid transparent;
+	color: $white;
+	cursor: pointer;
+	display: inline-block;
+	font-family: inherit;
+	font-size: 0.9rem;
+	line-height: 1;
+	margin: 0 0 $global-margin;
+	padding: 0.85em 1em;
+	text-decoration: none;
+	transition:
+		background-color 0.25s ease-out,
+		color 0.25s ease-out;
+
+	&:hover,
+	&:focus {
+		background-color: var(--wp--preset--color--primary, #125488);
+		color: $white;
+		text-decoration: none;
+	}
+}
+
+// Screen reader text
+// ------------------
+
+.show-for-sr,
+.screen-reader-text {
+	@include element-invisible;
+}
+
+// Visibility
+// ----------
+
+.hide {
+	/* stylelint-disable-next-line declaration-no-important */
+	display: none !important;
+}
+
+// Responsive embed
+// ----------------
+// Wraps iframes/video in a 16:9 container.
+// Usage: <div class="responsive-embed">...</div>
+
+.responsive-embed,
+.flex-video {
+	height: 0;
+	margin-bottom: $global-margin;
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	position: relative;
+
+	iframe,
+	object,
+	embed,
+	video {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+}

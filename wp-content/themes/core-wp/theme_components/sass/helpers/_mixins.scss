@@ -1,12 +1,83 @@
-/*
-	http://www.sitepoint.com/sass-mixin-placeholder/
+@use 'settings' as *;
 
-	Mixins allow you to define styles that can be re-used throughout the stylesheet
-	without needing to resort to non-semantic classes like .float-left. Mixins can
-	also contain full CSS rules, and anything else allowed elsewhere in a Sass
-	document. They can even take arguments which allows you to produce a wide
-	variety of styles with very few mixins.
- */
+// breakpoint($size)
+// -----------------
+// Media query mixin matching Foundation's named breakpoints.
+// Mirrors Foundation 6 semantics so existing callsites need no changes.
+//
+// Supported values: 'small only', 'medium', 'medium only', 'large', 'large only',
+//                   'xlarge', 'xxlarge'
+//
+// Usage:
+//   @include breakpoint(medium) { ... }      → min-width: 640px
+//   @include breakpoint(small only) { ... }  → max-width: 639px
+
+@mixin breakpoint($size) {
+	@if $size == 'small only' {
+		@media screen and (max-width: 639px) {
+			@content;
+		}
+	} @else if $size == 'medium' {
+		@media screen and (min-width: 640px) {
+			@content;
+		}
+	} @else if $size == 'medium only' {
+		@media screen and (min-width: 640px) and (max-width: 1023px) {
+			@content;
+		}
+	} @else if $size == 'large' {
+		@media screen and (min-width: 1024px) {
+			@content;
+		}
+	} @else if $size == 'large only' {
+		@media screen and (min-width: 1024px) and (max-width: 1199px) {
+			@content;
+		}
+	} @else if $size == 'xlarge' {
+		@media screen and (min-width: 1200px) {
+			@content;
+		}
+	} @else if $size == 'xxlarge' {
+		@media screen and (min-width: 1440px) {
+			@content;
+		}
+	}
+}
+
+// element-invisible
+// -----------------
+// Visually hides an element while keeping it accessible to screen readers.
+// Replaces Foundation's element-invisible mixin.
+// Use via .screen-reader-text in _generic-styles.scss or @include directly.
+
+@mixin element-invisible {
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+// clearfix
+// --------
+// Clears floated children without extra markup.
+// Replaces Foundation's clearfix mixin.
+
+@mixin clearfix {
+	&::after {
+		clear: both;
+		content: '';
+		display: table;
+	}
+}
+
+// hover-active-focus($property, $value)
+// -------------------------------------
+// Shorthand for applying a single property across interaction states.
+//
+// Usage: @include hover-active-focus(color, red);
 
 @mixin hover-active-focus($property, $value) {
 	&:hover,
@@ -14,4 +85,4 @@
 	&:focus {
 		#{$property}: $value;
 	}
-} // to use: @include hover-active-focus(property, value);
+}

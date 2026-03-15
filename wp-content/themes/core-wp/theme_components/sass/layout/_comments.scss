@@ -32,12 +32,27 @@
 	}
 }
 
-/*
- *
- * No easy was to get at Wordpresses default submit buttons on comments
- * Addeding the submit class to the button stylings for foundation
- *
-*/
+// WordPress comment form submit button inherits .button base styles.
 .submit {
-	@include button;
+	background-color: var(--wp--preset--color--primary, #1779ba);
+	border: 1px solid transparent;
+	color: $white;
+	cursor: pointer;
+	display: inline-block;
+	font-family: inherit;
+	font-size: 0.9rem;
+	line-height: 1;
+	margin: 0 0 1rem;
+	padding: 0.85em 1em;
+	text-decoration: none;
+	transition:
+		background-color 0.25s ease-out,
+		color 0.25s ease-out;
+
+	&:hover,
+	&:focus {
+		background-color: var(--wp--preset--color--primary, #125488);
+		color: $white;
+		text-decoration: none;
+	}
 }

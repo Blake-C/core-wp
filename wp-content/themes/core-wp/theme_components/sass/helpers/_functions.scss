@@ -1,3 +1,29 @@
-/*
-	http://thesassway.com/advanced/pure-sass-functions
- */
+// rem-calc($values, $base: 16)
+// ----------------------------
+// Converts pixel values to rem. Mirrors Foundation's rem-calc() function.
+// Accepts a single value or a space-separated list (for shorthand properties).
+//
+// Usage:
+//   font-size: rem-calc(14);         → 0.875rem
+//   padding: rem-calc(9 20 0 19);    → 0.5625rem 1.25rem 0 1.1875rem
+
+@use 'sass:list';
+@use 'sass:math';
+
+@function rem-calc($values, $base: 16) {
+	$rem-values: ();
+
+	@each $value in $values {
+		@if $value == 0 {
+			$rem-values: list.append($rem-values, 0);
+		} @else {
+			$rem-values: list.append($rem-values, math.div($value, $base) * 1rem);
+		}
+	}
+
+	@if list.length($rem-values) == 1 {
+		@return list.nth($rem-values, 1);
+	} @else {
+		@return $rem-values;
+	}
+}

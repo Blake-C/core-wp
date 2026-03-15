@@ -23,12 +23,27 @@
 				{
 					"name": "White",
 					"slug": "white",
-					"color": "#ffffff"
+					"color": "#fefefe"
 				},
 				{
 					"name": "Black",
 					"slug": "black",
-					"color": "#222222"
+					"color": "#0a0a0a"
+				},
+				{
+					"name": "Light Gray",
+					"slug": "light-gray",
+					"color": "#e6e6e6"
+				},
+				{
+					"name": "Medium Gray",
+					"slug": "medium-gray",
+					"color": "#cacaca"
+				},
+				{
+					"name": "Dark Gray",
+					"slug": "dark-gray",
+					"color": "#8a8a8a"
 				}
 			]
 		},
@@ -37,32 +52,38 @@
 			"wideSize": "1600px"
 		},
 		"spacing": {
-			"spacingScale": {
-				"steps": 1
-			}
+			"units": ["px", "em", "rem", "vh", "vw", "%"],
+			"spacingSizes": [
+				{ "slug": "1", "size": "0.25rem", "name": "XSmall" },
+				{ "slug": "2", "size": "0.5rem",  "name": "Small" },
+				{ "slug": "3", "size": "1rem",    "name": "Medium" },
+				{ "slug": "4", "size": "1.5rem",  "name": "Large" },
+				{ "slug": "5", "size": "2rem",    "name": "XLarge" },
+				{ "slug": "6", "size": "3rem",    "name": "XXLarge" },
+				{ "slug": "7", "size": "4rem",    "name": "Huge" }
+			]
 		},
 		"typography": {
-			"fontSizes": [
+			"customFontSize": true,
+			"fontFamilies": [
 				{
-					"slug": "small",
-					"size": "14px",
-					"name": "Small"
+					"name": "System Sans-Serif",
+					"slug": "sans-serif",
+					"fontFamily": "\"Helvetica Neue\", helvetica, roboto, arial, sans-serif"
 				},
 				{
-					"slug": "medium",
-					"size": "16px",
-					"name": "Medium"
-				},
-				{
-					"slug": "large",
-					"size": "20px",
-					"name": "Large"
-				},
-				{
-					"slug": "x-large",
-					"size": "24px",
-					"name": "X Large"
+					"name": "Monospace",
+					"slug": "monospace",
+					"fontFamily": "consolas, \"Liberation Mono\", courier, monospace"
 				}
+			],
+			"fontSizes": [
+				{ "slug": "small",   "size": "0.8rem",   "name": "Small" },
+				{ "slug": "medium",  "size": "1rem",     "name": "Medium" },
+				{ "slug": "large",   "size": "1.25rem",  "name": "Large" },
+				{ "slug": "x-large", "size": "1.5rem",   "name": "X Large" },
+				{ "slug": "xx-large","size": "2rem",     "name": "XX Large" },
+				{ "slug": "huge",    "size": "3rem",     "name": "Huge" }
 			]
 		}
 	},
@@ -70,6 +91,19 @@
 		"color": {
 			"background": "var(--wp--preset--color--white)",
 			"text": "var(--wp--preset--color--black)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--sans-serif)",
+			"fontSize": "1rem",
+			"lineHeight": "1.5"
+		},
+		"elements": {
+			"h1": { "typography": { "fontSize": "3rem",       "lineHeight": "1.4" } },
+			"h2": { "typography": { "fontSize": "2.5rem",     "lineHeight": "1.4" } },
+			"h3": { "typography": { "fontSize": "1.9375rem",  "lineHeight": "1.4" } },
+			"h4": { "typography": { "fontSize": "1.5625rem",  "lineHeight": "1.4" } },
+			"h5": { "typography": { "fontSize": "1.25rem",    "lineHeight": "1.4" } },
+			"h6": { "typography": { "fontSize": "1rem",       "lineHeight": "1.4" } }
 		}
 	}
 }

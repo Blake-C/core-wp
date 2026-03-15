@@ -1,0 +1,70 @@
+// Theme Settings
+// --------------
+// Global design tokens: colors, typography, spacing, breakpoints.
+// These replace foundation-settings.scss without any framework dependency.
+// Values are kept close to Foundation 6 defaults where practical.
+
+@use 'sass:color';
+
+// 1. Colors
+// ---------
+
+$white: #fefefe;
+$black: #0a0a0a;
+$light-gray: #e6e6e6;
+$medium-gray: #cacaca;
+$dark-gray: #8a8a8a;
+$body-background: $white;
+$body-font-color: $black;
+
+// Primary/secondary map to theme.json CSS vars at runtime.
+// These Sass variables are fallbacks used during SCSS compilation.
+$primary-color: #1779ba;
+$secondary-color: #767676;
+
+// 2. Breakpoints
+// --------------
+// Used by the breakpoint() mixin in _mixins.scss.
+// Mirrors Foundation's named breakpoints so existing SCSS callsites need no changes.
+
+$breakpoints: (
+	'small': 0,
+	'medium': 640px,
+	'large': 1024px,
+	'xlarge': 1200px,
+	'xxlarge': 1440px,
+);
+
+// 3. Layout
+// ---------
+
+$global-width: 1200px;
+
+// 4. Typography
+// -------------
+
+$global-font-size: 100%;
+$global-lineheight: 1.5;
+$body-font-family: 'Helvetica Neue', helvetica, roboto, arial, sans-serif;
+$header-font-family: $body-font-family;
+$header-lineheight: 1.4;
+$paragraph-lineheight: 1.6;
+$font-family-monospace: consolas, 'Liberation Mono', courier, monospace;
+
+// 5. Spacing
+// ----------
+
+$global-margin: 1rem;
+$global-padding: 1rem;
+$global-radius: 0;
+
+// 6. Code Blocks
+// --------------
+// Referenced by _generic-styles.scss for <pre> styling.
+
+$code-color: $black;
+$code-font-family: $font-family-monospace;
+$code-font-weight: normal;
+$code-background: $light-gray;
+$code-border: 1px solid $medium-gray;
+$code-padding: 0.125rem 0.3125rem 0.0625rem;

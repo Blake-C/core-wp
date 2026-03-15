@@ -18,7 +18,16 @@ body {
 	a {
 		&.button {
 			&[data-mce-selected] {
-				@include button();
+				background-color: var(--wp--preset--color--primary, #1779ba);
+				border: 1px solid transparent;
+				color: $white;
+				cursor: pointer;
+				display: inline-block;
+				font-family: inherit;
+				font-size: 0.9rem;
+				line-height: 1;
+				padding: 0.85em 1em;
+				text-decoration: none;
 			}
 
 			&.expanded {
