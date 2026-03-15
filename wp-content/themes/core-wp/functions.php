@@ -130,7 +130,7 @@ if ( ! function_exists( 'core_wp_scripts' ) ) {
 		wp_enqueue_style( 'core-wp-style', $global_styles, array(), core_wp_cache_bust( $global_styles ) );
 
 		/* Import Scripts (Keep to a minimum or import into global-scripts.js file) */
-		wp_enqueue_script( 'core-wp-global', $global_scripts, array( 'jquery' ), core_wp_cache_bust( $global_scripts ), true );
+		wp_enqueue_script( 'core-wp-global', $global_scripts, array(), core_wp_cache_bust( $global_scripts ), true );
 
 		/**
 		 * Conditionally add scripts and styles to pages with template tags

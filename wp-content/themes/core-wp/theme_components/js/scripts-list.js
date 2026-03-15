@@ -15,7 +15,7 @@
  * Then enqueue the output file conditionally in functions.php:
  *
  *   if ( is_front_page() ) {
- *     wp_enqueue_script( 'core-wp-home', get_template_directory_uri() . '/assets/js/bundle.home-scripts.js', [ 'jquery' ], core_wp_cache_bust( $path ), true );
+ *     wp_enqueue_script( 'core-wp-home', get_template_directory_uri() . '/assets/js/bundle.home-scripts.js', [], core_wp_cache_bust( $path ), true );
  *   }
  *
  * When to use dynamic import() chunks instead

@@ -20,9 +20,6 @@ const webpackConfig = env => {
 			path: path.resolve(__dirname, env.output), // eslint-disable-line no-undef
 			filename: 'bundle.[name].js',
 		},
-		externals: {
-			jquery: 'jQuery',
-		},
 		devtool: 'source-map',
 		stats: {
 			/**
@@ -36,13 +33,6 @@ const webpackConfig = env => {
 		},
 		module: {
 			rules: [
-				{
-					/**
-					 * @link https://github.com/webpack/webpack/issues/3017#issuecomment-285954512
-					 * @link https://github.com/jquery/jquery-migrate/issues/273
-					 */
-					parser: { amd: false },
-				},
 				{
 					test: /\.(js|jsx)$/,
 					loader: 'babel-loader',
