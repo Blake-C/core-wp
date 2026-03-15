@@ -41,7 +41,7 @@ wp-db-export() {
 
 	if [[ "$REPLACEURLCLEAN" != "" ]]; then
 		wp search-replace "$REPLACEURLCLEAN" "localhost" --allow-root
-		wp option update siteurl "http://localhost/wp" --allow-root
+		wp option update siteurl "http://localhost" --allow-root
 	fi
 
 	cd $WORKING_DIR
