@@ -28,6 +28,9 @@ if ( ! function_exists( 'core_wp_print_pre' ) ) {
 	 * @param  [array] $data - Array to be displayed in pre tags.
 	 */
 	function core_wp_print_pre( $data ) {
+		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+			return;
+		}
 		echo '<pre>';
       print_r( $data ); // phpcs:ignore
 		echo '</pre>';
@@ -42,6 +45,9 @@ if ( ! function_exists( 'core_wp_theme_error_log' ) ) {
 	 * @param  string $message Message to pass to error log.
 	 */
 	function core_wp_theme_error_log( $message ) {
+		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+			return;
+		}
 		$time_stamp = new DateTime( 'NOW' );
 		$time_stamp->setTimezone( new DateTimeZone( 'America/Chicago' ) );
 		$error_time  = $time_stamp->format( 'F j, Y @ G:i:s' );

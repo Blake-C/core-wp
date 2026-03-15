@@ -6,7 +6,7 @@
 		}
 	],
 	"require": {
-		"php": "~8.0",
+		"php": "~8.3",
 		"composer/installers": "*",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
 		"wpackagist-plugin/redirection": "^5.7",
