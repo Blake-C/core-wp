@@ -1,23 +1,25 @@
 {
 	"repositories": [
 		{
+			"name": "wp-composer",
 			"type": "composer",
-			"url": "https://wpackagist.org"
+			"url": "https://repo.wp-composer.com"
 		}
 	],
 	"require": {
 		"php": "~8.3",
 		"composer/installers": "*",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
-		"wpackagist-plugin/redirection": "^5.7",
-		"wpackagist-plugin/wordfence": "^8.1",
-		"wpackagist-plugin/wordpress-seo": "^27.1"
+		"wp-plugin/redirection": "^5.7",
+		"wp-plugin/wordfence": "^8.1",
+		"wp-plugin/wordpress-seo": "^27.1",
+		"wp-plugin/wps-hide-login": "^1.9"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.5",
 		"phpcompatibility/php-compatibility": "^9.3",
 		"wp-coding-standards/wpcs": "^3.0",
-		"wpackagist-plugin/query-monitor": "^3.20"
+		"wp-plugin/query-monitor": "^3.20"
 	},
 	"extra": {
 		"wordpress-install-dir": ".",

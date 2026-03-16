@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7dff647b190e10a076c9d52954d6ffe4",
+    "content-hash": "4d5403a99e18164e8f0244e6c03bde39",
     "packages": [
         {
             "name": "composer/installers",
@@ -328,7 +328,7 @@
             "time": "2025-11-04T16:30:35+00:00"
         },
         {
-            "name": "wpackagist-plugin/redirection",
+            "name": "wp-plugin/redirection",
             "version": "5.7.5",
             "source": {
                 "type": "svn",
@@ -340,13 +340,26 @@
                 "url": "https://downloads.wordpress.org/plugin/redirection.5.7.5.zip"
             },
             "require": {
-                "composer/installers": "^1.0 || ^2.0"
+                "composer/installers": "~1.0|~2.0"
             },
             "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/redirection/"
+            "notification-url": "https://wp-composer.com/downloads",
+            "authors": [
+                {
+                    "name": "John Godley"
+                }
+            ],
+            "description": "Manage 301 redirects, track 404 errors, and improve your site. No knowledge of Apache or Nginx required.",
+            "homepage": "https://redirection.me/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/redirection/#developers",
+                "issues": "https://wordpress.org/support/plugin/redirection",
+                "source": "https://plugins.svn.wordpress.org/redirection"
+            },
+            "time": "2026-03-01T07:42:00+00:00"
         },
         {
-            "name": "wpackagist-plugin/wordfence",
+            "name": "wp-plugin/wordfence",
             "version": "8.1.4",
             "source": {
                 "type": "svn",
@@ -358,13 +371,26 @@
                 "url": "https://downloads.wordpress.org/plugin/wordfence.8.1.4.zip"
             },
             "require": {
-                "composer/installers": "^1.0 || ^2.0"
+                "composer/installers": "~1.0|~2.0"
             },
             "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wordfence/"
+            "notification-url": "https://wp-composer.com/downloads",
+            "authors": [
+                {
+                    "name": "Mark Maunder"
+                }
+            ],
+            "description": "Firewall, Malware Scanner, Two Factor Auth, and Comprehensive Security Features, powered by our 24-hour team. Make security a priority with Wordfence.",
+            "homepage": "https://www.wordfence.com/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/wordfence/#developers",
+                "issues": "https://wordpress.org/support/plugin/wordfence",
+                "source": "https://plugins.svn.wordpress.org/wordfence"
+            },
+            "time": "2025-12-20T21:06:00+00:00"
         },
         {
-            "name": "wpackagist-plugin/wordpress-seo",
+            "name": "wp-plugin/wordpress-seo",
             "version": "27.1.1",
             "source": {
                 "type": "svn",
@@ -376,10 +402,53 @@
                 "url": "https://downloads.wordpress.org/plugin/wordpress-seo.27.1.1.zip"
             },
             "require": {
-                "composer/installers": "^1.0 || ^2.0"
+                "composer/installers": "~1.0|~2.0"
             },
             "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wordpress-seo/"
+            "notification-url": "https://wp-composer.com/downloads",
+            "authors": [
+                {
+                    "name": "Yoast"
+                }
+            ],
+            "description": "Improve your SEO with real-time feedback, schema, and clear guidance. Upgrade for AI tools, Google Docs integration, and 24/7 support, no hidden fees.",
+            "homepage": "https://yoa.st/1uj",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/wordpress-seo/#developers",
+                "issues": "https://wordpress.org/support/plugin/wordpress-seo",
+                "source": "https://plugins.svn.wordpress.org/wordpress-seo"
+            },
+            "time": "2026-03-03T13:51:00+00:00"
+        },
+        {
+            "name": "wp-plugin/wps-hide-login",
+            "version": "1.9.18",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
+                "reference": "tags/1.9.18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.9.18.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-composer.com/downloads",
+            "authors": [
+                {
+                    "name": "Remy Perona"
+                }
+            ],
+            "description": "Change wp-login.php to anything you want.",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/wps-hide-login/#developers",
+                "issues": "https://wordpress.org/support/plugin/wps-hide-login",
+                "source": "https://plugins.svn.wordpress.org/wps-hide-login"
+            },
+            "time": "2026-01-12T08:47:00+00:00"
         }
     ],
     "packages-dev": [
@@ -687,7 +756,7 @@
             "time": "2025-11-25T12:08:04+00:00"
         },
         {
-            "name": "wpackagist-plugin/query-monitor",
+            "name": "wp-plugin/query-monitor",
             "version": "3.20.2",
             "source": {
                 "type": "svn",
@@ -699,10 +768,23 @@
                 "url": "https://downloads.wordpress.org/plugin/query-monitor.3.20.2.zip"
             },
             "require": {
-                "composer/installers": "^1.0 || ^2.0"
+                "composer/installers": "~1.0|~2.0"
             },
             "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/query-monitor/"
+            "notification-url": "https://wp-composer.com/downloads",
+            "authors": [
+                {
+                    "name": "John Blackbourn"
+                }
+            ],
+            "description": "Query Monitor is the developer tools panel for WordPress and WooCommerce.",
+            "homepage": "https://querymonitor.com/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/query-monitor/#developers",
+                "issues": "https://wordpress.org/support/plugin/query-monitor",
+                "source": "https://plugins.svn.wordpress.org/query-monitor"
+            },
+            "time": "2025-12-11T22:16:00+00:00"
         }
     ],
     "aliases": [],
