@@ -1,11 +1,4 @@
 {
-	"repositories": [
-		{
-			"name": "wp-composer",
-			"type": "composer",
-			"url": "https://repo.wp-composer.com"
-		}
-	],
 	"require": {
 		"php": "~8.3",
 		"composer/installers": "*",
@@ -39,6 +32,16 @@
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true,
 			"composer/installers": true
+		},
+		"secure-http": true,
+		"preferred-install": "dist",
+		"audit": {
+			"abandoned": "report"
 		}
-	}
+	},
+	"repositories": [{
+		"name": "wp-packages",
+		"type": "composer",
+		"url": "https://repo.wp-packages.org"
+	}]
 }
