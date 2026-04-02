@@ -4,7 +4,6 @@ services:
         volumes:
             - ./wp-content:/home/webdev/www/public_html/wp-content
             - ./functions.zsh:/home/webdev/.config/zsh/functions.zsh
-            - ./wordpress:/home/webdev/www/public_html
             - ./.pnpm-store:/home/webdev/node/.local/share/pnpm/store
         ports:
             - '3000:3000'
@@ -36,8 +35,8 @@ services:
             # Remove or set to "off" to disable XDebug overhead when not debugging.
             XDEBUG_MODE: debug
         volumes:
-            - ./wp-content:/var/www/html/wp-content
             - ./wordpress:/var/www/html
+            - ./wp-content:/var/www/html/wp-content
         depends_on:
             db:
                 condition: service_healthy
