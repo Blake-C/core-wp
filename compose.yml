@@ -5,6 +5,7 @@ services:
             - ./wp-content:/home/webdev/www/public_html/wp-content
             - ./functions.zsh:/home/webdev/.config/zsh/functions.zsh
             - ./.pnpm-store:/home/webdev/node/.local/share/pnpm/store
+            - ./wordpress:/home/webdev/www/public_html/
         ports:
             - '3000:3000'
             - '3001:3001'
