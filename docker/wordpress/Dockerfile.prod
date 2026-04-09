@@ -27,6 +27,6 @@ COPY --from=composer-builder /app/vendor/ /var/www/html/wp-content/vendor/
 COPY --from=theme-builder /theme/assets/ /var/www/html/wp-content/themes/core-wp/assets/
 
 COPY docker/wordpress/php-opcache-prod.ini /usr/local/etc/php/conf.d/php-opcache.ini
-COPY docker/wordpress/www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY docker/wordpress/www.prod.conf /usr/local/etc/php-fpm.d/www.conf
 
 RUN chown -R www-data:www-data /var/www/html/wp-content
