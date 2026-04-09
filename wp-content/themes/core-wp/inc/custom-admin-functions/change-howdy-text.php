@@ -18,6 +18,10 @@ if ( ! function_exists( 'core_wp_change_howdy_text_toolbar' ) ) {
 	function core_wp_change_howdy_text_toolbar( $wp_admin_bar ) {
 		$getgreetings = $wp_admin_bar->get_node( 'my-account' );
 
+		if ( ! $getgreetings ) {
+			return;
+		}
+
 		$rpctitle = str_replace( 'Howdy', 'Welcome', $getgreetings->title );
 
 		$wp_admin_bar->add_node(
