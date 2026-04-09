@@ -30,8 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! defined( 'WFS_FILES' ) ) {
-	define( 'WFS_FILES', __FILE__ );
+if ( ! defined( 'CORE_WP_FILES' ) ) {
+	define( 'CORE_WP_FILES', __FILE__ );
 }
 
-require_once dirname( WFS_FILES ) . '/custom-post-types/sample-post-type.php';
+require_once dirname( CORE_WP_FILES ) . '/custom-post-types/sample-post-type.php';
