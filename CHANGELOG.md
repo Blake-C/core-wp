@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [#.#.#] - Next
 
+### Security
+
+- Upgraded nginx image from `nginx:1.27-alpine` to `nginx:1.29-alpine` — resolves critical `libxml2` CVEs (Expired Pointer Dereference, Out-of-bounds Read) and high `libpng`, `expat`, `openssl` vulnerabilities — `compose.yml`, `compose.prod.yml`
+- Added `apk upgrade --no-cache` to WordPress dev and prod Dockerfiles — patches upstream Alpine packages including `imagemagick` and `expat` CVEs — `docker/wordpress/Dockerfile`, `docker/wordpress/Dockerfile.prod`
+
 ### Added
 
 - Added nginx service (`nginx:1.27-alpine`) as reverse proxy + static file server — dev (`compose.yml`) and prod (`compose.prod.yml`)

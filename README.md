@@ -369,7 +369,7 @@ wp search-replace https://production.com http://localhost --precise --all-tables
 
 | Service | Image | Port | Notes |
 | --- | --- | --- | --- |
-| nginx | `nginx:1.27-alpine` | `80` | Reverse proxy + static file serving |
+| nginx | `nginx:1.29-alpine` | `80` | Reverse proxy + static file serving |
 | WordPress (PHP-FPM 8.3) | Custom — `docker/wordpress/Dockerfile` | — | FPM Alpine; XDebug 3 installed |
 | Database | `mariadb:11.8` | `3306` (localhost only) | — |
 | phpMyAdmin | `phpmyadmin` | `8000` (localhost only) | — |
