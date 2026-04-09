@@ -13,14 +13,17 @@ import scriptsList from './theme_components/js/scripts-list.js'
 const __dirname = path.resolve(path.dirname(''))
 
 const webpackConfig = env => {
+	const mode = env.mode || 'production'
 	return {
-		mode: 'production',
+		mode,
 		entry: scriptsList,
 		output: {
 			path: path.resolve(__dirname, env.output), // eslint-disable-line no-undef
 			filename: 'bundle.[name].js',
 		},
-		devtool: 'source-map',
+		// Full source maps for production (debuggable in DevTools without exposing source).
+		// Cheap module maps in development — much faster rebuilds, still line-accurate.
+		devtool: mode === 'production' ? 'source-map' : 'cheap-module-source-map',
 		stats: {
 			/**
 			 * @link https://webpack.js.org/configuration/stats/
