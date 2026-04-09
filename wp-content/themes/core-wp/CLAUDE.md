@@ -30,7 +30,7 @@ Dual-mode: behaviour changes based on `APP_ENV=docker` environment variable.
 
 | | Docker (`pnpm run serve` in container) | Local |
 |---|---|---|
-| Proxy target | `http://wordpress` | `http://localhost` |
+| Proxy target | `http://nginx` | `http://localhost` |
 | Port | 3000 (mapped `3000:3000`) | 3010 |
 | UI port | 3001 | 3011 |
 

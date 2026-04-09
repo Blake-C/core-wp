@@ -8,9 +8,10 @@ A WordPress development environment running in Docker. The theme and plugin sour
 
 | Service | Image | Purpose | Ports |
 |---|---|---|---|
-| `wordpress` | Custom (built from `docker/wordpress/Dockerfile`) | Apache + PHP 8.3 + XDebug | 80 |
-| `db` | `mariadb:11.8` | Database | 3306 |
-| `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 |
+| `nginx` | `nginx:1.27-alpine` | Reverse proxy + static file serving | 80 |
+| `wordpress` | Custom (built from `docker/wordpress/Dockerfile`) | PHP-FPM 8.3 + XDebug (Alpine) | — |
+| `db` | `mariadb:11.8` | Database | 3306 (localhost only) |
+| `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 (localhost only) |
 | `cli_tools` | `digitalblake/light-cli:5.0.0` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
 
 **Start everything:** `docker compose up -d`
