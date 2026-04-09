@@ -58,6 +58,7 @@ All notable changes to this project will be documented in this file.
 - Refactored styles watch pipeline — restricted browser-sync `files` to `global-styles.min.css` only (other stylesheets have no `<link>` on frontend pages and caused fallback full-page reloads cancelling in-flight CSS injection); replaced xargs loop with single `postcss` invocation using `--dir`/`--ext`/`--no-map` against an isolated `assets/css/.src/` intermediate directory; added concurrent build lock and 500ms chokidar debounce — `scripts/styles.sh`, `bs-config.cjs`, `package.json`
 - Fixed `images.sh` grep pattern to correctly match file extensions — `scripts/images.sh`
 - Removed dead `webpack.config.babel.js` reference from `eslint.config.js`
+- Updated digitalblake/light-cli from v5.0.0 to v5.0.1
 
 ## [0.0.0] - 2026-03-16
 
