@@ -138,7 +138,7 @@ wp-init() {
 
 	#Setup main navigation
 	wp menu create "Main Navigation"
-	wp menu location assign main-navigation primary
+	# wp menu location assign main-navigation primary
 
 	# add pages to navigation
 	export IFS=" "
@@ -154,6 +154,7 @@ wp-init() {
 
 	# Activate plugins
 	wp plugin activate query-monitor
+	wp plugin activate redis-cache
 
 	echo "\n\nDon't forget to:"
 	echo "Update your style.css file in the base theme"
