@@ -2,15 +2,24 @@
 # styles.sh — SCSS → minified CSS pipeline
 #
 # Steps:
-#   1. Clean output directory
-#   2. Lint: Prettier formatting + Stylelint auto-fix
+#   1. Clean output directory          [skipped when SKIP_CLEAN=1]
+#   2. Lint: Prettier + Stylelint      [skipped when SKIP_LINT=1]
 #   3. Compile SCSS → CSS via Dart Sass
-#   4. Rename compiled files to .min.css
-#   5. PostCSS: autoprefixer + cssnano minification
+#   4. PostCSS (autoprefixer + cssnano) reading *.css → writing *.min.css directly
+#   5. Remove intermediate *.css files
 #   6. (Production only) Remove source map files
 #
-# BUILD_MODE=production disables Sass source map generation and removes any
-# residual .css.map files. Default (development) keeps source maps for DevTools.
+# SKIP_CLEAN=1 — skips rm -rf of assets/css/ so CSS files are overwritten in
+#                place rather than deleted and recreated. Browser-sync then sees
+#                a single change event (not unlink+add) and CSS injection stays
+#                reliable on every save. Set automatically by styles:watch.
+#
+# SKIP_LINT=1  — skips prettier + stylelint. Used by styles:watch so that
+#                formatter writes do not re-trigger the chokidar watcher and
+#                cause concurrent builds.
+#
+# BUILD_MODE=production — disables Sass source map generation and removes any
+#                         residual .css.map files.
 
 set -e
 
@@ -20,12 +29,16 @@ else
 	SASS_SOURCE_MAP_FLAG=""
 fi
 
-echo "Cleaning styles output..."
-rm -rf ./assets/css/*
+if [ "${SKIP_CLEAN:-}" != "1" ]; then
+	echo "Cleaning styles output..."
+	rm -rf ./assets/css/*
+fi
 
-echo "Linting..."
-prettier --write --log-level warn './theme_components/sass/**/*.scss'
-stylelint './theme_components/sass/**/*.scss' --fix
+if [ "${SKIP_LINT:-}" != "1" ]; then
+	echo "Linting..."
+	prettier --write --log-level warn './theme_components/sass/**/*.scss'
+	stylelint './theme_components/sass/**/*.scss' --fix
+fi
 
 echo "Compiling SCSS (mode: ${BUILD_MODE:-development})..."
 sass theme_components/sass/:assets/css \
@@ -35,14 +48,18 @@ sass theme_components/sass/:assets/css \
 	--charset \
 	${SASS_SOURCE_MAP_FLAG}
 
-echo "Renaming to .min.css..."
+# PostCSS: process each intermediate .css file and write directly to .min.css
+# in a single step. Combining rename + postcss into one write means browser-sync
+# sees exactly one change event per file per save instead of two (rename then
+# postcss overwrite), which prevents double-injection and pending queue buildup.
+echo "Running PostCSS (autoprefixer + cssnano → .min.css)..."
 ls ./assets/css \
 	| grep -Ev '\.min\.css|\.map' \
 	| xargs -I '{}' basename '{}' .css \
-	| xargs -I '{}' mv ./assets/css/{}.css ./assets/css/{}.min.css
+	| xargs -I '{}' postcss ./assets/css/{}.css -o ./assets/css/{}.min.css
 
-echo "Running PostCSS..."
-postcss './assets/css/*.css' --replace
+echo "Removing intermediate CSS files..."
+find ./assets/css -maxdepth 1 -name '*.css' ! -name '*.min.css' -delete
 
 if [ "${BUILD_MODE:-}" = "production" ]; then
 	echo "Cleaning up map files..."

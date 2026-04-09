@@ -32,7 +32,7 @@
     "watch":               "pnpm run scripts:watch & pnpm run styles:watch & pnpm run static:assets:watch & pnpm run images:watch & pnpm run html:watch",
     "watch:all":           "pnpm run scripts:watch & pnpm run styles:watch & pnpm run static:assets:watch & pnpm run phpcs:watch & pnpm run html:watch & pnpm run images:watch",
     "scripts:watch":       "chokidar 'theme_components/js/**/*.js' -c 'pnpm run scripts && pnpm run reload'",
-    "styles:watch":        "chokidar 'theme_components/sass/**/*.scss' -c 'pnpm run styles'",
+    "styles:watch":        "chokidar 'theme_components/sass/**/*.scss' -c 'SKIP_LINT=1 SKIP_CLEAN=1 pnpm run styles'",
     "static:assets:watch": "chokidar 'theme_components/icons/**' 'theme_components/fonts/**' -c 'pnpm run static:assets && pnpm run reload'",
     "images:watch":        "chokidar 'theme_components/images/**/*.{jpg,jpeg,png,gif,svg}' -c 'pnpm run images && pnpm run reload'",
     "html:watch":          "chokidar '**/*.html' --ignore 'node_modules/**' --ignore 'assets/**' -c 'pnpm run reload'",
