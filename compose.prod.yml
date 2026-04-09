@@ -8,6 +8,9 @@ services:
             - webroot:/var/www/html:ro
             - uploads:/var/www/html/wp-content/uploads:ro
             - ./docker/nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+            # Named volume so the FastCGI page cache survives nginx restarts.
+            # Clear it manually: docker compose exec nginx rm -rf /var/cache/nginx/fastcgi/*
+            - nginx_cache:/var/cache/nginx/fastcgi
         depends_on:
             wordpress:
                 condition: service_healthy
@@ -83,7 +86,9 @@ services:
         restart: always
         # Cap memory, evict least-recently-used keys when full, disable RDB persistence.
         # This is correct for a pure object cache — no durability needed.
-        command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru --save ""
+        # 256MB vs dev's 128MB — prod sees more concurrent traffic and a warmer cache
+        # has a larger working set. Monitor evictions: redis-cli info stats | grep evicted_keys
+        command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru --save ""
         healthcheck:
             test: ["CMD", "redis-cli", "ping"]
             interval: 10s
@@ -95,3 +100,4 @@ volumes:
     webroot:
     uploads:
     db_data:
+    nginx_cache:
