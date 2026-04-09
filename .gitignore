@@ -12,6 +12,7 @@ data
 !/wp-content/themes/core-wp
 !/wp-content/themes/core-wp/*
 !/wp-content/mu-plugins/index.php
+!/wp-content/mu-plugins/docker-loopback.php
 !/wp-content/plugins/index.php
 !/wp-content/themes/index.php
 !/wp-content/plugins/core-wp
