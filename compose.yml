@@ -20,7 +20,7 @@ services:
             WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
             WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
             WP_REDIS_HOST: redis
-            WORDPRESS_CONFIG_EXTRA: "define( 'WP_REDIS_HOST', getenv_docker('WP_REDIS_HOST', '127.0.0.1') );"
+            WORDPRESS_CONFIG_EXTRA: "define( 'WP_REDIS_HOST', getenv_docker('WP_REDIS_HOST', '127.0.0.1') ); define( 'WP_REDIS_DISABLED', true );"
 
     nginx:
         image: nginx:1.29-alpine
@@ -60,7 +60,8 @@ services:
             WP_REDIS_HOST: redis
             # Translate the WP_REDIS_HOST env var into a PHP constant for the Redis Object Cache plugin.
             # wp-config.php evals this after getenv_docker() is defined, so it is available here.
-            WORDPRESS_CONFIG_EXTRA: "define( 'WP_REDIS_HOST', getenv_docker('WP_REDIS_HOST', '127.0.0.1') );"
+            # WP_REDIS_DISABLED keeps the object cache off in dev — enable it in production config only.
+            WORDPRESS_CONFIG_EXTRA: "define( 'WP_REDIS_HOST', getenv_docker('WP_REDIS_HOST', '127.0.0.1') ); define( 'WP_REDIS_DISABLED', true );"
         volumes:
             - ./wordpress:/var/www/html
             - ./wp-content:/var/www/html/wp-content
