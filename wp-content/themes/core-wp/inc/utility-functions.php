@@ -14,9 +14,22 @@ if ( ! function_exists( 'core_wp_cache_bust' ) ) {
 	 * @return string      Returns the time when the data blocks of a file were being written to, that is, the time when the content of the file was changed.
 	 */
 	function core_wp_cache_bust( $src ) {
-		$cache_bust = filemtime( realpath( '.' . wp_parse_url( $src, PHP_URL_PATH ) ) );
+		static $request_cache = array();
 
-		return $cache_bust;
+		if ( isset( $request_cache[ $src ] ) ) {
+			return $request_cache[ $src ];
+		}
+
+		$file_path = realpath( '.' . wp_parse_url( $src, PHP_URL_PATH ) );
+
+		if ( ! $file_path || ! file_exists( $file_path ) ) {
+			$request_cache[ $src ] = null;
+			return null;
+		}
+
+		$request_cache[ $src ] = filemtime( $file_path );
+
+		return $request_cache[ $src ];
 	}
 }
 
