@@ -1,7 +1,7 @@
 {
 	"require": {
 		"php": "~8.3",
-		"composer/installers": "*",
+		"composer/installers": "^2.3",
 		"wp-plugin/redirection": "^5.7",
 		"wp-plugin/wordfence": "^8.1",
 		"wp-plugin/wordpress-seo": "^27.1",
