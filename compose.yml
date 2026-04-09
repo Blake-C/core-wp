@@ -50,13 +50,19 @@ services:
             WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
             WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
             WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
-            # Remove or set to "off" to disable XDebug overhead when not debugging.
-            XDEBUG_MODE: debug
+            # Set XDEBUG_MODE=debug in .env to enable debugging.
+            # Defaults to "off" to avoid PHP performance overhead.
+            XDEBUG_MODE: ${XDEBUG_MODE:-off}
+            # Redis object cache — requires the "Redis Object Cache" plugin
+            # (https://wordpress.org/plugins/redis-cache/) to be installed and activated.
+            WP_REDIS_HOST: redis
         volumes:
             - ./wordpress:/var/www/html
             - ./wp-content:/var/www/html/wp-content
         depends_on:
             db:
+                condition: service_healthy
+            redis:
                 condition: service_healthy
         healthcheck:
             test: ["CMD-SHELL", "nc -z 127.0.0.1 9000 || exit 1"]
@@ -70,6 +76,7 @@ services:
         restart: always
         volumes:
             - ./data/mysql:/var/lib/mysql
+            - ./docker/mysql/my-dev.cnf:/etc/mysql/conf.d/my.cnf:ro
         ports:
             - '127.0.0.1:3306:3306'
         environment:
@@ -83,9 +90,22 @@ services:
             retries: 5
             start_period: 30s
 
+    redis:
+        image: redis:7-alpine
+        restart: always
+        # Cap memory, evict least-recently-used keys when full, disable RDB persistence.
+        # This is correct for a pure object cache — no durability needed.
+        command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru --save ""
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 10s
+            timeout: 5s
+            retries: 3
+            start_period: 10s
+
     phpmyadmin:
         image: phpmyadmin
-        restart: always
+        restart: unless-stopped
         depends_on:
             - db
         ports:
