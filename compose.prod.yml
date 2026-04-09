@@ -1,11 +1,30 @@
 services:
+    nginx:
+        image: nginx:1.27-alpine
+        restart: always
+        expose:
+            - 80
+        volumes:
+            - webroot:/var/www/html:ro
+            - uploads:/var/www/html/wp-content/uploads:ro
+            - ./docker/nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+        depends_on:
+            wordpress:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD-SHELL", "wget -qO- http://localhost/ > /dev/null 2>&1 || exit 1"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 30s
+
     wordpress:
         build:
             context: .
             dockerfile: docker/wordpress/Dockerfile.prod
         restart: always
         expose:
-            - 80
+            - 9000
         environment:
             WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
             WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
@@ -22,12 +41,15 @@ services:
                 define('DISALLOW_FILE_EDIT', true);
                 define('DISALLOW_FILE_MODS', true);
         volumes:
+            # webroot is populated from the image on first start by Docker.
+            # On redeploy: docker compose down -v && docker compose up -d
+            - webroot:/var/www/html
             - uploads:/var/www/html/wp-content/uploads
         depends_on:
             db:
                 condition: service_healthy
         healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost/"]
+            test: ["CMD-SHELL", "nc -z 127.0.0.1 9000 || exit 1"]
             interval: 30s
             timeout: 10s
             retries: 3
@@ -51,5 +73,6 @@ services:
             start_period: 30s
 
 volumes:
+    webroot:
     uploads:
     db_data:
