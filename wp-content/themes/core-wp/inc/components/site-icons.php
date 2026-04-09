@@ -30,7 +30,20 @@ if ( ! function_exists( 'core_wp_site_icons' ) ) {
 		$tags .= '<meta name="apple-mobile-web-app-title" content="' . $site_name . '">' . "\n";
 		$tags .= '<meta name="application-name" content="' . $site_name . '">' . "\n";
 
-		echo $tags; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$allowed_html = array(
+			'link' => array(
+				'rel'   => true,
+				'sizes' => true,
+				'href'  => true,
+				'type'  => true,
+				'color' => true,
+			),
+			'meta' => array(
+				'name'    => true,
+				'content' => true,
+			),
+		);
+		echo wp_kses( $tags, $allowed_html );
 	}
 }
 add_action( 'wp_head', 'core_wp_site_icons', 1 );
