@@ -1,0 +1,24 @@
+[mysqld]
+# InnoDB buffer pool: cache for table data and indexes.
+# 256M is appropriate for a local dev machine; raise to match available RAM.
+innodb_buffer_pool_size        = 256M
+
+# Flush log once per second instead of on every commit — faster writes in dev
+# at the cost of up to 1 second of data on a crash (acceptable for local work).
+innodb_flush_log_at_trx_commit = 2
+
+# Log slow queries so you can spot N+1 or missing-index problems early.
+slow_query_log                 = 1
+slow_query_log_file            = /var/log/mysql/slow.log
+long_query_time                = 2
+
+# Reduce log flush overhead on dev; default 1M is often too small for WordPress.
+innodb_log_buffer_size         = 16M
+
+# Cache threads to avoid creation overhead on repeated short-lived connections
+# (WP-CLI, browser-sync reloads, etc.).
+thread_cache_size              = 8
+
+# UTF-8 everywhere — matches WordPress defaults.
+character_set_server           = utf8mb4
+collation_server               = utf8mb4_unicode_ci
