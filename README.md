@@ -143,7 +143,7 @@ Browser-Sync is environment-aware via `bs-config.cjs`:
 
 | Environment | URL | Notes |
 | --- | --- | --- |
-| Docker (inside container) | `http://localhost:3000` | Proxies the `wordpress` service |
+| Docker (inside container) | `http://localhost:3000` | Proxies the `nginx` service |
 | Local (outside container) | `http://localhost:3010` | Proxies `http://localhost` |
 
 CSS changes are injected directly into the browser without a full page reload. All other changes (JS, PHP, HTML, images) trigger a full reload.
@@ -244,14 +244,17 @@ Named Docker volumes survive rebuilds and container replacements:
 
 | Volume | Contents |
 | --- | --- |
+| `webroot` | WordPress core + compiled theme/plugin files — shared with nginx for static file serving |
 | `uploads` | `wp-content/uploads/` — user-uploaded media |
 | `db_data` | MariaDB data directory |
 
 All other content (theme, plugins, PHP code) is baked into the image and replaced on every deploy.
 
+> **Note:** `webroot` is populated from the WordPress image on first start. On redeploy, the volume is not automatically refreshed. To pick up new image content, run `docker compose -f compose.prod.yml down -v && ./deploy.sh`.
+
 ### HTTPS
 
-`compose.prod.yml` serves on port `80` only. For HTTPS, place a reverse proxy (nginx + Certbot, or Traefik) in front of the WordPress container to handle SSL termination. The WordPress container does not need to change.
+`compose.prod.yml` serves on port `80` only. For HTTPS, place a reverse proxy (Certbot, Traefik, or a load balancer) in front of the stack to handle SSL termination. The internal nginx container does not need to change.
 
 ### Rolling back
 
@@ -366,9 +369,10 @@ wp search-replace https://production.com http://localhost --precise --all-tables
 
 | Service | Image | Port | Notes |
 | --- | --- | --- | --- |
-| WordPress (PHP 8.3) | Custom — `docker/wordpress/Dockerfile` | `80` | XDebug 3 installed |
-| Database | `mariadb:11.8` | `3306` | — |
-| phpMyAdmin | `phpmyadmin` | `8000` | — |
+| nginx | `nginx:1.27-alpine` | `80` | Reverse proxy + static file serving |
+| WordPress (PHP-FPM 8.3) | Custom — `docker/wordpress/Dockerfile` | — | FPM Alpine; XDebug 3 installed |
+| Database | `mariadb:11.8` | `3306` (localhost only) | — |
+| phpMyAdmin | `phpmyadmin` | `8000` (localhost only) | — |
 | CLI Tools | `digitalblake/light-cli:5.0.0` | — | pnpm, WP-CLI, Composer, ImageMagick |
 
 XDebug 3 is baked into the WordPress service image (`docker/wordpress/Dockerfile`) and listens on port `9003`. See the [PHP Debugging](#php-debugging-xdebug) section for VSCode setup.

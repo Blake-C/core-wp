@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 
 ## [#.#.#] - Next
 
+### Added
+
+- Added nginx service (`nginx:1.27-alpine`) as reverse proxy + static file server — dev (`compose.yml`) and prod (`compose.prod.yml`)
+- Added dev nginx config (`docker/nginx/nginx.conf`) — WordPress permalink routing, FPM proxy, static file serving, upload size limit, httpoxy mitigation, uploaded-file PHP execution protection
+- Added production nginx config (`docker/nginx/nginx.prod.conf`) — all dev settings plus `server_tokens off`, gzip, security headers (X-Frame-Options, X-Content-Type-Options, XSS-Protection, Referrer-Policy), rate limiting on `wp-login.php`, blocked `xmlrpc.php`, blocked PHP execution in uploads, immutable cache headers
+- Added `webroot` named volume to prod compose — populated from WordPress image on first start; shared read-only with nginx for static file serving
+- Added Midline CTA block patterns — 4 layouts × 2 color modes (`patterns/`)
+
+### Changed
+
+- Switched WordPress dev image from `wordpress:6.9-php8.3` (Apache) to `wordpress:6.9.4-php8.3-fpm-alpine` (PHP-FPM) — `docker/wordpress/Dockerfile`
+- Switched WordPress prod image from `wordpress:6.9-php8.3` to `wordpress:6.9.4-php8.3-fpm-alpine` — `docker/wordpress/Dockerfile.prod`
+- Updated xdebug install to use `apk` + `$PHPIZE_DEPS` for Alpine compatibility; pinned to `xdebug-3.4.2` — `docker/wordpress/Dockerfile`
+- Moved HTTP port `80` from `wordpress` service to `nginx` service; `wordpress` now only exposes FPM on port `9000` — `compose.yml`, `compose.prod.yml`
+- Updated wordpress service healthcheck from `curl http://localhost/` to `nc -z 127.0.0.1 9000` (TCP check against FPM socket) — `compose.yml`, `compose.prod.yml`
+- Updated browser-sync Docker proxy target from `http://wordpress` to `http://nginx` — `bs-config.cjs`
+- Restricted MariaDB port binding to `127.0.0.1:3306` (localhost only) — `compose.yml`
+- Restricted phpMyAdmin port binding to `127.0.0.1:8000` (localhost only) — `compose.yml`
+- Pinned `composer/installers` from `*` to `^2.3` — `wp-content/composer.json`
+
+## [0.0.0] - 2026-03-16
+
 ### Changed
 
 - Updated `wordpress` service to build from a custom Dockerfile; `cli_tools` updated to `digitalblake/light-cli:5.0.0` - `compose.yml`
