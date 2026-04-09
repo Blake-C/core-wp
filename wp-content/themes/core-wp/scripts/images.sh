@@ -21,7 +21,7 @@ cp -r ./theme_components/images ./assets/
 if command -v mogrify >/dev/null 2>&1; then
 	echo "Optimizing images..."
 	find ./assets/images -type f \
-		| grep -E 'png|jpg|jpeg' \
+		| grep -iE '\.(png|jpg|jpeg)$' \
 		| xargs -P 4 -I '{}' mogrify -strip -resize '1500x1500>' -quality 70 '{}'
 	echo "Completed: Image Optimizations"
 else
