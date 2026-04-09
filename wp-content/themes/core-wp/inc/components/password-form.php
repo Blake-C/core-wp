@@ -21,10 +21,10 @@ if ( ! function_exists( 'core_wp_custom_password_form' ) ) {
 			<p>' . __( 'To view this protected post, enter the password below:', 'core_wp' ) . '</p>' .
 		'<div class="row collapse">' .
 		'<div>' .
-		'<label class="pass-label" for="' . $label . '">' . __( 'Password:', 'core_wp' ) . ' </label>' .
+		'<label class="pass-label" for="' . esc_attr( $label ) . '">' . __( 'Password:', 'core_wp' ) . ' </label>' .
 		'</div>' .
 		'<div class="small-8 columns">' .
-		'<input name="post_password" id="' . $label . '" type="password" />' .
+		'<input name="post_password" id="' . esc_attr( $label ) . '" type="password" />' .
 		'</div>' .
 		'<div class="small-4 columns">' .
 		'<input type="submit" name="Submit" class="button expanded" value="' . esc_attr_x( 'Submit', 'Button value attribute on password form', 'core_wp' ) . '" />' .
