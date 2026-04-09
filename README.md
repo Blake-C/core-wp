@@ -35,7 +35,7 @@ cd wp-content
 composer install
 ```
 
-Add plugins from [wpackagist.org](https://wpackagist.org) by adding them to `wp-content/composer.json` and running `composer update`.
+Add plugins from [wp-packages.org](https://wp-packages.org/) by adding them to `wp-content/composer.json` and running `composer update`.
 
 ### Initialize WordPress
 
