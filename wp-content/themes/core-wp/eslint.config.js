@@ -20,7 +20,7 @@ export default [
 		},
 	},
 	{
-		files: ['*.cjs', 'webpack.config.babel.js'],
+		files: ['*.cjs'],
 		languageOptions: {
 			sourceType: 'commonjs',
 			globals: {
