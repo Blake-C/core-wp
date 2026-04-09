@@ -56,6 +56,9 @@ services:
             # Redis object cache — requires the "Redis Object Cache" plugin
             # (https://wordpress.org/plugins/redis-cache/) to be installed and activated.
             WP_REDIS_HOST: redis
+            # Translate the WP_REDIS_HOST env var into a PHP constant for the Redis Object Cache plugin.
+            # wp-config.php evals this after getenv_docker() is defined, so it is available here.
+            WORDPRESS_CONFIG_EXTRA: "define( 'WP_REDIS_HOST', getenv_docker('WP_REDIS_HOST', '127.0.0.1') );"
         volumes:
             - ./wordpress:/var/www/html
             - ./wp-content:/var/www/html/wp-content
