@@ -3,7 +3,7 @@ const port = parseInt(process.env.BROWSER_SYNC_PORT || (isDocker ? '3000' : '301
 
 module.exports = {
 	proxy: {
-		target: isDocker ? 'http://wordpress' : 'http://localhost',
+		target: isDocker ? 'http://nginx' : 'http://localhost',
 		proxyOptions: isDocker
 			? {
 					changeOrigin: false,
