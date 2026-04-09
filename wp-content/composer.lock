@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "982b64c559b6a55fc2ef066ba242caae",
+    "content-hash": "ae3eeee3a4d749d6721b08a6570e9c01",
     "packages": [
         {
             "name": "composer/installers",
@@ -180,6 +180,37 @@
                 "changelog": "https://wordpress.org/plugins/redirection/#developers",
                 "issues": "https://wordpress.org/support/plugin/redirection",
                 "source": "https://plugins.svn.wordpress.org/redirection"
+            },
+            "time": "2026-03-23T19:23:21+00:00"
+        },
+        {
+            "name": "wp-plugin/redis-cache",
+            "version": "2.7.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/redis-cache/",
+                "reference": "tags/2.7.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/redis-cache.2.7.0.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Till Krüss"
+                }
+            ],
+            "description": "A persistent object cache backend powered by Redis®¹. Supports Predis, PhpRedis, Relay, replication, sentinels, clustering and WP-CLI.",
+            "homepage": "https://wordpress.org/plugins/redis-cache/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/redis-cache/#developers",
+                "issues": "https://wordpress.org/support/plugin/redis-cache",
+                "source": "https://plugins.svn.wordpress.org/redis-cache"
             },
             "time": "2026-03-23T19:23:21+00:00"
         },

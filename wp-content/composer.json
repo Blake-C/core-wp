@@ -5,7 +5,8 @@
 		"wp-plugin/redirection": "^5.7",
 		"wp-plugin/wordfence": "^8.1",
 		"wp-plugin/wordpress-seo": "^27.1",
-		"wp-plugin/wps-hide-login": "^1.9"
+		"wp-plugin/wps-hide-login": "^1.9",
+		"wp-plugin/redis-cache": "^2.7"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.5",
