@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [#.#.#] - Next
 
+### Added
+
+### Changed
+
+## [0.0.1] - 2026-03-09
+
 ### Security
 
 - Upgraded nginx image from `nginx:1.27-alpine` to `nginx:1.29-alpine` — resolves critical `libxml2` CVEs (Expired Pointer Dereference, Out-of-bounds Read) and high `libpng`, `expat`, `openssl` vulnerabilities — `compose.yml`, `compose.prod.yml`
