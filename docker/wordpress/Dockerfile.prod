@@ -13,7 +13,7 @@ COPY wp-content/composer.json wp-content/composer.lock ./
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # Stage 3: Production image
-FROM wordpress:6.9-php8.3
+FROM wordpress:6.9.4-php8.3-fpm-alpine
 
 # Copy wp-content (themes source, patterns, inc, etc.)
 COPY wp-content/ /var/www/html/wp-content/
