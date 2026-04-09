@@ -21,7 +21,7 @@ services:
             WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
 
     nginx:
-        image: nginx:1.27-alpine
+        image: nginx:1.29-alpine
         restart: always
         ports:
             - 80:80
