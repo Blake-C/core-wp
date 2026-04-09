@@ -372,6 +372,7 @@ wp search-replace https://production.com http://localhost --precise --all-tables
 | nginx | `nginx:1.29-alpine` | `80` | Reverse proxy + static file serving |
 | WordPress (PHP-FPM 8.3) | Custom — `docker/wordpress/Dockerfile` | — | FPM Alpine; XDebug 3 installed |
 | Database | `mariadb:11.8` | `3306` (localhost only) | — |
+| Redis | `redis:7-alpine` | — | Object cache; LRU eviction, no persistence |
 | phpMyAdmin | `phpmyadmin` | `8000` (localhost only) | — |
 | CLI Tools | `digitalblake/light-cli:5.0.0` | — | pnpm, WP-CLI, Composer, ImageMagick |
 
