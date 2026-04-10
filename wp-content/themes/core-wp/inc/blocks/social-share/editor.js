@@ -53,7 +53,11 @@
 			}
 
 			function removeCustomLink(index) {
-				setAttributes({ customLinks: customLinks.filter(function (_, i) { return i !== index }) })
+				setAttributes({
+					customLinks: customLinks.filter(function (_, i) {
+						return i !== index
+					}),
+				})
 			}
 
 			// Build live preview children
@@ -197,11 +201,7 @@
 								})
 							: null
 					),
-					el(
-						PanelBody,
-						{ title: __('Custom Links', 'core_wp'), initialOpen: false },
-						customLinkRows
-					)
+					el(PanelBody, { title: __('Custom Links', 'core_wp'), initialOpen: false }, customLinkRows)
 				),
 				el('div', blockProps, el('div', { style: previewWrapStyle }, previewChildren))
 			)
