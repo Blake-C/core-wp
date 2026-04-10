@@ -7,7 +7,12 @@
   },
   "type": "module",
   "browserslist": [
-    "> 1% or last 3 versions"
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 1 Edge version",
+    "not dead",
+    "not IE 11"
   ],
   "scripts": {
     "clean":               "rm -rf assets ../core-wp-build",
