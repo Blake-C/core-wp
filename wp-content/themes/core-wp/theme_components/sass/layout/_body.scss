@@ -3,3 +3,8 @@
 main {
 	display: block;
 }
+
+.wp-site-blocks > * {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
