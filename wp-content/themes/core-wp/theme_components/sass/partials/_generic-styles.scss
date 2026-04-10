@@ -114,3 +114,7 @@ pre {
 .has-background-dim {
 	color: $white;
 }
+
+p:empty {
+	display: none;
+}
