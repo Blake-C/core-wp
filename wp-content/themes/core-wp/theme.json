@@ -49,6 +49,11 @@
 					"name": "Dark Navy",
 					"slug": "dark-navy",
 					"color": "#0d1b2e"
+				},
+				{
+					"name": "Green Blue",
+					"slug": "accent-green-blue",
+					"color": "#3d79df"
 				}
 			]
 		},

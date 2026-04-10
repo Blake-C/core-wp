@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "core-wp/related-posts",
+	"version": "1.0.0",
+	"title": "Related Posts",
+	"category": "theme",
+	"description": "Displays related posts from the same categories as the current post.",
+	"textdomain": "core_wp",
+	"editorScript": "core-wp-related-posts-editor",
+	"supports": {
+		"html": false,
+		"reusable": false
+	}
+}

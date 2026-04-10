@@ -4,7 +4,13 @@ main {
 	display: block;
 }
 
-.wp-site-blocks > * {
-	padding-left: 1rem;
-	padding-right: 1rem;
+.wp-site-blocks {
+	> * {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	> main {
+		margin-top: 64px;
+	}
 }

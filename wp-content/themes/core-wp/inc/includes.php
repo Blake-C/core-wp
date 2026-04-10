@@ -32,8 +32,15 @@ require get_template_directory() . '/inc/components/thumbnail-upscale.php';
 
 
 /**
+ * Blocks
+ */
+require get_template_directory() . '/inc/blocks/related-posts/block.php';
+
+
+/**
  * Template Tags
  */
+require get_template_directory() . '/inc/template-tags/single-post.php';
 
 
 /**
