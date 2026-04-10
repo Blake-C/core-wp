@@ -10,6 +10,7 @@
 		"declaration-no-important": true,
 		"selector-no-vendor-prefix": true,
 		"no-descending-specificity": null,
+		"selector-class-pattern": ["^([a-z][a-z0-9-]*)(__[a-z0-9][a-z0-9-]*)?(--[a-z0-9][a-z0-9-]*)?$", {"message": "Expected BEM class name: block, block__element, block--modifier, or block__element--modifier"}],
 		"selector-max-id": 0,
 		"function-url-quotes": "always",
 		"at-rule-empty-line-before": [
