@@ -156,7 +156,7 @@ if ( ! function_exists( 'core_wp_register_pattern_categories' ) ) {
 	function core_wp_register_pattern_categories() {
 		register_block_pattern_category(
 			'core-wp-sections',
-			array( 'label' => __( 'Sections', 'core_wp' ) )
+			array( 'label' => __( 'Core WP', 'core_wp' ) )
 		);
 	}
 }
