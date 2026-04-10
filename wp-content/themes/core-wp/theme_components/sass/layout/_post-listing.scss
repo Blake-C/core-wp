@@ -8,14 +8,14 @@
 
 // Grid container
 .post-grid {
-	column-gap: 1.5rem;
+	column-gap: $px-24;
 	/* stylelint-disable-next-line declaration-no-important */
 	display: grid !important; // Overrides WP block is-layout-flow flex
 	grid-template-columns: 1fr;
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	row-gap: 2.5rem;
+	row-gap: $px-36;
 
 	@include breakpoint(medium) {
 		grid-template-columns: repeat(2, 1fr);
@@ -89,7 +89,7 @@
 	aspect-ratio: 4 / 2;
 	border-radius: 16px;
 	display: block;
-	margin-bottom: 1rem;
+	margin-bottom: $px-16;
 	overflow: hidden;
 
 	img {
@@ -110,11 +110,11 @@
 .post-grid .wp-block-post-terms {
 	display: flex;
 	flex-wrap: wrap;
-	font-size: 0.75rem;
+	font-size: rem-calc(12);
 	font-weight: 700;
-	gap: 0.4rem;
+	gap: $px-8;
 	letter-spacing: 0.04em;
-	margin-bottom: 0.25rem;
+	margin-bottom: $px-4;
 	text-transform: uppercase;
 }
 
@@ -128,7 +128,7 @@
 
 .post-card__title,
 .post-grid .wp-block-post-title {
-	font-size: 1.4rem;
+	font-size: rem-calc(22);
 	margin-bottom: 0;
 	margin-top: 0;
 }
@@ -138,8 +138,8 @@
 // =============================================================================
 
 .post-grid .wp-block-post-date {
-	font-size: 0.775rem;
-	margin-bottom: 0.55rem;
+	font-size: rem-calc(12);
+	margin-bottom: $px-8;
 }
 
 // =============================================================================
@@ -148,7 +148,7 @@
 // =============================================================================
 
 .wp-block-query-title {
-	font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem);
+	@include fluid-font-size(56, 28);
 	line-height: 1.1;
 }
 
@@ -158,12 +158,12 @@
 
 .wp-block-query-pagination {
 	gap: 0;
-	margin-top: 4rem;
+	margin-top: $px-64;
 
 	.wp-block-query-pagination-numbers {
 		align-items: center;
 		display: flex;
-		gap: 0.25rem;
+		gap: $px-4;
 	}
 
 	.page-numbers,
@@ -172,11 +172,11 @@
 		align-items: center;
 		border-radius: 4px;
 		display: inline-flex;
-		font-size: 0.9rem;
+		font-size: rem-calc(14);
 		font-weight: 600;
 		justify-content: center;
-		min-width: 2.25rem;
-		padding: 0.4rem 0.6rem;
+		min-width: $px-36;
+		padding: $px-8;
 		text-decoration: none;
 		transition:
 			background-color 0.2s,
@@ -199,11 +199,11 @@
 	.wp-block-query-pagination-previous {
 		font-size: 0; // visually hide text; screen readers still read DOM content
 		min-width: auto;
-		padding: 0.4rem 0.85rem;
+		padding: $px-8 $px-16;
 
 		&::before,
 		&::after {
-			font-size: 1rem;
+			font-size: rem-calc(16);
 		}
 	}
 

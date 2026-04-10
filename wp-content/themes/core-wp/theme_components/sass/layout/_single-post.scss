@@ -6,7 +6,7 @@
 
 .single-post {
 	&__grid {
-		column-gap: 1.5rem;
+		column-gap: $px-24;
 		/* stylelint-disable-next-line declaration-no-important */
 		display: grid !important; // Overrides WP block is-layout-flow flex
 		grid-template-columns: repeat(12, 1fr);
@@ -20,7 +20,7 @@
 	&__eyebrow {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem;
+		gap: $px-8;
 		margin-bottom: 0;
 
 		@include breakpoint(large) {
@@ -32,10 +32,10 @@
 			border-radius: 4px;
 			color: #fff;
 			display: inline-block;
-			font-size: 0.8125rem;
+			font-size: rem-calc(13);
 			font-weight: 700;
 			letter-spacing: 0.04em;
-			padding: 0.3rem 0.875rem;
+			padding: $px-4 $px-16;
 			text-decoration: none;
 			text-transform: uppercase;
 
@@ -48,9 +48,9 @@
 	}
 
 	&__title {
-		font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem);
+		@include fluid-font-size(56, 28);
 		margin-bottom: 0;
-		margin-top: 8px;
+		margin-top: $px-8;
 
 		@include breakpoint(large) {
 			grid-column: 1/10;
@@ -95,7 +95,7 @@
 	&__featured-image {
 		border-radius: 36px;
 		height: 400px;
-		margin: 48px 0 24px;
+		margin: $px-48 0 $px-24;
 		overflow: hidden;
 
 		img {
@@ -114,7 +114,7 @@
 
 	&__divider {
 		border-width: 1px;
-		margin: 24px 0 0;
+		margin: $px-24 0 0;
 		/* stylelint-disable-next-line declaration-no-important */
 		width: 100% !important ;
 
@@ -136,11 +136,11 @@
 		align-items: center;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem;
+		gap: $px-16;
 	}
 
 	&__social-label {
-		font-size: 0.875rem;
+		font-size: rem-calc(14);
 		font-weight: 700;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
@@ -149,7 +149,7 @@
 	&__social-link {
 		color: var(--wp--preset--color--primary, #000);
 		display: inline-flex;
-		font-size: 0.9rem;
+		font-size: rem-calc(14);
 		font-weight: 600;
 		text-decoration: none;
 
@@ -172,16 +172,16 @@
 	&__related-wrap {
 		grid-column: 1 / -1; // Always full 12 columns
 		/* stylelint-disable-next-line declaration-no-important */
-		margin: 128px 0 0 !important;
+		margin: $px-128 0 0 !important;
 	}
 
 	&__related-heading {
-		font-size: clamp(1.75rem, 3.5vw + 0.75rem, 2.5rem);
+		@include fluid-font-size(40, 28);
 		line-height: 1;
 		margin-bottom: 0;
 	}
 
 	&__related-divider {
-		margin: 2rem 0;
+		margin: $px-36 0;
 	}
 }

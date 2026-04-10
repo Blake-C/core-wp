@@ -12,12 +12,12 @@ body {
 @include breakpoint(medium) {
 	.alignright {
 		float: right;
-		margin: 0 0 0 16px;
+		margin: 0 0 0 $px-16;
 	}
 
 	.alignleft {
 		float: left;
-		margin: 0 16px 0 0;
+		margin: 0 $px-16 0 0;
 	}
 
 	.aligncenter {
@@ -39,7 +39,7 @@ pre {
 	color: $code-color;
 	font-family: $code-font-family;
 	font-weight: $code-font-weight;
-	margin-bottom: 16px;
+	margin-bottom: $px-16;
 	padding: $code-padding;
 	white-space: pre-wrap;
 }
@@ -56,12 +56,12 @@ pre {
 
 	.button {
 		margin-bottom: 0;
-		margin-top: 16px;
+		margin-top: $px-16;
 	}
 }
 
 .wp-block-button {
-	margin-bottom: 16px;
+	margin-bottom: $px-16;
 }
 
 .screen-reader-text {
@@ -73,21 +73,21 @@ pre {
 	display: block;
 	left: -9999rem;
 	overflow: hidden;
-	padding: 15px 23px 14px;
+	padding: $px-16 $px-24 $px-16;
 	position: absolute;
 	top: -9999rem;
 
 	&:focus {
 		background-color: $white;
 		color: $black;
-		font-size: 1rem;
+		font-size: rem-calc(16);
 		font-weight: 700;
 		height: auto;
-		left: 8px;
+		left: $px-8;
 		overflow: auto;
 		position: fixed;
 		text-decoration: none;
-		top: 8px;
+		top: $px-8;
 		width: auto;
 		z-index: 100000;
 	}
@@ -108,7 +108,7 @@ pre {
 
 .wp-block-media-text,
 .wp-block-cover {
-	margin-bottom: 16px;
+	margin-bottom: $px-16;
 }
 
 .has-background-dim {

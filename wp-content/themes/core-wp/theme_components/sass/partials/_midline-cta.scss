@@ -5,7 +5,7 @@
 // overrides, stat number typography, background-image waveform column, and
 // full-bleed alignment.
 //
-// Padding note: all padding is set via CSS clamp() here — NOT inline in the block
+// Padding note: all padding is set via fluid-space() here — NOT inline in the block
 // markup — so that responsive scaling works without !important overrides.
 
 @use '../helpers' as *;
@@ -34,20 +34,23 @@ $_waveform-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 	}
 
 	// Scale H2 headings within the pattern as the viewport narrows.
-	// clamp: 1.5rem floor → fluid (0.5rem + 3.2vw) → 2.5rem ceiling (~1000px).
+	// fluid-font-size: 24px floor → fluid → 40px ceiling.
 	h2 {
-		font-size: clamp(1.5rem, calc(0.5rem + 3.2vw), 2.5rem);
+		@include fluid-font-size(40, 24);
 	}
 }
 
 // ─── Padding — group-level (variants 2, 3 & 4) ───────────────────────────────
 // Padding lives here in CSS, not as inline styles in the block markup, so
-// clamp() handles all breakpoints without needing !important overrides.
-// vertical:   clamp(1.5rem → 4vw+0.25rem → 3rem)
-// horizontal: clamp(1.25rem → 3vw+0.25rem → 2.5rem)
+// fluid-space() handles all breakpoints without needing !important overrides.
+// vertical:   48px → 24px  (fluid between 640px and 1024px viewports)
+// horizontal: 40px → 20px
 
 .midline-cta:not(.midline-cta-simple) {
-	padding: clamp(1.5rem, calc(0.25rem + 4vw), 3rem) clamp(1.25rem, calc(0.25rem + 3vw), 2.5rem);
+	@include fluid-space(padding-top, 48, 24);
+	@include fluid-space(padding-bottom, 48, 24);
+	@include fluid-space(padding-left, 40, 20);
+	@include fluid-space(padding-right, 40, 20);
 }
 
 // ─── Column layout overrides ──────────────────────────────────────────────────
@@ -102,20 +105,21 @@ $_waveform-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 // ─── Padding — content column (Variant 1 — Simple layout) ────────────────────
 // Padding is on the column (not the group) so .midline-cta-bg-col can extend
 // flush to the card edge. Asymmetric right padding accounts for the col gap.
+// vertical: 48px → 24px | left: 40px → 20px | right: 32px → 16px
 
 .midline-cta-content-col {
-	padding-bottom: clamp(1.5rem, calc(0.25rem + 4vw), 3rem);
-	padding-left: clamp(1.25rem, calc(0.25rem + 3vw), 2.5rem);
-	padding-right: clamp(1rem, calc(0.25rem + 2.5vw), 2rem);
-	padding-top: clamp(1.5rem, calc(0.25rem + 4vw), 3rem);
+	@include fluid-space(padding-bottom, 48, 24);
+	@include fluid-space(padding-left, 40, 20);
+	@include fluid-space(padding-right, 32, 16);
+	@include fluid-space(padding-top, 48, 24);
 }
 
 // ─── Stat number (Variants 2 & 4) ────────────────────────────────────────────
 
 .midline-cta-stat-number {
-	font-size: clamp(1.75rem, calc(1rem + 4.5vw), 5rem);
+	@include fluid-font-size(80, 28);
 	font-weight: 700;
 	letter-spacing: -0.02em;
 	line-height: 1;
-	margin-bottom: 0.5rem;
+	margin-bottom: $px-8;
 }

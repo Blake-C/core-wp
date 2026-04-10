@@ -9,18 +9,18 @@
 .comment-list {
 	.comment {
 		background: $accent-1;
-		margin: 15px 0;
-		padding: 20px 0 20px 15px;
+		margin: $px-16 0;
+		padding: $px-24 0 $px-24 $px-16;
 	}
 
 	.children {
 		background: $white;
-		margin: 15px 0 0 15px;
-		padding: 5px 0 0 15px;
+		margin: $px-16 0 0 $px-16;
+		padding: $px-4 0 0 $px-16;
 	}
 
 	.comment-body {
-		padding: 15px 20px;
+		padding: $px-16 $px-24;
 	}
 
 	.comment-content {
@@ -40,9 +40,9 @@
 	cursor: pointer;
 	display: inline-block;
 	font-family: inherit;
-	font-size: 0.9rem;
+	font-size: rem-calc(14);
 	line-height: 1;
-	margin: 0 0 1rem;
+	margin: 0 0 $px-16;
 	padding: 0.85em 1em;
 	text-decoration: none;
 	transition:

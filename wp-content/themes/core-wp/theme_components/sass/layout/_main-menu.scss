@@ -12,7 +12,7 @@
 	a {
 		color: $black;
 		display: block;
-		padding: 10px 20px;
+		padding: $px-8 $px-24;
 
 		&:hover {
 			background-color: $medium-gray;

@@ -3,7 +3,8 @@
 // Placeholder for footer styles.
 .site-footer {
 	background-color: var(--wp--preset--color--light-gray, #e6e6e6);
-	margin-top: 128px;
-	padding-bottom: 48px;
-	padding-top: 48px;
+
+	@include fluid-space(margin-top, 128);
+	padding-bottom: $px-48;
+	padding-top: $px-48;
 }

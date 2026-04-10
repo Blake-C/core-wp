@@ -4,15 +4,15 @@
 	@include clearfix;
 
 	background-color: $light-gray;
-	margin: 20px 0;
-	padding: 10px 20px;
+	margin: $px-24 0;
+	padding: $px-8 $px-24;
 
 	.nav-previous {
 		float: left;
 
 		&::before {
 			content: '\2190';
-			margin-right: 5px;
+			margin-right: $px-4;
 		}
 	}
 
@@ -21,7 +21,7 @@
 
 		&::after {
 			content: '\2192';
-			margin-left: 5px;
+			margin-left: $px-4;
 		}
 	}
 }

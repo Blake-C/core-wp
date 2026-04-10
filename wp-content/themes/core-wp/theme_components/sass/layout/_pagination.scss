@@ -6,8 +6,8 @@
 		background-color: $accent-1;
 		border-radius: 3px;
 		font-size: 0;
-		margin: 10px 0;
-		padding: 4px;
+		margin: $px-8 0;
+		padding: $px-4;
 		text-align: center;
 	}
 
@@ -28,9 +28,9 @@
 		border-radius: 3px;
 		color: $white;
 		display: block;
-		font-size: 1rem;
-		margin: 0 4px;
-		padding: 5px 10px;
+		font-size: rem-calc(16);
+		margin: 0 $px-4;
+		padding: $px-4 $px-8;
 	}
 
 	a {

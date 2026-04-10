@@ -54,9 +54,26 @@ $font-family-monospace: consolas, 'Liberation Mono', courier, monospace;
 
 // 5. Spacing
 // ----------
+// Think in px, write in px. All $px-{N} tokens are stored as rem (base 16px = 1rem).
+// For custom one-off values, use rem-calc(N) from helpers/_functions.scss.
+//
+// Usage:
+//   margin-top: $px-64;                                → 4rem  (64px)
+//   @include fluid-space(margin-top, 128);            → clamp(4rem, …vw, 8rem)
+//   @include fluid-space(padding, 48, 32);            → clamp(2rem, …vw, 3rem)
 
-$global-margin: 1rem;
-$global-padding: 1rem;
+$px-2: 0.125rem; // 2px
+$px-4: 0.25rem; // 4px
+$px-8: 0.5rem; // 8px
+$px-16: 1rem; // 16px
+$px-24: 1.5rem; // 24px
+$px-36: 2.25rem; // 36px
+$px-48: 3rem; // 48px
+$px-64: 4rem; // 64px
+$px-128: 8rem; // 128px
+
+$global-margin: $px-16;
+$global-padding: $px-16;
 $global-radius: 0;
 
 // 6. Code Blocks

@@ -6,11 +6,11 @@ main {
 
 .wp-site-blocks {
 	> * {
-		padding-left: 1rem;
-		padding-right: 1rem;
+		padding-left: $px-16;
+		padding-right: $px-16;
 	}
 
 	> main {
-		margin-top: 64px;
+		@include fluid-space(margin-top, 64);
 	}
 }

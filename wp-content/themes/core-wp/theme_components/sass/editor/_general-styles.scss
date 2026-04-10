@@ -1,17 +1,17 @@
 @use '../helpers' as *;
 
 body {
-	margin: 9px 10px;
+	margin: $px-8;
 }
 
 .row {
 	border: 1px dotted $dark-gray;
-	padding: 5px;
+	padding: $px-4;
 }
 
 .columns {
 	border: 1px dotted $primary-color;
-	padding: 5px;
+	padding: $px-4;
 }
 
 .mce-content-body {
@@ -24,7 +24,7 @@ body {
 				cursor: pointer;
 				display: inline-block;
 				font-family: inherit;
-				font-size: 0.9rem;
+				font-size: rem-calc(14);
 				line-height: 1;
 				padding: 0.85em 1em;
 				text-decoration: none;

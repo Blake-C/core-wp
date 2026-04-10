@@ -1,4 +1,6 @@
+@use 'sass:math';
 @use 'settings' as *;
+@use 'functions' as *;
 
 // breakpoint($size)
 // -----------------
@@ -84,5 +86,79 @@
 	&:active,
 	&:focus {
 		#{$property}: $value;
+	}
+}
+
+// font-size($px)
+// --------------
+// Apply font-size using a px value; outputs rem. Keeps authoring in the unit
+// you can visualise while shipping the accessible rem unit to the browser.
+//
+// Usage:
+//   @include font-size(16);   → font-size: 1rem
+//   @include font-size(14);   → font-size: 0.875rem
+
+@mixin font-size($px) {
+	font-size: rem-calc($px);
+}
+
+// fluid-font-size($desktop-px, $mobile-px)
+// -----------------------------------------
+// Responsive type using clamp(). Scales smoothly from $mobile-px at 640px
+// viewport width up to $desktop-px at 1024px+. Both values are authored in px.
+//
+// Usage:
+//   @include fluid-font-size(56, 28);   → font-size: clamp(1.75rem, …vw, 3.5rem)
+
+@mixin fluid-font-size($desktop-px, $mobile-px) {
+	@include fluid-space(font-size, $desktop-px, $mobile-px);
+}
+
+// fluid-space($property, $desktop-px, $mobile-px)
+// -------------------------------------------------
+// Outputs a clamp() value that scales a spacing property smoothly between
+// $mobile-px (at 640px viewport) and $desktop-px (at 1024px+ viewport).
+// Author both values in px; rem is handled automatically.
+//
+// If $mobile-px is omitted it defaults to 50% of $desktop-px, minimum 8px —
+// matching the rule that large gaps (e.g. 128px) should halve on mobile (64px).
+//
+// Viewport range: 640px (medium breakpoint) → 1024px (large breakpoint).
+//
+// Usage:
+//   @include fluid-space(margin-top, 128);         → scales 64px → 128px
+//   @include fluid-space(padding-top, 48, 24);     → scales 24px → 48px
+//   @include fluid-space(gap, 24);                 → scales 12px → 24px
+
+@mixin fluid-space($property, $desktop-px, $mobile-px: null) {
+	$mobile: 0;
+
+	@if $mobile-px {
+		$mobile: $mobile-px;
+	} @else {
+		$mobile: math.max(math.ceil($desktop-px * 0.5), 8);
+	}
+
+	@if $mobile >= $desktop-px {
+		// No scaling needed — emit a static rem value.
+		#{$property}: rem-calc($desktop-px);
+	} @else {
+		$min-vw: 640;
+		$max-vw: 1024;
+		$slope: math.div($desktop-px - $mobile, $max-vw - $min-vw);
+		$intercept: $mobile - ($slope * $min-vw);
+		$slope-vw: math.round($slope * 100 * 10000) * 0.0001; // 4 decimal places
+		$intercept-abs: math.abs($intercept);
+		$sign: '+';
+
+		@if $intercept < 0 {
+			$sign: '-';
+		}
+
+		#{$property}: clamp(
+			#{rem-calc($mobile)},
+			calc(#{$slope-vw}vw #{$sign} #{$intercept-abs}px),
+			#{rem-calc($desktop-px)}
+		);
 	}
 }
