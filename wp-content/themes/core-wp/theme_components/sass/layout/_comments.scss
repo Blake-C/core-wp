@@ -43,7 +43,7 @@
 	font-size: rem-calc(14);
 	line-height: 1;
 	margin: 0 0 $px-16;
-	padding: 0.85em 1em;
+	padding: rem-calc(12 14);
 	text-decoration: none;
 	transition:
 		background-color 0.25s ease-out,

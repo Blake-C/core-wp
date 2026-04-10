@@ -34,7 +34,7 @@
 			display: inline-block;
 			font-size: rem-calc(13);
 			font-weight: 700;
-			letter-spacing: 0.04em;
+			letter-spacing: rem-calc(0.5);
 			padding: $px-4 $px-16;
 			text-decoration: none;
 			text-transform: uppercase;
@@ -81,7 +81,7 @@
 		.wp-block-post-date {
 			&::before {
 				content: '\2014'; // em dash —
-				margin: 0 0.4em;
+				margin: rem-calc(0 7);
 			}
 		}
 	}
@@ -142,7 +142,7 @@
 	&__social-label {
 		font-size: rem-calc(14);
 		font-weight: 700;
-		letter-spacing: 0.04em;
+		letter-spacing: rem-calc(0.5);
 		text-transform: uppercase;
 	}
 

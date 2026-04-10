@@ -26,7 +26,7 @@
 	// Expand links to show full URL after link text.
 	a[href]::after {
 		content: ' (' attr(href) ')';
-		font-size: 0.8em;
+		font-size: $px-16;
 		word-break: break-all;
 	}
 
