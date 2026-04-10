@@ -50,7 +50,7 @@ if ( ! function_exists( 'core_wp_related_posts_render' ) ) {
 		$output  = '<section class="single-post__related">';
 		$output .= '<h2 class="single-post__related-heading">' . esc_html__( 'Related Stories', 'core_wp' ) . '</h2>';
 		$output .= '<hr class="single-post__related-divider" />';
-		$output .= '<div class="single-post__related-grid">';
+		$output .= '<div class="post-grid">';
 
 		while ( $related_query->have_posts() ) {
 			$related_query->the_post();
@@ -60,11 +60,11 @@ if ( ! function_exists( 'core_wp_related_posts_render' ) ) {
 			$post_title = get_the_title();
 			$tags       = get_the_terms( $related_id, 'post_tag' );
 
-			$output .= '<a href="' . esc_url( $post_url ) . '" class="single-post__related-item">';
+			$output .= '<a href="' . esc_url( $post_url ) . '" class="post-card">';
 
 			$output .= '<article>';
 
-			$output .= '<figure class="single-post__related-image">';
+			$output .= '<figure class="post-card__image">';
 
 			if ( has_post_thumbnail() ) {
 				$output .= get_the_post_thumbnail( $related_id, 'large' );
@@ -76,14 +76,14 @@ if ( ! function_exists( 'core_wp_related_posts_render' ) ) {
 			$output .= '</figure>';
 
 			if ( $tags && ! is_wp_error( $tags ) ) {
-				$output .= '<div class="single-post__related-tags">';
+				$output .= '<div class="post-card__tags">';
 				foreach ( $tags as $tag ) {
-					$output .= '<span class="single-post__tag">' . esc_html( $tag->name ) . '</span>';
+					$output .= '<span class="post-card__tag">' . esc_html( $tag->name ) . '</span>';
 				}
-					$output .= '</div>';
+				$output .= '</div>';
 			}
 
-			$output .= '<h3 class="single-post__related-title">' . esc_html( $post_title ) . '</h3>';
+			$output .= '<h3 class="post-card__title">' . esc_html( $post_title ) . '</h3>';
 
 			$output .= '</article>';
 			$output .= '</a>';

@@ -6,11 +6,7 @@
  * Block Types: core/post-template
  */
 ?>
-<!-- wp:group {"tagName":"article","layout":{"type":"constrained"}} -->
-<article class="wp-block-group">
-	<!-- wp:post-title {"isLink":true,"level":2} /-->
-	<!-- wp:post-date /-->
-	<!-- wp:post-featured-image {"isLink":true} /-->
-	<!-- wp:post-excerpt /-->
-</article>
-<!-- /wp:group -->
+<!-- wp:post-featured-image /-->
+<!-- wp:post-date /-->
+<!-- wp:post-terms {"term":"post_tag"} /-->
+<!-- wp:post-title {"level":2} /-->

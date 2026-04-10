@@ -1,0 +1,153 @@
+@use '../helpers' as *;
+
+// =============================================================================
+// Post Grid — shared card grid layout
+// Used by: Related Posts block (single post) and post listing pages
+// (archive, category, tag, blog index, search)
+// =============================================================================
+
+// Grid container
+.post-grid {
+	column-gap: 1.5rem;
+	/* stylelint-disable-next-line declaration-no-important */
+	display: grid !important; // Overrides WP block is-layout-flow flex
+	grid-template-columns: 1fr;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	row-gap: 2.5rem;
+
+	@include breakpoint(medium) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@include breakpoint(large) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+// =============================================================================
+// Related Posts cards (.post-card — whole card is a single <a>)
+// =============================================================================
+
+.post-card {
+	display: flex;
+	flex-direction: column;
+	margin-top: 0;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+
+		.post-card__image img {
+			transform: scale(1.2);
+		}
+
+		.post-card__title {
+			text-decoration: underline;
+		}
+	}
+}
+
+// =============================================================================
+// Listing page cards (.wp-block-post inside .post-grid — outer <a> is the link)
+// =============================================================================
+
+.post-grid .wp-block-post {
+	display: flex;
+	flex-direction: column;
+	margin-top: 0;
+
+	// Outer card <a> added by core_wp_listing_card_link_wrap()
+	> a {
+		color: inherit;
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: none;
+
+			.wp-block-post-featured-image img {
+				transform: scale(1.2);
+			}
+
+			.wp-block-post-title {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+// =============================================================================
+// Shared card image
+// =============================================================================
+
+.post-card__image,
+.post-grid .wp-block-post-featured-image {
+	aspect-ratio: 4 / 2;
+	border-radius: 16px;
+	display: block;
+	margin-bottom: 1rem;
+	overflow: hidden;
+
+	img {
+		display: block;
+		height: 100%;
+		object-fit: cover;
+		transform: scale(1);
+		transition: transform 0.3s;
+		width: 100%;
+	}
+}
+
+// =============================================================================
+// Shared card tags
+// =============================================================================
+
+.post-card__tags,
+.post-grid .wp-block-post-terms {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 0.75rem;
+	font-weight: 700;
+	gap: 0.4rem;
+	letter-spacing: 0.04em;
+	margin-bottom: 0.25rem;
+	text-transform: uppercase;
+}
+
+.post-card__tag {
+	display: inline-block;
+}
+
+// =============================================================================
+// Shared card title
+// =============================================================================
+
+.post-card__title,
+.post-grid .wp-block-post-title {
+	font-size: 1.4rem;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+// =============================================================================
+// Date — listing pages only (related posts show no date)
+// =============================================================================
+
+.post-grid .wp-block-post-date {
+	font-size: 0.775rem;
+	margin-bottom: 0.55rem;
+}
+
+// =============================================================================
+// Archive / category / tag / search page h1 — responsive scaling
+// Matches the clamp approach used on the single post title.
+// =============================================================================
+
+.wp-block-query-title {
+	font-size: clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem);
+	line-height: 1.1;
+}
