@@ -36,34 +36,3 @@ if ( ! function_exists( 'core_wp_featured_image_fallback' ) ) {
 	}
 }
 add_filter( 'render_block_core/post-featured-image', 'core_wp_featured_image_fallback', 10, 2 );
-
-if ( ! function_exists( 'core_wp_social_share_shortcode' ) ) {
-	/**
-	 * Outputs anchor-based social share links for the current post.
-	 *
-	 * Uses share URL schemes (no JavaScript embeds) for LinkedIn, X (Twitter),
-	 * and Facebook. Safe to call only when in the loop (single post context).
-	 *
-	 * @param  array  $atts    Shortcode attributes (unused).
-	 * @param  string $content Enclosed content (unused).
-	 * @return string          Share links HTML.
-	 */
-	function core_wp_social_share_shortcode( $atts, $content = null ) {
-		$url   = rawurlencode( (string) get_permalink() );
-		$title = rawurlencode( (string) get_the_title() );
-
-		$linkedin_url = 'https://www.linkedin.com/sharing/share-offsite/?url=' . $url;
-		$twitter_url  = 'https://twitter.com/intent/tweet?url=' . $url . '&text=' . $title;
-		$facebook_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $url;
-
-		$output  = '<div class="single-post__social-links">';
-		$output .= '<span class="single-post__social-label">' . esc_html__( 'Share:', 'core_wp' ) . '</span>';
-		$output .= '<a href="' . esc_url( $linkedin_url ) . '" class="single-post__social-link single-post__social-link--linkedin" target="_blank" rel="noopener noreferrer">' . esc_html__( 'LinkedIn', 'core_wp' ) . '</a>';
-		$output .= '<a href="' . esc_url( $twitter_url ) . '" class="single-post__social-link single-post__social-link--twitter" target="_blank" rel="noopener noreferrer">' . esc_html__( 'X (Twitter)', 'core_wp' ) . '</a>';
-		$output .= '<a href="' . esc_url( $facebook_url ) . '" class="single-post__social-link single-post__social-link--facebook" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Facebook', 'core_wp' ) . '</a>';
-		$output .= '</div>';
-
-		return $output;
-	}
-}
-add_shortcode( 'core_wp_social_share', 'core_wp_social_share_shortcode' );

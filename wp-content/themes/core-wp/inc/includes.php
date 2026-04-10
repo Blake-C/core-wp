@@ -35,6 +35,7 @@ require get_template_directory() . '/inc/components/thumbnail-upscale.php';
  * Blocks
  */
 require get_template_directory() . '/inc/blocks/related-posts/block.php';
+require get_template_directory() . '/inc/blocks/social-share/block.php';
 
 
 /**

@@ -1,0 +1,52 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "core-wp/social-share",
+	"version": "1.0.0",
+	"title": "Social Share",
+	"category": "theme",
+	"description": "Displays social share links for the current post. Configure networks, labels, and custom links in the block settings.",
+	"textdomain": "core_wp",
+	"editorScript": "core-wp-social-share-editor",
+	"attributes": {
+		"shareLabel": {
+			"type": "string",
+			"default": "Share:"
+		},
+		"linkedinEnabled": {
+			"type": "boolean",
+			"default": true
+		},
+		"linkedinText": {
+			"type": "string",
+			"default": "LinkedIn"
+		},
+		"twitterEnabled": {
+			"type": "boolean",
+			"default": true
+		},
+		"twitterText": {
+			"type": "string",
+			"default": "X (Twitter)"
+		},
+		"facebookEnabled": {
+			"type": "boolean",
+			"default": true
+		},
+		"facebookText": {
+			"type": "string",
+			"default": "Facebook"
+		},
+		"customLinks": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "object"
+			}
+		}
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	}
+}
