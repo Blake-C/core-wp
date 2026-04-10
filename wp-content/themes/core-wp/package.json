@@ -17,7 +17,7 @@
     "scripts":             "sh scripts/scripts.sh",
     "scripts:webpack":     "webpack --env output=\"./assets/js\"",
     "images":              "sh scripts/images.sh",
-    "images:optimize":     "find ./assets/images -type f | grep -E \"png|jpg|jpeg\" | xargs -P 4 -I '{}' mogrify -strip -resize '1500x1500>' -quality 70 '{}'",
+    "images:optimize":     "find ./assets/images -type f | grep -E \"png|jpg|jpeg|webp\" | xargs -P 4 -I '{}' mogrify -strip -resize '1500x1500>' -quality 70 '{}'",
     "static:assets":       "cp -r ./theme_components/fonts ./assets/ && cp -r ./theme_components/icons ./assets/",
     "phpcs":               "sh scripts/phpcs.sh",
     "phpcs:fix":           "php ../../vendor/bin/phpcbf --standard=phpcs.xml --basepath=./",
@@ -34,7 +34,7 @@
     "scripts:watch":       "chokidar 'theme_components/js/**/*.js' -c 'SKIP_LINT=1 pnpm run scripts && pnpm run reload'",
     "styles:watch":        "chokidar 'theme_components/sass/**/*.scss' --debounce 500 -c 'SKIP_LINT=1 SKIP_CLEAN=1 pnpm run styles'",
     "static:assets:watch": "chokidar 'theme_components/icons/**' 'theme_components/fonts/**' -c 'pnpm run static:assets && pnpm run reload'",
-    "images:watch":        "chokidar 'theme_components/images/**/*.{jpg,jpeg,png,gif,svg}' -c 'pnpm run images && pnpm run reload'",
+    "images:watch":        "chokidar 'theme_components/images/**/*.{jpg,jpeg,png,gif,svg,webp}' -c 'pnpm run images && pnpm run reload'",
     "html:watch":          "chokidar '**/*.html' --ignore 'node_modules/**' --ignore 'assets/**' -c 'pnpm run reload'",
     "phpcs:watch":         "chokidar '**/*.php' --ignore 'node_modules/**' --ignore 'vendor/**' --ignore 'assets/**' -c 'php ../../vendor/bin/phpcbf --standard=phpcs.xml --basepath=./ {path} ; php ../../vendor/bin/phpcs --standard=phpcs.xml --basepath=./ {path} && pnpm run reload'"
   },
