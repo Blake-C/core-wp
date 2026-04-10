@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "core-wp/copyright",
+	"version": "1.0.0",
+	"title": "Copyright",
+	"category": "theme",
+	"description": "Outputs a dynamic copyright line with the current year and site name. Supports custom prefix/suffix text and an option to hide the site name.",
+	"textdomain": "core_wp",
+	"editorScript": "core-wp-copyright-editor",
+	"attributes": {
+		"showSiteName": {
+			"type": "boolean",
+			"default": true
+		},
+		"prefixText": {
+			"type": "string",
+			"default": ""
+		},
+		"suffixText": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	}
+}

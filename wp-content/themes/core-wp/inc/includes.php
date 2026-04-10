@@ -36,6 +36,7 @@ require get_template_directory() . '/inc/components/thumbnail-upscale.php';
  */
 require get_template_directory() . '/inc/blocks/related-posts/block.php';
 require get_template_directory() . '/inc/blocks/social-share/block.php';
+require get_template_directory() . '/inc/blocks/copyright/block.php';
 
 
 /**
@@ -57,4 +58,3 @@ require get_template_directory() . '/inc/custom-admin-functions/login-page-style
 /**
  * Shortcodes
  */
-require get_template_directory() . '/inc/shortcodes/copyright.php';
