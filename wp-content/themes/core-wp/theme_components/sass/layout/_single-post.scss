@@ -1,8 +1,26 @@
 @use '../helpers' as *;
 
-// =============================================================================
+// ─────────────────────────────────────────────────────────────────────────────
 // Single Post Layout
-// =============================================================================
+//
+// BEM structure:
+//   .single-post                     — root element
+//   .single-post__grid               — 12-column CSS grid layout
+//   .single-post__eyebrow            — category tag row above the title
+//   .single-post__title              — post title (fluid font scale)
+//   .single-post__meta               — author name + date row
+//   .single-post__featured-image-wrapper — outer column constraint
+//   .single-post__featured-image     — rounded image container
+//   .single-post__content            — article body column
+//   .single-post__divider            — hr above social share
+//   .single-post__social-wrap        — social share column constraint
+//   .single-post__social-links       — social link row
+//   .single-post__social-label       — "Share:" label
+//   .single-post__social-link        — individual link (modifier: --linkedin etc.)
+//   .single-post__related-wrap       — Related Stories grid wrapper
+//   .single-post__related-heading    — "Related Stories" heading
+//   .single-post__related-divider    — hr between heading and cards
+// ─────────────────────────────────────────────────────────────────────────────
 
 .single-post {
 	&__grid {
@@ -32,7 +50,8 @@
 			border-radius: 4px;
 			color: #fff;
 			display: inline-block;
-			font-size: rem-calc(13);
+
+			@include font-size(13);
 			font-weight: 700;
 			letter-spacing: rem-calc(0.5);
 			padding: $px-4 $px-16;
@@ -71,10 +90,7 @@
 				font-weight: 600;
 				text-decoration: none;
 
-				&:hover,
-				&:focus {
-					text-decoration: underline;
-				}
+				@include hover-active-focus(text-decoration, underline);
 			}
 		}
 
@@ -123,9 +139,8 @@
 		}
 	}
 
-	// =============================================================================
-	// Social Share Links
-	// =============================================================================
+	// ── Social Share Links ───────────────────────────────────────────────────
+
 	&__social-wrap {
 		@include breakpoint(large) {
 			grid-column: 3/11;
@@ -140,7 +155,7 @@
 	}
 
 	&__social-label {
-		font-size: rem-calc(14);
+		@include font-size(14);
 		font-weight: 700;
 		letter-spacing: rem-calc(0.5);
 		text-transform: uppercase;
@@ -149,14 +164,12 @@
 	&__social-link {
 		color: var(--wp--preset--color--primary, #000);
 		display: inline-flex;
-		font-size: rem-calc(14);
+
+		@include font-size(14);
 		font-weight: 600;
 		text-decoration: none;
 
-		&:hover,
-		&:focus {
-			text-decoration: underline;
-		}
+		@include hover-active-focus(text-decoration, underline);
 
 		&--linkedin,
 		&--twitter,
@@ -166,9 +179,8 @@
 		}
 	}
 
-	// =============================================================================
-	// Related Stories
-	// =============================================================================
+	// ── Related Stories ──────────────────────────────────────────────────────
+
 	&__related-wrap {
 		grid-column: 1 / -1; // Always full 12 columns
 		/* stylelint-disable-next-line declaration-no-important */
