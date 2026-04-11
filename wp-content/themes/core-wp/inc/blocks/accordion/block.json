@@ -4,7 +4,7 @@
 	"name": "core-wp/accordion",
 	"version": "1.0.0",
 	"title": "Accordion",
-	"category": "theme",
+	"category": "core-wp",
 	"description": "Collapsible accordion with optional float or 50/50 split layout.",
 	"textdomain": "core_wp",
 	"editorScript": "core-wp-accordion-editor",

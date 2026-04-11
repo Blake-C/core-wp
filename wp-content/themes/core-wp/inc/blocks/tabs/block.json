@@ -4,7 +4,7 @@
 	"name": "core-wp/tabs",
 	"version": "1.0.0",
 	"title": "Tabs",
-	"category": "theme",
+	"category": "core-wp",
 	"description": "Tabbed content block. Add Tab Item children to build each tab.",
 	"textdomain": "core_wp",
 	"editorScript": "core-wp-tabs-editor",

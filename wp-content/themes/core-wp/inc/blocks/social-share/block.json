@@ -4,7 +4,7 @@
 	"name": "core-wp/social-share",
 	"version": "1.0.0",
 	"title": "Social Share",
-	"category": "theme",
+	"category": "core-wp",
 	"description": "Displays social share links for the current post. Configure networks, labels, and custom links in the block settings.",
 	"textdomain": "core_wp",
 	"editorScript": "core-wp-social-share-editor",

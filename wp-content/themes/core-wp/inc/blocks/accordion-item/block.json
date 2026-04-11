@@ -4,7 +4,7 @@
 	"name": "core-wp/accordion-item",
 	"version": "1.0.0",
 	"title": "Accordion Item",
-	"category": "theme",
+	"category": "core-wp",
 	"description": "A single collapsible accordion item with a title, rich content, and optional image for split layout.",
 	"textdomain": "core_wp",
 	"parent": ["core-wp/accordion"],

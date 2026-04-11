@@ -4,7 +4,7 @@
 	"name": "core-wp/tab-item",
 	"version": "1.0.0",
 	"title": "Tab Item",
-	"category": "theme",
+	"category": "core-wp",
 	"description": "A single tab with a title and rich content area. Must be used inside the Tabs block.",
 	"textdomain": "core_wp",
 	"parent": ["core-wp/tabs"],

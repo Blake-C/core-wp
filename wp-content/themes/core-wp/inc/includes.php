@@ -30,6 +30,7 @@ require get_template_directory() . '/inc/components/meta-description.php';
 require get_template_directory() . '/inc/components/password-form.php';
 require get_template_directory() . '/inc/components/site-icons.php';
 require get_template_directory() . '/inc/components/skip-link-tabindex.php';
+require get_template_directory() . '/inc/components/block-categories.php';
 require get_template_directory() . '/inc/components/thumbnail-upscale.php';
 
 
