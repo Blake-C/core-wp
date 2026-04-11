@@ -1,12 +1,28 @@
 @use '../helpers' as *;
 
-// =============================================================================
-// Post Grid — shared card grid layout
-// Used by: Related Posts block (single post) and post listing pages
-// (archive, category, tag, blog index, search)
-// =============================================================================
+// ─────────────────────────────────────────────────────────────────────────────
+// Post Listing — grid, cards, and pagination
+//
+// BEM structure:
+//   .post-grid              — CSS grid wrapper (used by both blocks below)
+//   .post-card              — Related Posts: the whole card is a single <a>
+//   .post-card__image       — image wrapper with overflow + aspect ratio
+//   .post-card__tags        — category / taxonomy tag row
+//   .post-card__tag         — individual tag label
+//   .post-card__title       — card heading
+//
+// WordPress core class overrides (selectors cannot be renamed):
+//   .post-grid .wp-block-post            — Query Loop listing card
+//   .post-grid .wp-block-post-featured-image
+//   .post-grid .wp-block-post-terms
+//   .post-grid .wp-block-post-title
+//   .post-grid .wp-block-post-date
+//   .wp-block-query-title                — archive / search page h1
+//   .wp-block-query-pagination           — pagination wrapper
+// ─────────────────────────────────────────────────────────────────────────────
 
-// Grid container
+// ── Post grid ─────────────────────────────────────────────────────────────────
+
 .post-grid {
 	column-gap: $px-24;
 	/* stylelint-disable-next-line declaration-no-important */
@@ -24,11 +40,88 @@
 	@include breakpoint(large) {
 		grid-template-columns: repeat(3, 1fr);
 	}
+
+	// ── Listing page card (Query Loop) ───────────────────────────────────────
+	// Outer card <a> is added by core_wp_listing_card_link_wrap().
+
+	.wp-block-post {
+		display: flex;
+		flex-direction: column;
+		margin-top: 0;
+
+		> a {
+			color: inherit;
+			display: flex;
+			flex: 1;
+			flex-direction: column;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: none;
+
+				.wp-block-post-featured-image img {
+					transform: scale(1.2);
+				}
+
+				.wp-block-post-title {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	// ── Card image ───────────────────────────────────────────────────────────
+
+	.wp-block-post-featured-image {
+		aspect-ratio: 4 / 2;
+		border-radius: 16px;
+		display: block;
+		margin-bottom: $px-16;
+		overflow: hidden;
+
+		img {
+			display: block;
+			height: 100%;
+			object-fit: cover;
+			transform: scale(1);
+			transition: transform 0.3s;
+			width: 100%;
+		}
+	}
+
+	// ── Card tags ────────────────────────────────────────────────────────────
+
+	.wp-block-post-terms {
+		display: flex;
+		flex-wrap: wrap;
+
+		@include font-size(12);
+		font-weight: 700;
+		gap: $px-8;
+		letter-spacing: rem-calc(0.5);
+		margin-bottom: $px-4;
+		text-transform: uppercase;
+	}
+
+	// ── Card title ───────────────────────────────────────────────────────────
+
+	.wp-block-post-title {
+		@include font-size(22);
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+
+	// ── Card date ────────────────────────────────────────────────────────────
+	// Listing pages only — Related Posts cards show no date.
+
+	.wp-block-post-date {
+		@include font-size(12);
+		margin-bottom: $px-8;
+	}
 }
 
-// =============================================================================
-// Related Posts cards (.post-card — whole card is a single <a>)
-// =============================================================================
+// ── Related Posts card ────────────────────────────────────────────────────────
+// The whole card is a single <a> wrapping an <article>.
 
 .post-card {
 	display: flex;
@@ -47,114 +140,61 @@
 			text-decoration: underline;
 		}
 	}
-}
 
-// =============================================================================
-// Listing page cards (.wp-block-post inside .post-grid — outer <a> is the link)
-// =============================================================================
+	// ── Image ─────────────────────────────────────────────────────────────────
 
-.post-grid .wp-block-post {
-	display: flex;
-	flex-direction: column;
-	margin-top: 0;
+	&__image {
+		aspect-ratio: 4 / 2;
+		border-radius: 16px;
+		display: block;
+		margin-bottom: $px-16;
+		overflow: hidden;
 
-	// Outer card <a> added by core_wp_listing_card_link_wrap()
-	> a {
-		color: inherit;
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-		text-decoration: none;
-
-		&:hover {
-			text-decoration: none;
-
-			.wp-block-post-featured-image img {
-				transform: scale(1.2);
-			}
-
-			.wp-block-post-title {
-				text-decoration: underline;
-			}
+		img {
+			display: block;
+			height: 100%;
+			object-fit: cover;
+			transform: scale(1);
+			transition: transform 0.3s;
+			width: 100%;
 		}
 	}
-}
 
-// =============================================================================
-// Shared card image
-// =============================================================================
+	// ── Tags ──────────────────────────────────────────────────────────────────
 
-.post-card__image,
-.post-grid .wp-block-post-featured-image {
-	aspect-ratio: 4 / 2;
-	border-radius: 16px;
-	display: block;
-	margin-bottom: $px-16;
-	overflow: hidden;
+	&__tags {
+		display: flex;
+		flex-wrap: wrap;
 
-	img {
-		display: block;
-		height: 100%;
-		object-fit: cover;
-		transform: scale(1);
-		transition: transform 0.3s;
-		width: 100%;
+		@include font-size(12);
+		font-weight: 700;
+		gap: $px-8;
+		letter-spacing: rem-calc(0.5);
+		margin-bottom: $px-4;
+		text-transform: uppercase;
+	}
+
+	&__tag {
+		display: inline-block;
+	}
+
+	// ── Title ─────────────────────────────────────────────────────────────────
+
+	&__title {
+		@include font-size(22);
+		margin-bottom: 0;
+		margin-top: 0;
 	}
 }
 
-// =============================================================================
-// Shared card tags
-// =============================================================================
-
-.post-card__tags,
-.post-grid .wp-block-post-terms {
-	display: flex;
-	flex-wrap: wrap;
-	font-size: rem-calc(12);
-	font-weight: 700;
-	gap: $px-8;
-	letter-spacing: rem-calc(0.5);
-	margin-bottom: $px-4;
-	text-transform: uppercase;
-}
-
-.post-card__tag {
-	display: inline-block;
-}
-
-// =============================================================================
-// Shared card title
-// =============================================================================
-
-.post-card__title,
-.post-grid .wp-block-post-title {
-	font-size: rem-calc(22);
-	margin-bottom: 0;
-	margin-top: 0;
-}
-
-// =============================================================================
-// Date — listing pages only (related posts show no date)
-// =============================================================================
-
-.post-grid .wp-block-post-date {
-	font-size: rem-calc(12);
-	margin-bottom: $px-8;
-}
-
-// =============================================================================
-// Archive / category / tag / search page h1 — responsive scaling
-// Matches the clamp approach used on the single post title.
-// =============================================================================
+// ── Archive / search page title ───────────────────────────────────────────────
 
 .wp-block-query-title {
 	@include fluid-font-size(56, 28);
 	line-height: 1.1;
 }
 
-// =============================================================================
-// Pagination
-// =============================================================================
+// ── Pagination ────────────────────────────────────────────────────────────────
 
 .wp-block-query-pagination {
 	gap: 0;
@@ -172,7 +212,8 @@
 		align-items: center;
 		border-radius: 4px;
 		display: inline-flex;
-		font-size: rem-calc(14);
+
+		@include font-size(14);
 		font-weight: 600;
 		justify-content: center;
 		min-width: $px-36;
@@ -203,7 +244,7 @@
 
 		&::before,
 		&::after {
-			font-size: rem-calc(16);
+			@include font-size(16);
 		}
 	}
 
