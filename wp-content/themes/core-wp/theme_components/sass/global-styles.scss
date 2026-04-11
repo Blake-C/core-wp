@@ -134,28 +134,3 @@ tbody tr:nth-child(even) {
 	/* stylelint-disable-next-line declaration-no-important */
 	display: none !important;
 }
-
-// Responsive embed
-// ----------------
-// Wraps iframes/video in a 16:9 container.
-// Usage: <div class="responsive-embed">...</div>
-
-.responsive-embed,
-.flex-video {
-	height: 0;
-	margin-bottom: $global-margin;
-	overflow: hidden;
-	padding-bottom: 56.25%;
-	position: relative;
-
-	iframe,
-	object,
-	embed,
-	video {
-		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 100%;
-	}
-}
