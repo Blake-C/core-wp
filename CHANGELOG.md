@@ -4,11 +4,57 @@ All notable changes to this project will be documented in this file.
 
 ## [#.#.#] - Next
 
+### Security
+
 ### Added
 
 ### Changed
 
-## [0.0.1] - 2026-03-09
+### Removed
+
+## [0.0.2] - 2026-04-10
+
+### Security
+
+- Replaced `phpcs:ignore` bypass on echo with `wp_kses()` for safe HTML output — `inc/components/site-icons.php`
+- Added `esc_attr()` escaping to `$label` in password form attributes — `inc/components/password-form.php`
+- Fixed Docker loopback Host header causing WordPress canonical redirect loop; added PHPCS config for mu-plugins directory — `wp-content/mu-plugins/`
+
+### Added
+
+- Added tabs block with mobile accordion conversion on small screens — `inc/blocks/tab-item/`
+- Added accordion block — `inc/blocks/accordion-item/`
+- Added copyright custom block (converted from shortcode) — `inc/blocks/copyright/`
+- Added social share custom block (converted from shortcode) — `inc/blocks/social-share/`
+- Added related posts block — `inc/blocks/related-posts/`
+- Added post featured image fallback and listing card wrap components — `inc/components/`
+- Added base pagination styles — `theme_components/sass/layout/_post-listing.scss`
+- Added global left/right padding — `theme_components/sass/layout/_body.scss`
+- Added `file_exists()` guard and request-level cache to `core_wp_cache_bust()` — `inc/utility-functions.php`
+- Added null guard on `get_node()` result — `inc/custom-admin-functions/change-howdy-text.php`
+- Added webp to watchable image files in build system — `package.json`
+
+### Changed
+
+- Reformatted post listing styles into BEM naming convention — `theme_components/sass/layout/_post-listing.scss`
+- Refactored midline CTA block patterns into BEM naming convention — `patterns/`
+- Standardized theme font sizes and spacing; switched from em to variable px units (converted to rem) — `theme_components/sass/`
+- Renamed block pattern category from "Sections" to "Core WP" — `functions.php`
+- Updated listing pages to display a grid of posts with featured images
+- Updated site footer for styling — `parts/footer.html`, `templates/`
+- Updated supported browsers in `package.json` to exclude dead browsers
+- Adjusted stylelint selector pattern to support BEM naming convention — `.stylelintrc`
+- Updated core plugin setup with proper prefix — `wp-content/plugins/core-wp/core-wp.php`
+- Changed nginx healthcheck from `localhost` to `127.0.0.1` in dev and prod compose for DNS independence — `compose.yml`, `compose.prod.yml`
+- Updated styling readme guide — `theme_components/sass/README.md`
+- Updated plugin registry URL from wpackagist.org to wp-packages.org — `README.md`
+
+### Removed
+
+- Removed legacy embed flex-video styles — `theme_components/sass/global-styles.scss`
+- Removed old pagination styles — `theme_components/sass/layout/`
+
+## [0.0.1] - 2026-04-09
 
 ### Security
 

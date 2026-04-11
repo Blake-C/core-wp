@@ -374,7 +374,7 @@ wp search-replace https://production.com http://localhost --precise --all-tables
 | Database | `mariadb:11.8` | `3306` (localhost only) | — |
 | Redis | `redis:7-alpine` | — | Object cache; LRU eviction, no persistence |
 | phpMyAdmin | `phpmyadmin` | `8000` (localhost only) | — |
-| CLI Tools | `digitalblake/light-cli:5.0.0` | — | pnpm, WP-CLI, Composer, ImageMagick |
+| CLI Tools | `digitalblake/light-cli:5.0.1` | — | pnpm, WP-CLI, Composer, ImageMagick |
 
 XDebug 3 is baked into the WordPress service image (`docker/wordpress/Dockerfile`) and listens on port `9003`. See the [PHP Debugging](#php-debugging-xdebug) section for VSCode setup.
 
