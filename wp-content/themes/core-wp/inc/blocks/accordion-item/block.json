@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "core-wp/accordion-item",
+	"version": "1.0.0",
+	"title": "Accordion Item",
+	"category": "theme",
+	"description": "A single collapsible accordion item with a title, rich content, and optional image for split layout.",
+	"textdomain": "core_wp",
+	"parent": ["core-wp/accordion"],
+	"editorScript": "core-wp-accordion-item-editor",
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "integer",
+			"default": 0
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"defaultOpen": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	}
+}

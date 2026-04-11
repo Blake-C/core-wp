@@ -1,0 +1,217 @@
+@use '../helpers' as *;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Accordion block
+//
+// BEM structure:
+//   .accordion                    — container (full / float-left / float-right / split)
+//   .accordion__items             — ordered list of items
+//   .accordion__item              — single collapsible unit
+//   .accordion__header            — <button> that toggles the panel
+//   .accordion__title             — visible button label
+//   .accordion__icon              — decorative +/× indicator
+//   .accordion__content           — collapsible panel (hidden attribute controls visibility)
+//   .accordion__image-panel       — right-side image column (split layout only)
+//   .accordion__image             — <img> inside the panel
+// ─────────────────────────────────────────────────────────────────────────────
+
+.accordion {
+	@include fluid-space(margin-bottom, 48, 24);
+
+	// ── Float layouts ───────────────────────────────────────────────────────
+
+	&--float-left,
+	&--float-right {
+		@include breakpoint(medium) {
+			width: 45%;
+		}
+	}
+
+	&--float-left {
+		@include breakpoint(medium) {
+			float: left;
+			margin-right: $px-36;
+		}
+	}
+
+	&--float-right {
+		@include breakpoint(medium) {
+			float: right;
+			margin-left: $px-36;
+		}
+	}
+
+	// ── Split layout ────────────────────────────────────────────────────────
+
+	&--split {
+		@include breakpoint(medium) {
+			align-items: flex-start;
+			display: flex;
+			gap: $px-48;
+
+			.accordion__items {
+				flex: 1 1 50%;
+				min-width: 0;
+			}
+
+			.accordion__image-panel {
+				flex: 1 1 50%;
+				min-width: 0;
+				position: sticky;
+				top: $px-24;
+			}
+		}
+	}
+
+	// ── Items list ──────────────────────────────────────────────────────────
+
+	&__items {
+		width: 100%;
+	}
+
+	// ── Single item ─────────────────────────────────────────────────────────
+
+	&__item {
+		border-bottom: 1px solid $light-gray;
+
+		&:first-child {
+			border-top: 1px solid $light-gray;
+		}
+	}
+
+	// ── Header button ────────────────────────────────────────────────────────
+
+	&__header {
+		align-items: center;
+		background: none;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+
+		@include fluid-space(padding-bottom, 24, 16);
+		@include fluid-space(padding-top, 24, 16);
+		padding-left: 0;
+		padding-right: 0;
+		text-align: left;
+		width: 100%;
+
+		@include hover-active-focus(color, var(--wp--preset--color--primary, #{$primary-color}));
+
+		&:focus-visible {
+			outline: 2px solid var(--wp--preset--color--primary, #{$primary-color});
+			outline-offset: 2px;
+		}
+	}
+
+	// ── Title text ───────────────────────────────────────────────────────────
+
+	&__title {
+		@include font-size(18);
+		flex: 1;
+		font-weight: 600;
+		line-height: $header-lineheight;
+		padding-right: $px-16;
+	}
+
+	// ── +/− icon ─────────────────────────────────────────────────────────────
+
+	&__icon {
+		flex-shrink: 0;
+		height: 1.25rem;
+		position: relative;
+		width: 1.25rem;
+
+		// Horizontal bar (always visible)
+		&::before,
+		&::after {
+			background-color: currentcolor;
+			border-radius: $px-2;
+			content: '';
+			display: block;
+			height: 2px;
+			left: 50%;
+			position: absolute;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			transition:
+				transform 0.25s ease,
+				opacity 0.25s ease;
+			width: 100%;
+		}
+
+		// Vertical bar (rotates away when open)
+		&::after {
+			transform: translate(-50%, -50%) rotate(90deg);
+		}
+	}
+
+	// Rotate vertical bar to 0deg when item is open
+	&__header[aria-expanded='true'] &__icon {
+		&::after {
+			opacity: 0;
+			transform: translate(-50%, -50%) rotate(0deg);
+		}
+	}
+
+	// ── Content panel ────────────────────────────────────────────────────────
+
+	&__content {
+		@include fluid-space(padding-bottom, 24, 16);
+
+		// When hidden attribute is present the browser hides the element natively.
+		// Override only if a theme-level reset has removed display:none for [hidden].
+		&[hidden] {
+			display: none;
+		}
+
+		// Inner block typography
+		> * + * {
+			margin-top: $px-16;
+		}
+
+		> *:last-child {
+			margin-bottom: 0;
+		}
+
+		a {
+			color: var(--wp--preset--color--primary, #{$primary-color});
+
+			@include hover-active-focus(text-decoration, underline);
+		}
+	}
+
+	// ── Image panel (split layout) ───────────────────────────────────────────
+
+	&__image-panel {
+		// Hidden by default on small screens; JS toggles `hidden` attribute.
+		@include breakpoint('small only') {
+			display: none;
+		}
+	}
+
+	&__image {
+		border-radius: $global-radius;
+		display: block;
+		height: auto;
+		max-width: 100%;
+		transition: opacity 0.3s ease;
+		width: 100%;
+	}
+
+	// ── Editor placeholder (image panel preview) ─────────────────────────────
+
+	&__image-panel--editor-placeholder {
+		align-items: center;
+		background: $accent-1;
+		border: 2px dashed $medium-gray;
+		border-radius: $global-radius;
+		color: $dark-gray;
+		display: flex;
+
+		@include font-size(13);
+		justify-content: center;
+		min-height: 12rem;
+		padding: $px-16;
+	}
+}

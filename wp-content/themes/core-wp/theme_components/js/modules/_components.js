@@ -29,3 +29,15 @@
  * The chunk will be output as assets/js/accordion.js and loaded on demand.
  * No changes to webpack.config.mjs or scripts-list.js are needed for chunks.
  */
+
+async function loadAccordion() {
+	const { initAccordion } = await import(
+		/* webpackChunkName: "accordion" */
+		'./_accordion.js'
+	)
+	initAccordion()
+}
+
+if (document.querySelector('[data-accordion]')) {
+	loadAccordion()
+}
