@@ -1,0 +1,437 @@
+@use '../helpers' as *;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Prism.js Code Block Styles — Okaidia theme
+//
+// Applies to WordPress core/code blocks (.wp-block-code) and bare <pre> tags.
+// The toolbar plugin wraps <pre> in .code-toolbar and appends a .toolbar div.
+//
+// Layout model
+// ─────────────────────────────────────────────────────────────────────────────
+// .code-toolbar is a flex column. The .toolbar has order: -1 so it appears
+// above <pre> visually even though it follows it in the DOM.
+//
+// .toolbar (full-width bar)
+//   ├── .toolbar-item > span        — language label (plain text, left)
+//   └── .toolbar-item > button      — copy button (semi-transparent pill, right)
+//         └── span                  — button label (reset to inherit from button)
+//
+// Per-language bar colours are driven by CSS custom properties set on
+// .code-toolbar via :has(code.language-*) selectors.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Okaidia theme tokens ──────────────────────────────────────────────────────
+
+$prism-bg: #272822;
+$prism-fg: #f8f8f2;
+$prism-border-radius: 6px;
+$prism-line-num-color: #75715e;
+$prism-line-num-border: #49483e;
+$prism-selection-bg: #49483e;
+$prism-bar-bg-default: #3e3d32;
+$prism-bar-fg-default: #a59f85;
+
+// ── Okaidia token colours ────────────────────────────────────────────────────
+
+$token-comment: #8292a2;
+$token-punctuation: #f8f8f2;
+$token-property: #f92672;
+$token-number: #ae81ff;
+$token-string: #e6db74;
+$token-operator: #f8f8f2;
+$token-function: #e6db74;
+$token-keyword: #66d9e8;
+$token-regex: #fd971f;
+$token-deleted: #f92672;
+$token-inserted: #e6db74;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Reset inherited pre styles from _generic-styles.scss for code blocks
+// ─────────────────────────────────────────────────────────────────────────────
+
+.wp-block-code {
+	background-color: unset;
+	border: none;
+	padding: 0;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Code toolbar wrapper
+// ─────────────────────────────────────────────────────────────────────────────
+
+.code-toolbar {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: $px-24;
+
+	// Flat top on the code block — the bar provides the top radius.
+	> pre[class*='language-'],
+	> .wp-block-code {
+		border: none;
+		border-radius: 0 0 $prism-border-radius $prism-border-radius;
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+
+	// ── Language bar ─────────────────────────────────────────────────────────
+	// order: -1 moves the bar above <pre> without altering the DOM.
+	// background/color driven by --prism-bar-bg/fg, defaulting to the
+	// neutral Okaidia-matching values below.
+
+	.toolbar {
+		align-items: center;
+		background: var(--prism-bar-bg, #{$prism-bar-bg-default});
+		border-radius: $prism-border-radius $prism-border-radius 0 0;
+		color: var(--prism-bar-fg, #{$prism-bar-fg-default});
+		display: flex;
+		justify-content: space-between;
+		opacity: 1;
+		order: -1;
+		padding: rem-calc(6 12);
+		position: static;
+		transition: none;
+		width: 100%;
+	}
+
+	.toolbar-item {
+		display: inline-flex;
+	}
+
+	// Language label — plain text inside the bar, no pill frame.
+	.toolbar-item > span {
+		background: transparent;
+		border: none;
+		color: inherit;
+		cursor: default;
+		display: inline-block;
+		font-family: $font-family-monospace;
+
+		@include font-size(11);
+
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		line-height: 1;
+		margin: 0;
+		padding: 0;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	// Copy button — semi-transparent overlay so it reads well on every bar colour.
+	.toolbar-item button {
+		-webkit-appearance: none;
+		appearance: none;
+		background: rgb(0 0 0 / 20%);
+		border: 1px solid rgb(0 0 0 / 30%);
+		border-radius: 4px;
+		box-shadow: none;
+		color: inherit;
+		cursor: pointer;
+		display: inline-block;
+		font-family: $font-family-monospace;
+
+		@include font-size(11);
+
+		line-height: 1;
+		margin: 0;
+		padding: rem-calc(4 8);
+		text-decoration: none;
+		text-transform: uppercase;
+		transition: background 0.15s ease;
+		white-space: nowrap;
+
+		&:hover,
+		&:focus {
+			background: rgb(0 0 0 / 35%);
+			text-decoration: none;
+		}
+
+		&:focus-visible {
+			outline: 2px solid currentcolor;
+			outline-offset: 2px;
+		}
+
+		&:not(:focus-visible) {
+			outline: none;
+		}
+	}
+
+	// Inner <span> inside copy button — reset so it doesn't inherit pill styles.
+	.toolbar-item button span {
+		all: unset;
+	}
+
+	// ── Per-language bar colours ──────────────────────────────────────────────
+	// bg/fg values match each language's official or widely-recognised colour.
+	// Light backgrounds use a dark fg; dark backgrounds use a light fg.
+
+	&:has(code.language-javascript),
+	&:has(code.language-js),
+	&:has(code.language-jsx) {
+		--prism-bar-bg: #f7df1e;
+		--prism-bar-fg: #1a1a1a;
+	}
+
+	&:has(code.language-typescript),
+	&:has(code.language-ts),
+	&:has(code.language-tsx) {
+		--prism-bar-bg: #3178c6;
+		--prism-bar-fg: #fff;
+	}
+
+	&:has(code.language-php) {
+		--prism-bar-bg: #8892bf;
+		--prism-bar-fg: #fff;
+	}
+
+	&:has(code.language-css) {
+		--prism-bar-bg: #264de4;
+		--prism-bar-fg: #fff;
+	}
+
+	&:has(code.language-scss) {
+		--prism-bar-bg: #c74b85;
+		--prism-bar-fg: #fff;
+	}
+
+	&:has(code.language-markup),
+	&:has(code.language-html),
+	&:has(code.language-xml),
+	&:has(code.language-svg) {
+		--prism-bar-bg: #e44d26;
+		--prism-bar-fg: #fff;
+	}
+
+	&:has(code.language-bash),
+	&:has(code.language-shell),
+	&:has(code.language-sh) {
+		--prism-bar-bg: #2e3a46;
+		--prism-bar-fg: #4ec9b0;
+	}
+
+	&:has(code.language-json) {
+		--prism-bar-bg: #2b2b2b;
+		--prism-bar-fg: #f8f8f2;
+	}
+
+	&:has(code.language-python) {
+		--prism-bar-bg: #3572a5;
+		--prism-bar-fg: #fff;
+	}
+
+	&:has(code.language-yaml) {
+		--prism-bar-bg: #cc1616;
+		--prism-bar-fg: #fff;
+	}
+
+	&:has(code.language-sql) {
+		--prism-bar-bg: #e38c00;
+		--prism-bar-fg: #1a1a1a;
+	}
+
+	&:has(code.language-go) {
+		--prism-bar-bg: #00add8;
+		--prism-bar-fg: #fff;
+	}
+
+	&:has(code.language-diff) {
+		--prism-bar-bg: #2e4a35;
+		--prism-bar-fg: #b5cea8;
+	}
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// <pre> / code block base
+// ─────────────────────────────────────────────────────────────────────────────
+
+code[class*='language-'],
+pre[class*='language-'],
+.wp-block-code {
+	background: $prism-bg;
+	border-radius: $prism-border-radius;
+	color: $prism-fg;
+	direction: ltr;
+	font-family: $font-family-monospace;
+
+	@include font-size(14);
+
+	hyphens: none;
+	line-height: 1.6;
+	tab-size: 4;
+	text-align: left;
+	text-shadow: 0 1px rgb(0 0 0 / 30%);
+	white-space: pre;
+	word-break: normal;
+	word-spacing: normal;
+
+	::selection {
+		background: $prism-selection-bg;
+	}
+}
+
+pre[class*='language-'],
+.wp-block-code {
+	margin-bottom: $px-24;
+	overflow: auto;
+	padding: $px-24;
+}
+
+// Inline code
+:not(pre) > code[class*='language-'] {
+	background: $prism-bg;
+	border-radius: 4px;
+	color: $prism-fg;
+	padding: 0.1em 0.3em;
+	white-space: normal;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Syntax tokens — Okaidia
+// ─────────────────────────────────────────────────────────────────────────────
+
+.token {
+	&.comment,
+	&.prolog,
+	&.doctype,
+	&.cdata {
+		color: $token-comment;
+	}
+
+	&.punctuation {
+		color: $token-punctuation;
+	}
+
+	&.namespace {
+		opacity: 0.7;
+	}
+
+	&.property,
+	&.tag,
+	&.constant,
+	&.symbol,
+	&.deleted {
+		color: $token-property;
+	}
+
+	&.boolean,
+	&.number {
+		color: $token-number;
+	}
+
+	&.selector,
+	&.attr-name,
+	&.string,
+	&.char,
+	&.builtin,
+	&.inserted {
+		color: $token-string;
+	}
+
+	&.operator,
+	&.entity,
+	&.url,
+	&.variable {
+		color: $token-operator;
+	}
+
+	&.atrule,
+	&.attr-value,
+	&.function,
+	&.class-name {
+		color: $token-function;
+	}
+
+	&.keyword {
+		color: $token-keyword;
+	}
+
+	&.regex,
+	&.important {
+		color: $token-regex;
+	}
+
+	&.important,
+	&.bold {
+		font-weight: 700;
+	}
+
+	&.italic {
+		font-style: italic;
+	}
+
+	&.entity {
+		cursor: help;
+	}
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Inline colour plugin
+//
+// Renders a small colour swatch next to colour values in CSS/SCSS code blocks.
+// Requires prism-css-extras to be loaded first (adds the `color` token type).
+// ─────────────────────────────────────────────────────────────────────────────
+
+.inline-color-wrapper {
+	white-space: nowrap;
+}
+
+.inline-color {
+	border-radius: 0.3em;
+	display: inline-block;
+	height: 0.667em;
+	margin: 0 0.2em;
+	outline: 1px solid rgba(255, 255, 255, 0.5);
+	overflow: hidden;
+	vertical-align: inherit;
+	width: 0.667em;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Line numbers plugin
+//
+// .line-numbers-rows is inserted inside <code> by Prism.
+// <code> is position: relative — the column is positioned relative to it.
+//   top: 0        — first line aligns with first code line
+//   left: -48px   — pulls into <pre>'s left padding (40px column + 8px gap)
+//
+// CSS counters drive the number display:
+//   counter-reset on <pre>  — resets before first line
+//   counter-increment on each span — increments before ::before renders
+// ─────────────────────────────────────────────────────────────────────────────
+
+pre.line-numbers {
+	counter-reset: linenumber;
+	padding-left: rem-calc(56);
+	position: relative;
+}
+
+pre.line-numbers > code {
+	position: relative;
+	white-space: inherit;
+}
+
+.line-numbers-rows {
+	border-right: 1px solid $prism-line-num-border;
+	font-size: 100%;
+	left: rem-calc(-48);
+	letter-spacing: -1px;
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	user-select: none;
+	width: rem-calc(40);
+
+	> span {
+		counter-increment: linenumber;
+		display: block;
+		padding-right: $px-8;
+		pointer-events: none;
+		text-align: right;
+
+		&::before {
+			color: $prism-line-num-color;
+			content: counter(linenumber);
+			display: block;
+		}
+	}
+}

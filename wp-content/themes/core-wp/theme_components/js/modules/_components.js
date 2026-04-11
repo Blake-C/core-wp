@@ -53,3 +53,15 @@ async function loadTabs() {
 if (document.querySelector('[data-tabs]')) {
 	loadTabs()
 }
+
+async function loadPrismCode() {
+	const { initPrismCode } = await import(
+		/* webpackChunkName: "prism-code" */
+		'./_prism-code.js'
+	)
+	initPrismCode()
+}
+
+if (document.querySelector('.wp-block-code, pre')) {
+	loadPrismCode()
+}
