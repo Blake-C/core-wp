@@ -41,3 +41,15 @@ async function loadAccordion() {
 if (document.querySelector('[data-accordion]')) {
 	loadAccordion()
 }
+
+async function loadTabs() {
+	const { initTabs } = await import(
+		/* webpackChunkName: "tabs" */
+		'./_tabs.js'
+	)
+	initTabs()
+}
+
+if (document.querySelector('[data-tabs]')) {
+	loadTabs()
+}

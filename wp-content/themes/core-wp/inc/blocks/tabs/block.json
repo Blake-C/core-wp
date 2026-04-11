@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "core-wp/tabs",
+	"version": "1.0.0",
+	"title": "Tabs",
+	"category": "theme",
+	"description": "Tabbed content block. Add Tab Item children to build each tab.",
+	"textdomain": "core_wp",
+	"editorScript": "core-wp-tabs-editor",
+	"attributes": {
+		"mobileAccordion": {
+			"type": "boolean",
+			"default": false
+		},
+		"mobileSingleOpen": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	}
+}

@@ -1,0 +1,231 @@
+@use '../helpers' as *;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Tabs block
+//
+// BEM structure:
+//   .tabs                 — container ([data-tabs])
+//   .tabs__nav            — <ul role="tablist"> wrapping all tab buttons
+//   .tabs__nav-item       — <li role="presentation"> per tab
+//   .tabs__tab            — <button role="tab"> — the clickable tab label
+//   .tabs__tab--active    — active state on the button
+//   .tabs__panels         — wrapper for all panels
+//   .tabs__panel          — <div role="tabpanel"> (hidden attribute when inactive)
+//   .tabs__panel--active  — active state on the panel
+//
+// Editor helpers:
+//   .tabs--editor         — applied via useBlockProps in edit function
+// ─────────────────────────────────────────────────────────────────────────────
+
+.tabs {
+	@include fluid-space(margin-bottom, 48, 24);
+
+	// ── Tab nav ─────────────────────────────────────────────────────────────
+
+	&__nav {
+		border-bottom: 2px solid $light-gray;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	&__nav-item {
+		margin: 0;
+	}
+
+	// ── Tab button ──────────────────────────────────────────────────────────
+
+	&__tab {
+		background: none;
+		border: none;
+		border-bottom: 2px solid transparent;
+		color: $dark-gray;
+		cursor: pointer;
+
+		@include font-size(15);
+		font-weight: 600;
+		margin-bottom: -2px; // overlap the nav border-bottom
+
+		@include fluid-space(padding-bottom, 16, 12);
+		padding-left: $px-24;
+		padding-right: $px-24;
+
+		@include fluid-space(padding-top, 16, 12);
+		position: relative;
+		transition:
+			color 0.2s ease,
+			border-color 0.2s ease;
+		white-space: nowrap;
+
+		@include hover-active-focus(color, var(--wp--preset--color--primary, #{$primary-color}));
+
+		&:focus-visible {
+			outline: 2px solid var(--wp--preset--color--primary, #{$primary-color});
+			outline-offset: -2px;
+		}
+
+		&--active {
+			border-bottom-color: var(--wp--preset--color--primary, #{$primary-color});
+			color: var(--wp--preset--color--primary, #{$primary-color});
+		}
+	}
+
+	// ── Panels wrapper ───────────────────────────────────────────────────────
+
+	&__panels {
+		@include fluid-space(padding-top, 36, 24);
+	}
+
+	// ── Individual panel ────────────────────────────────────────────────────
+
+	&__panel {
+		// Natively hidden via the `hidden` attribute — override in case a reset
+		// removes display:none for [hidden].
+		&[hidden] {
+			display: none;
+		}
+
+		// Inner block typography
+		> * + * {
+			margin-top: $px-16;
+		}
+
+		> *:last-child {
+			margin-bottom: 0;
+		}
+
+		a {
+			color: var(--wp--preset--color--primary, #{$primary-color});
+
+			@include hover-active-focus(text-decoration, underline);
+		}
+	}
+
+	// ── Mobile accordion header (hidden on desktop) ─────────────────────────
+	// Rendered by PHP only when data-mobile-accordion is set. Always hidden on
+	// desktop; JS + media query CSS reveals it on small viewports.
+
+	&__mobile-header {
+		align-items: center;
+		background: none;
+		border: none;
+		border-bottom: 1px solid $light-gray;
+		cursor: pointer;
+		display: none; // shown at small breakpoint via [data-mobile-accordion]
+		justify-content: space-between;
+
+		@include fluid-space(padding-bottom, 20, 14);
+		padding-left: 0;
+		padding-right: 0;
+
+		@include fluid-space(padding-top, 20, 14);
+		text-align: left;
+		width: 100%;
+
+		@include hover-active-focus(color, var(--wp--preset--color--primary, #{$primary-color}));
+
+		&:focus-visible {
+			outline: 2px solid var(--wp--preset--color--primary, #{$primary-color});
+			outline-offset: 2px;
+		}
+	}
+
+	&__mobile-header-label {
+		@include font-size(16);
+		flex: 1;
+		font-weight: 600;
+		line-height: $header-lineheight;
+		padding-right: $px-16;
+	}
+
+	// +/− icon — mirrors the accordion icon pattern
+	&__mobile-icon {
+		flex-shrink: 0;
+		height: 1.25rem;
+		position: relative;
+		width: 1.25rem;
+
+		&::before,
+		&::after {
+			background-color: currentcolor;
+			border-radius: $px-2;
+			content: '';
+			display: block;
+			height: 2px;
+			left: 50%;
+			position: absolute;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			transition:
+				transform 0.25s ease,
+				opacity 0.25s ease;
+			width: 100%;
+		}
+
+		&::after {
+			transform: translate(-50%, -50%) rotate(90deg);
+		}
+	}
+
+	&__mobile-header[aria-expanded='true'] &__mobile-icon {
+		&::after {
+			opacity: 0;
+			transform: translate(-50%, -50%) rotate(0deg);
+		}
+	}
+
+	// ── Mobile accordion panel content wrapper ───────────────────────────────
+	// Present only when data-mobile-accordion is set. On desktop it is always
+	// visible (no styles needed). On mobile, JS toggles the hidden attribute.
+
+	&__panel-content {
+		&[hidden] {
+			display: none;
+		}
+
+		@include breakpoint('small only') {
+			padding-bottom: $px-24;
+		}
+	}
+
+	// ── Mobile accordion responsive overrides ────────────────────────────────
+
+	@include breakpoint('small only') {
+		[data-mobile-accordion] & {
+			// suppress tab nav — replaced by mobile headers
+			&__nav {
+				display: none;
+			}
+
+			// panel wrappers become accordion item containers
+			&__panel {
+				// JS removes [hidden] from panels in mobile mode; [hidden] is only
+				// used for desktop tab visibility. Ensure no flash if it's still set.
+				&[hidden] {
+					display: block;
+				}
+
+				&:first-child {
+					border-top: 1px solid $light-gray;
+				}
+			}
+
+			// show the mobile accordion header
+			&__mobile-header {
+				display: flex;
+			}
+		}
+	}
+
+	// ── Editor styles ────────────────────────────────────────────────────────
+	// In the editor, items are stacked rather than hidden/shown as real tabs.
+
+	&--editor {
+		.tabs__nav {
+			display: none; // Nav is built at render time from attributes — not shown in editor.
+		}
+	}
+}

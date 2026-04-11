@@ -38,6 +38,8 @@ require get_template_directory() . '/inc/components/thumbnail-upscale.php';
  */
 require get_template_directory() . '/inc/blocks/accordion/block.php';
 require get_template_directory() . '/inc/blocks/accordion-item/block.php';
+require get_template_directory() . '/inc/blocks/tabs/block.php';
+require get_template_directory() . '/inc/blocks/tab-item/block.php';
 require get_template_directory() . '/inc/blocks/related-posts/block.php';
 require get_template_directory() . '/inc/blocks/social-share/block.php';
 require get_template_directory() . '/inc/blocks/copyright/block.php';
