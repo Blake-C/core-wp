@@ -42,6 +42,11 @@
 	}
 
 	blocks.registerBlockType('core-wp/tab-item', {
+		icon: el(
+			'svg',
+			{ xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', 'aria-hidden': true, focusable: false },
+			el('path', { d: 'M3 9h18v12H3zM3 4h9v5H3z' })
+		),
 		edit: function (props) {
 			var attributes = props.attributes
 			var setAttributes = props.setAttributes

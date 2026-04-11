@@ -8,6 +8,24 @@
 	"description": "Collapsible accordion with optional float or 50/50 split layout.",
 	"textdomain": "core_wp",
 	"editorScript": "core-wp-accordion-editor",
+	"example": {
+		"innerBlocks": [
+			{
+				"name": "core-wp/accordion-item",
+				"attributes": { "title": "What is an accordion?" },
+				"innerBlocks": [
+					{ "name": "core/paragraph", "attributes": { "content": "An accordion is a vertically stacked list of items that can be expanded or collapsed." } }
+				]
+			},
+			{
+				"name": "core-wp/accordion-item",
+				"attributes": { "title": "When should I use one?" },
+				"innerBlocks": [
+					{ "name": "core/paragraph", "attributes": { "content": "Use accordions to present large amounts of content in a compact, scannable format." } }
+				]
+			}
+		]
+	},
 	"attributes": {
 		"layout": {
 			"type": "string",

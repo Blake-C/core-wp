@@ -8,6 +8,24 @@
 	"description": "Tabbed content block. Add Tab Item children to build each tab.",
 	"textdomain": "core_wp",
 	"editorScript": "core-wp-tabs-editor",
+	"example": {
+		"innerBlocks": [
+			{
+				"name": "core-wp/tab-item",
+				"attributes": { "title": "First Tab" },
+				"innerBlocks": [
+					{ "name": "core/paragraph", "attributes": { "content": "Content for the first tab goes here." } }
+				]
+			},
+			{
+				"name": "core-wp/tab-item",
+				"attributes": { "title": "Second Tab" },
+				"innerBlocks": [
+					{ "name": "core/paragraph", "attributes": { "content": "Content for the second tab goes here." } }
+				]
+			}
+		]
+	},
 	"attributes": {
 		"mobileAccordion": {
 			"type": "boolean",

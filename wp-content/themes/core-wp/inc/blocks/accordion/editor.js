@@ -12,6 +12,11 @@
 	var InnerBlocksContent = InnerBlocks.Content
 
 	blocks.registerBlockType('core-wp/accordion', {
+		icon: el(
+			'svg',
+			{ xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', 'aria-hidden': true, focusable: false },
+			el('path', { d: 'M3 4h13v4H3zM17 4l3 2-3 2zM3 11h13v4H3zM17 11l3 2-3 2zM3 18h13v4H3zM17 18l3 2-3 2z' })
+		),
 		edit: function (props) {
 			var attributes = props.attributes
 			var setAttributes = props.setAttributes

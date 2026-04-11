@@ -34,6 +34,12 @@
 	}
 
 	blocks.registerBlockType('core-wp/social-share', {
+		icon: el(
+			'svg',
+			{ xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', 'aria-hidden': true, focusable: false },
+			el('path', { d: 'M18 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM6 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6z' }),
+			el('path', { d: 'M8.7 10.7L15.3 7.3M8.7 13.3L15.3 16.7', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5 })
+		),
 		edit: function (props) {
 			var attributes = props.attributes
 			var setAttributes = props.setAttributes

@@ -15,6 +15,12 @@
 	}
 
 	blocks.registerBlockType('core-wp/copyright', {
+		icon: el(
+			'svg',
+			{ xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', 'aria-hidden': true, focusable: false },
+			el('path', { d: 'M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zM12 4a8 8 0 1 1 0 16A8 8 0 0 1 12 4z', fillRule: 'evenodd' }),
+			el('path', { d: 'M14.5 8.5A4 4 0 1 0 14.5 15.5', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round' })
+		),
 		edit: function (props) {
 			var attributes = props.attributes
 			var setAttributes = props.setAttributes

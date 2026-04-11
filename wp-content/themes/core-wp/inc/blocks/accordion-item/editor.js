@@ -48,6 +48,11 @@
 	}
 
 	blocks.registerBlockType('core-wp/accordion-item', {
+		icon: el(
+			'svg',
+			{ xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', 'aria-hidden': true, focusable: false },
+			el('path', { d: 'M3 4h13v5H3zM17 4l3 2.5-3 2.5zM3 12h13v2H3zM3 16h9v2H3z' })
+		),
 		edit: function (props) {
 			var attributes = props.attributes
 			var setAttributes = props.setAttributes
