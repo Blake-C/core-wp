@@ -6,11 +6,11 @@
  * Description: Large heading on the left (8 cols) with a CTA button on the right (4 cols). Transitions 8/4 → 6/6 → stacked. Light mode. Set alignment to "Full Width" for full-bleed background.
  */
 ?>
-<!-- wp:group {"className":"midline-cta midline-cta-light","backgroundColor":"light-gray","layout":{"type":"constrained"}} -->
-<div class="wp-block-group midline-cta midline-cta-light has-light-gray-background-color has-background">
+<!-- wp:group {"className":"midline-cta midline-cta--light","backgroundColor":"light-gray","layout":{"type":"constrained"}} -->
+<div class="wp-block-group midline-cta midline-cta--light has-light-gray-background-color has-background">
 
-	<!-- wp:columns {"isStackedOnMobile":true,"className":"midline-cta-cols midline-cta-cols-responsive","style":{"spacing":{"blockGap":{"top":"2rem","left":"2rem"}}}} -->
-	<div class="wp-block-columns is-layout-flex midline-cta-cols midline-cta-cols-responsive">
+	<!-- wp:columns {"isStackedOnMobile":true,"className":"midline-cta__cols midline-cta__cols--responsive","style":{"spacing":{"blockGap":{"top":"2rem","left":"2rem"}}}} -->
+	<div class="wp-block-columns is-layout-flex midline-cta__cols midline-cta__cols--responsive">
 
 		<!-- wp:column {"width":"66.66%","verticalAlignment":"center"} -->
 		<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:66.66%">

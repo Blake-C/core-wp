@@ -6,11 +6,11 @@
  * Description: Heading on the left (8 cols) with a large stat number and supporting text on the right (4 cols). Transitions 8/4 → 6/6 → stacked. Light mode. Set alignment to "Full Width" for full-bleed background.
  */
 ?>
-<!-- wp:group {"className":"midline-cta midline-cta-light","backgroundColor":"light-gray","layout":{"type":"constrained"}} -->
-<div class="wp-block-group midline-cta midline-cta-light has-light-gray-background-color has-background">
+<!-- wp:group {"className":"midline-cta midline-cta--light","backgroundColor":"light-gray","layout":{"type":"constrained"}} -->
+<div class="wp-block-group midline-cta midline-cta--light has-light-gray-background-color has-background">
 
-	<!-- wp:columns {"isStackedOnMobile":true,"className":"midline-cta-cols midline-cta-cols-responsive"} -->
-	<div class="wp-block-columns is-layout-flex midline-cta-cols midline-cta-cols-responsive">
+	<!-- wp:columns {"isStackedOnMobile":true,"className":"midline-cta__cols midline-cta__cols--responsive"} -->
+	<div class="wp-block-columns is-layout-flex midline-cta__cols midline-cta__cols--responsive">
 
 		<!-- wp:column {"width":"66.66%"} -->
 		<div class="wp-block-column" style="flex-basis:66.66%">
@@ -25,8 +25,8 @@
 		<!-- wp:column {"width":"33.33%"} -->
 		<div class="wp-block-column" style="flex-basis:33.33%">
 
-			<!-- wp:paragraph {"className":"midline-cta-stat-number","textColor":"dark-navy"} -->
-			<p class="midline-cta-stat-number has-dark-navy-color has-text-color">30%</p>
+			<!-- wp:paragraph {"className":"midline-cta__stat-number","textColor":"dark-navy"} -->
+			<p class="midline-cta__stat-number has-dark-navy-color has-text-color">30%</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:paragraph {"textColor":"black"} -->

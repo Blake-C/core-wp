@@ -1,14 +1,23 @@
-// Midline CTA Pattern
-// ------------------
-// Styles for the midline-cta block patterns (all 4 variants, light + dark modes).
-// Handles responsive border-radius, heading scale, padding scale, column layout
-// overrides, stat number typography, background-image waveform column, and
-// full-bleed alignment.
-//
-// Padding note: all padding is set via fluid-space() here — NOT inline in the block
-// markup — so that responsive scaling works without !important overrides.
-
 @use '../helpers' as *;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Midline CTA block patterns
+//
+// BEM structure:
+//   .midline-cta                     — root container (all variants)
+//   .midline-cta--simple             — Variant 1: decorative waveform column layout
+//   .midline-cta--light              — light color theme flag
+//   .midline-cta--dark               — dark color theme flag
+//   .midline-cta__cols               — inner wp:columns wrapper
+//   .midline-cta__cols--responsive   — 8/4 → 6/6 → stacked (Variants 2 & 3)
+//   .midline-cta__cols--stack-tablet — 4/8 → immediately stacked on tablet+ (Variant 4)
+//   .midline-cta__bg-col             — waveform background column (Variant 1)
+//   .midline-cta__content-col        — text content column (Variant 1)
+//   .midline-cta__stat-number        — large stat figure (Variants 2 & 4)
+//
+// Padding note: all padding is set via fluid-space() here — NOT inline in the
+// block markup — so that responsive scaling works without !important overrides.
+// ─────────────────────────────────────────────────────────────────────────────
 
 // SVG waveform placeholder — dark lines for light-mode background column
 $_waveform-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300' preserveAspectRatio='xMidYMid slice'%3E%3Cpath d='M-100%2C150 C0%2C80 100%2C20 200%2C150 C300%2C280 400%2C220 500%2C150 C600%2C80 700%2C20 800%2C150 C900%2C280 1000%2C220 1100%2C150' stroke='%230d1b2e' stroke-width='2' fill='none' opacity='0.1'/%3E%3Cpath d='M-100%2C200 C0%2C110 100%2C60 200%2C200 C300%2C340 400%2C280 500%2C200 C600%2C110 700%2C60 800%2C200 C900%2C340 1000%2C280 1100%2C200' stroke='%230d1b2e' stroke-width='1.5' fill='none' opacity='0.07'/%3E%3Cpath d='M-100%2C100 C0%2C40 100%2C10 200%2C100 C300%2C190 400%2C160 500%2C100 C600%2C40 700%2C10 800%2C100 C900%2C190 1000%2C160 1100%2C100' stroke='%230d1b2e' stroke-width='1' fill='none' opacity='0.05'/%3E%3C/svg%3E");
@@ -16,11 +25,11 @@ $_waveform-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 // SVG waveform placeholder — light lines for dark-mode background column
 $_waveform-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300' preserveAspectRatio='xMidYMid slice'%3E%3Cpath d='M-100%2C150 C0%2C80 100%2C20 200%2C150 C300%2C280 400%2C220 500%2C150 C600%2C80 700%2C20 800%2C150 C900%2C280 1000%2C220 1100%2C150' stroke='%23ffffff' stroke-width='2' fill='none' opacity='0.18'/%3E%3Cpath d='M-100%2C200 C0%2C110 100%2C60 200%2C200 C300%2C340 400%2C280 500%2C200 C600%2C110 700%2C60 800%2C200 C900%2C340 1000%2C280 1100%2C200' stroke='%23ffffff' stroke-width='1.5' fill='none' opacity='0.12'/%3E%3Cpath d='M-100%2C100 C0%2C40 100%2C10 200%2C100 C300%2C190 400%2C160 500%2C100 C600%2C40 700%2C10 800%2C100 C900%2C190 1000%2C160 1100%2C100' stroke='%23ffffff' stroke-width='1' fill='none' opacity='0.08'/%3E%3C/svg%3E");
 
-// ─── Base container ───────────────────────────────────────────────────────────
-
 .midline-cta {
+	// ── Base container ───────────────────────────────────────────────────────
 	// Border-radius only on desktop; zero on tablet and mobile so the card
 	// sits flush with the viewport as the available width narrows.
+
 	border-radius: 0;
 	overflow: hidden;
 
@@ -38,88 +47,87 @@ $_waveform-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 	h2 {
 		@include fluid-font-size(40, 24);
 	}
-}
 
-// ─── Padding — group-level (variants 2, 3 & 4) ───────────────────────────────
-// Padding lives here in CSS, not as inline styles in the block markup, so
-// fluid-space() handles all breakpoints without needing !important overrides.
-// vertical:   48px → 24px  (fluid between 640px and 1024px viewports)
-// horizontal: 40px → 20px
+	// ── Padding (non-simple variants) ────────────────────────────────────────
+	// Padding for variants 2, 3 & 4. Lives here in CSS, not as inline styles,
+	// so fluid-space() handles all breakpoints without !important overrides.
+	// vertical: 48px → 24px | horizontal: 40px → 20px
 
-.midline-cta:not(.midline-cta-simple) {
-	@include fluid-space(padding-top, 48, 24);
-	@include fluid-space(padding-bottom, 48, 24);
-	@include fluid-space(padding-left, 40, 20);
-	@include fluid-space(padding-right, 40, 20);
-}
+	&:not(.midline-cta--simple) {
+		@include fluid-space(padding-top, 48, 24);
+		@include fluid-space(padding-bottom, 48, 24);
+		@include fluid-space(padding-left, 40, 20);
+		@include fluid-space(padding-right, 40, 20);
+	}
 
-// ─── Column layout overrides ──────────────────────────────────────────────────
+	// ── Columns — responsive layout modifiers ────────────────────────────────
+	// !important beats WordPress's inline flex-basis on .wp-block-column.
 
-// Variants 2 & 3: 8/4 desktop → 6/6 tablet → stacked mobile.
-// !important beats WordPress's inline flex-basis on .wp-block-column.
-.midline-cta-cols-responsive {
-	@include breakpoint(medium only) {
-		flex-wrap: wrap;
+	// Variants 2 & 3: 8/4 desktop → 6/6 tablet → stacked mobile
+	&__cols--responsive {
+		@include breakpoint(medium only) {
+			flex-wrap: wrap;
 
-		> .wp-block-column {
-			flex-basis: 50% !important; /* stylelint-disable-line declaration-no-important */
-			max-width: 50% !important; /* stylelint-disable-line declaration-no-important */
+			> .wp-block-column {
+				flex-basis: 50% !important; /* stylelint-disable-line declaration-no-important */
+				max-width: 50% !important; /* stylelint-disable-line declaration-no-important */
+			}
 		}
 	}
-}
 
-// Variant 4: 4/8 desktop → immediately stacked on tablet + mobile
-.midline-cta-cols-stack-tablet {
-	@include breakpoint(medium only) {
-		flex-wrap: wrap;
+	// Variant 4: 4/8 desktop → immediately stacked on tablet + mobile
+	&__cols--stack-tablet {
+		@include breakpoint(medium only) {
+			flex-wrap: wrap;
 
-		> .wp-block-column {
-			flex-basis: 100% !important; /* stylelint-disable-line declaration-no-important */
-			max-width: 100% !important; /* stylelint-disable-line declaration-no-important */
+			> .wp-block-column {
+				flex-basis: 100% !important; /* stylelint-disable-line declaration-no-important */
+				max-width: 100% !important; /* stylelint-disable-line declaration-no-important */
+			}
 		}
 	}
-}
 
-// ─── Background-image column (Variant 1 — Simple layout) ─────────────────────
+	// ── Background-image column (Variant 1 — Simple layout) ──────────────────
 
-.midline-cta-bg-col {
-	align-self: stretch;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	min-height: 220px;
+	&__bg-col {
+		align-self: stretch;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		min-height: 220px;
 
-	@include breakpoint(small only) {
-		display: none !important; /* stylelint-disable-line declaration-no-important */
+		@include breakpoint(small only) {
+			display: none !important; /* stylelint-disable-line declaration-no-important */
+		}
 	}
-}
 
-.midline-cta-light .midline-cta-bg-col {
-	background-image: $_waveform-dark;
-}
+	&--light &__bg-col {
+		background-image: $_waveform-dark;
+	}
 
-.midline-cta-dark .midline-cta-bg-col {
-	background-image: $_waveform-light;
-}
+	&--dark &__bg-col {
+		background-image: $_waveform-light;
+	}
 
-// ─── Padding — content column (Variant 1 — Simple layout) ────────────────────
-// Padding is on the column (not the group) so .midline-cta-bg-col can extend
-// flush to the card edge. Asymmetric right padding accounts for the col gap.
-// vertical: 48px → 24px | left: 40px → 20px | right: 32px → 16px
+	// ── Content column (Variant 1 — Simple layout) ───────────────────────────
+	// Padding on the column (not the group) so __bg-col extends flush to the
+	// card edge. Asymmetric right padding accounts for the column gap.
+	// vertical: 48px → 24px | left: 40px → 20px | right: 32px → 16px
 
-.midline-cta-content-col {
-	@include fluid-space(padding-bottom, 48, 24);
-	@include fluid-space(padding-left, 40, 20);
-	@include fluid-space(padding-right, 32, 16);
-	@include fluid-space(padding-top, 48, 24);
-}
+	&__content-col {
+		@include fluid-space(padding-bottom, 48, 24);
+		@include fluid-space(padding-left, 40, 20);
+		@include fluid-space(padding-right, 32, 16);
+		@include fluid-space(padding-top, 48, 24);
+	}
 
-// ─── Stat number (Variants 2 & 4) ────────────────────────────────────────────
+	// ── Stat number (Variants 2 & 4) ─────────────────────────────────────────
 
-.midline-cta-stat-number {
-	@include fluid-font-size(80, 28);
-	font-weight: 700;
-	letter-spacing: rem-calc(-1.5);
-	line-height: 1;
-	margin-bottom: $px-8;
+	&__stat-number {
+		@include fluid-font-size(80, 28);
+		font-weight: 700;
+		letter-spacing: rem-calc(-1.5);
+		line-height: 1;
+		margin-bottom: $px-8;
+	}
 }
