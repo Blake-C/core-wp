@@ -96,3 +96,13 @@ patterns/              — Block patterns (content-* for post/page/search/none; 
 - `stylelint` is held at **16.x** — `@wordpress/stylelint-config` requires `^16.8.2` and is not yet compatible with v17.
 - `webpack.config.mjs` uses native ESM — no `@babel/register` needed.
 - `chokidar-cli` handles file watching (replaced nodemon). Supports `{path}` substitution for per-file PHPCS runs.
+
+## Developer Notes
+
+- When making commits, always check the readme.md and changelog.md files at root of project for any needed updates.
+- Always check for accessibility when developing new features.
+- Always check for security when developing new features.
+- When creating new blocks check for the pattern used on previous blocks and follow those patterns.
+- When making CSS/SCSS follow the BEM naming convention.
+- Always be sure code passes linting tools. WPCS for PHP, stylelint and prettier for CSS/SCSS, ESLint & prettier for JavaScript.
+- The theme location in the docker cli_tools container is here: /home/webdev/www/public_html/wp-content/themes/core-wp
