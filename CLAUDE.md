@@ -53,3 +53,13 @@ XDebug defaults to `off` in `xdebug.ini`. It is enabled in `compose.yml` via `XD
 |---|---|
 | `./wp-content` | `/var/www/html/wp-content` |
 | `./wordpress` | `/var/www/html` |
+
+## Developer Notes
+
+- When making commits, always check the README.md and CHANGELOG.md files at root of project for any needed updates.
+- Always check for accessibility when developing new features.
+- Always check for security when developing new features.
+- When creating new blocks check for the pattern used on previous blocks and follow those patterns.
+- When making CSS/SCSS follow the BEM naming convention.
+- Always be sure code passes linting tools. WPCS for PHP, stylelint and prettier for CSS/SCSS, ESLint & prettier for JavaScript.
+- The theme location in the docker cli_tools container is here: /home/webdev/www/public_html/wp-content/themes/core-wp
