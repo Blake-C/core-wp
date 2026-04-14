@@ -1,4 +1,4 @@
-FROM wordpress:6.9.4-php8.3-fpm-alpine
+FROM wordpress:php8.4-fpm-alpine
 RUN apk upgrade --no-cache && apk add --no-cache $PHPIZE_DEPS linux-headers \
     && pecl install xdebug-3.4.2 \
     && docker-php-ext-enable xdebug \
