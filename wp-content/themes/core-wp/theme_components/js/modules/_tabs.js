@@ -383,9 +383,12 @@ function pauseMediaInElement(el) {
 
 		try {
 			if (src.indexOf('youtube.com') !== -1 || src.indexOf('youtu.be') !== -1) {
-				win.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*')
+				win.postMessage(
+					JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }),
+					'https://www.youtube.com'
+				)
 			} else if (src.indexOf('vimeo.com') !== -1) {
-				win.postMessage(JSON.stringify({ method: 'pause' }), '*')
+				win.postMessage(JSON.stringify({ method: 'pause' }), 'https://player.vimeo.com')
 			}
 		} catch {
 			// Cross-origin contentWindow access denied — nothing to do.
