@@ -382,11 +382,11 @@ XDebug 3 is baked into the WordPress service image (`docker/wordpress/Dockerfile
 
 | Package | Version |
 | --- | --- |
-| PHP | 8.3 |
+| PHP | 8.4 |
 | Node | 24 |
 | pnpm | 10.32.1 |
-| WP-CLI | latest |
-| Composer | latest |
+| WP-CLI | 2.12.0 |
+| Composer | 2.9.7 |
 | ImageMagick | 7.1.2 (with JPEG support) |
 | zsh | 5.9 |
 
