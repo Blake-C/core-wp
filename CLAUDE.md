@@ -8,11 +8,12 @@ A WordPress development environment running in Docker. The theme and plugin sour
 
 | Service | Image | Purpose | Ports |
 |---|---|---|---|
-| `nginx` | `nginx:1.27-alpine` | Reverse proxy + static file serving | 80 |
+| `nginx` | `nginx:1.29-alpine` | Reverse proxy + static file serving | 80 |
 | `wordpress` | Custom (built from `docker/wordpress/Dockerfile`) | PHP-FPM 8.3 + XDebug (Alpine) | — |
 | `db` | `mariadb:11.8` | Database | 3306 (localhost only) |
+| `redis` | `redis:7-alpine` | Object cache (LRU, no persistence) | — |
 | `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 (localhost only) |
-| `cli_tools` | `digitalblake/light-cli:5.0.0` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
+| `cli_tools` | `digitalblake/light-cli:6.0.1` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
 
 **Start everything:** `docker compose up -d`
 
@@ -54,6 +55,43 @@ XDebug defaults to `off` in `xdebug.ini`. It is enabled in `compose.yml` via `XD
 | `./wp-content` | `/var/www/html/wp-content` |
 | `./wordpress` | `/var/www/html` |
 
+## Theme Architecture
+
+```
+wp-content/themes/core-wp/
+├── assets/               # Compiled output (git-ignored)
+├── parts/                # Block template parts (header, footer)
+├── patterns/             # Registered block patterns
+├── templates/            # Block templates (FSE — replaces PHP hierarchy)
+├── theme_components/     # Source files (sass/, js/, images/, fonts/, icons/)
+├── theme.json            # Global styles: color palette, layout, typography
+├── functions.php
+└── package.json
+```
+
+Global styles (colors, layout, font scale) live in `theme.json`, not `functions.php`.
+
+## Build Tool Stack
+
+| Tool | Purpose |
+| --- | --- |
+| Webpack 5 + Babel | JS bundling, ES2020 transpilation |
+| Dart Sass | SCSS compilation |
+| PostCSS + cssnano | CSS autoprefixing and minification |
+| Prettier | JS + SCSS formatting |
+| ESLint 10 | JS linting (flat config) |
+| Stylelint 16 | SCSS linting |
+| Browser-Sync 3 | Live reload proxy with CSS injection |
+| ImageMagick | Image optimization via `mogrify` |
+
+Browser-Sync inside container: `http://localhost:3000` — outside container: `http://localhost:3010`.
+
+## CLI Tools (`digitalblake/light-cli:6.0.1`)
+
+PHP 8.4 / Node 24 / pnpm 10 / WP-CLI 2.12 / Composer 2 / ImageMagick 7 / zsh
+
+Shell aliases inside container: `theme` (cd to theme root), `theme_components` (cd to theme_components/).
+
 ## Developer Notes
 
 - When making commits, always check the README.md and CHANGELOG.md files at root of project for any needed updates.
@@ -63,3 +101,16 @@ XDebug defaults to `off` in `xdebug.ini`. It is enabled in `compose.yml` via `XD
 - When making CSS/SCSS follow the BEM naming convention.
 - Always be sure code passes linting tools. WPCS for PHP, stylelint and prettier for CSS/SCSS, ESLint & prettier for JavaScript.
 - The theme location in the docker cli_tools container is here: /home/webdev/www/public_html/wp-content/themes/core-wp
+
+## Common Troubleshooting
+
+- **Port in use (80, 3306, 8000):** Stop the conflicting process or remap the port in `compose.yml`.
+- **WordPress container restarting:** DB health check is still running — wait ~30 s or check `docker compose logs db`.
+- **Changed `.env` credentials, DB won't connect:** `docker compose down && rm -rf data/mysql && docker compose up -d`
+- **`pnpm: command not found`:** Build commands must run inside the `cli_tools` container.
+- **Build fails with missing packages:** Run `pnpm install` from the theme directory first.
+- **Hooks not running:** Run `git config core.hooksPath .githooks` once per clone.
+- **PHPCS hook fails:** Run `composer install` from `wp-content/` first.
+- **XDebug breakpoints not hit:** Confirm `XDEBUG_MODE: debug` is set in `compose.yml` and "Listen for XDebug" is active in VSCode before loading the page.
+- **`wp` commands not found:** WP-CLI runs inside `cli_tools` — `docker compose exec cli_tools zsh`.
+- **Site not loading after DB import:** Run `wp search-replace https://production.com http://localhost --precise --all-tables`.
