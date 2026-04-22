@@ -89,3 +89,5 @@ To deploy updates: `git pull && ./deploy.sh`
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md).
+
+> **Assisted by [Claude Code](https://claude.ai/claude-code)**
