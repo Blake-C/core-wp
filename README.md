@@ -19,11 +19,10 @@ docker compose exec cli_tools zsh
 Inside the container:
 
 ```bash
-cd wp-content && composer install
 wp-init
 ```
 
-`wp-init` installs and builds the theme, configures WordPress, sets the homepage and theme, and removes default themes and plugins.
+`wp-init` installs and builds the theme & composer packages, configures WordPress, sets the homepage and theme, and removes default themes and plugins.
 
 ---
 
