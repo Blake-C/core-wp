@@ -408,3 +408,5 @@ XDebug 3 is baked into the WordPress service image (`docker/wordpress/Dockerfile
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for details on recent updates.
+
+> **Assisted by [Claude Code](https://claude.ai/claude-code)**
