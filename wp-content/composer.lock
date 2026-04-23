@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae3eeee3a4d749d6721b08a6570e9c01",
+    "content-hash": "2cd9bd0ba8e11db9291521153de239ea",
     "packages": [
         {
             "name": "composer/installers",
@@ -247,15 +247,15 @@
         },
         {
             "name": "wp-plugin/wordpress-seo",
-            "version": "27.3",
+            "version": "27.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/27.3"
+                "reference": "tags/27.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.27.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.27.4.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -274,7 +274,7 @@
                 "issues": "https://wordpress.org/support/plugin/wordpress-seo",
                 "source": "https://plugins.svn.wordpress.org/wordpress-seo"
             },
-            "time": "2026-03-31T11:45:46+00:00"
+            "time": "2026-04-14T10:15:51+00:00"
         },
         {
             "name": "wp-plugin/wps-hide-login",
@@ -788,15 +788,15 @@
         },
         {
             "name": "wp-plugin/query-monitor",
-            "version": "3.20.4",
+            "version": "4.0.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/query-monitor/",
-                "reference": "tags/3.20.4"
+                "reference": "tags/4.0.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.20.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/query-monitor.4.0.6.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -815,7 +815,7 @@
                 "issues": "https://wordpress.org/support/plugin/query-monitor",
                 "source": "https://plugins.svn.wordpress.org/query-monitor"
             },
-            "time": "2026-04-07T22:35:58+00:00"
+            "time": "2026-04-11T11:56:17+00:00"
         }
     ],
     "aliases": [],
