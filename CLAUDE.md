@@ -9,7 +9,7 @@ A WordPress development environment running in Docker. The theme and plugin sour
 | Service | Image | Purpose | Ports |
 |---|---|---|---|
 | `nginx` | `nginx:1.29-alpine` | Reverse proxy + static file serving | 80 |
-| `wordpress` | Custom (built from `docker/wordpress/Dockerfile`) | PHP-FPM 8.4 + XDebug (Alpine) | — |
+| `wordpress` | `digitalblake/core-wp-wordpress:php8.4-latest` | PHP-FPM 8.4 + XDebug (Alpine) | — |
 | `db` | `mariadb:11.8` | Database | 3306 (localhost only) |
 | `redis` | `redis:7-alpine` | Object cache (LRU, no persistence) | — |
 | `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 (localhost only) |
@@ -44,7 +44,7 @@ PHPCS `installed_paths` for WordPress and PHPCompatibility standards is configur
 
 ## XDebug
 
-The `wordpress` service has XDebug 3 installed and configured (`docker/wordpress/xdebug.ini`). It connects back to the host on port 9003. The VSCode "Listen for XDebug" launch configuration in `.vscode/launch.json` is pre-configured. XDebug is dev-only — do not use this Dockerfile in production.
+The `wordpress` service has XDebug 3 installed and configured (`docker/wordpress/xdebug.ini`). It connects back to the host on port 9003. The VSCode "Listen for XDebug" launch configuration in `.vscode/launch.json` is pre-configured. XDebug is dev-only — `Dockerfile.prod` does not configure it.
 
 XDebug defaults to `off` in `xdebug.ini`. It is enabled in `compose.yml` via `XDEBUG_MODE=debug`. Comment that line out when you don't need it to avoid the PHP performance overhead.
 

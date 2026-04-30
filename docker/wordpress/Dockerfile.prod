@@ -13,8 +13,7 @@ COPY wp-content/composer.json wp-content/composer.lock ./
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # Stage 3: Production image
-FROM wordpress:php8.4-fpm-alpine
-RUN apk upgrade --no-cache
+FROM digitalblake/core-wp-wordpress:php8.4-latest
 
 # Copy wp-content (themes source, patterns, inc, etc.)
 COPY wp-content/ /var/www/html/wp-content/
