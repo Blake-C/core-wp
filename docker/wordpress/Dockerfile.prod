@@ -1,5 +1,5 @@
 # Stage 1: Compile theme assets (same tools as dev environment)
-FROM digitalblake/light-cli:5.0.0 AS theme-builder
+FROM digitalblake/light-cli:6.0.1 AS theme-builder
 WORKDIR /theme
 COPY wp-content/themes/core-wp/package.json wp-content/themes/core-wp/pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
@@ -7,7 +7,7 @@ COPY wp-content/themes/core-wp/ ./
 RUN pnpm run build && find ./assets -name '*.map' -delete
 
 # Stage 2: Install PHP production dependencies (same tools as dev environment)
-FROM digitalblake/light-cli:5.0.0 AS composer-builder
+FROM digitalblake/light-cli:6.0.1 AS composer-builder
 WORKDIR /app
 COPY wp-content/composer.json wp-content/composer.lock ./
 RUN composer install --no-dev --optimize-autoloader --no-scripts

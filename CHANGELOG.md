@@ -12,6 +12,22 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
+## [0.0.3] - 2026-04-30
+
+### Security
+
+- Switched WordPress dev and prod images to `digitalblake/core-wp-wordpress:php8.4-latest` — centralised image with `apk upgrade` and XDebug baked in; security patches now applied once in the published image rather than per-project at build time — `compose.yml`, `docker/wordpress/Dockerfile.prod`
+
+### Changed
+
+- Replaced per-project WordPress `build:` in `compose.yml` with `image: digitalblake/core-wp-wordpress:php8.4-latest`; PHP config files (`xdebug.ini`, `php-opcache-dev.ini`, `www.conf`) are now volume-mounted so all projects share one cached image — `compose.yml`
+- Updated `Dockerfile.prod` stage 3 base from `wordpress:php8.4-fpm-alpine` + `apk upgrade` to `digitalblake/core-wp-wordpress:php8.4-latest` — `docker/wordpress/Dockerfile.prod`
+- Updated `Dockerfile.prod` builder stages from `digitalblake/light-cli:5.0.0` to `6.0.1` — `docker/wordpress/Dockerfile.prod`
+
+### Removed
+
+- Removed `docker/wordpress/Dockerfile` — no longer needed; dev environment pulls directly from the published image
+
 ## [0.0.2] - 2026-04-10
 
 ### Security
