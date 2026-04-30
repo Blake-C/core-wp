@@ -216,15 +216,15 @@
         },
         {
             "name": "wp-plugin/wordfence",
-            "version": "8.1.4",
+            "version": "8.2.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordfence/",
-                "reference": "tags/8.1.4"
+                "reference": "tags/8.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordfence.8.1.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordfence.8.2.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -243,19 +243,19 @@
                 "issues": "https://wordpress.org/support/plugin/wordfence",
                 "source": "https://plugins.svn.wordpress.org/wordfence"
             },
-            "time": "2026-03-23T19:23:21+00:00"
+            "time": "2026-04-29T15:50:47+00:00"
         },
         {
             "name": "wp-plugin/wordpress-seo",
-            "version": "27.4",
+            "version": "27.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/27.4"
+                "reference": "tags/27.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.27.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.27.5.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -274,7 +274,7 @@
                 "issues": "https://wordpress.org/support/plugin/wordpress-seo",
                 "source": "https://plugins.svn.wordpress.org/wordpress-seo"
             },
-            "time": "2026-04-14T10:15:51+00:00"
+            "time": "2026-04-29T13:20:51+00:00"
         },
         {
             "name": "wp-plugin/wps-hide-login",
