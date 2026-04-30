@@ -9,7 +9,7 @@ A WordPress development environment running in Docker. The theme and plugin sour
 | Service | Image | Purpose | Ports |
 |---|---|---|---|
 | `nginx` | `nginx:1.29-alpine` | Reverse proxy + static file serving | 80 |
-| `wordpress` | Custom (built from `docker/wordpress/Dockerfile`) | PHP-FPM 8.3 + XDebug (Alpine) | — |
+| `wordpress` | Custom (built from `docker/wordpress/Dockerfile`) | PHP-FPM 8.4 + XDebug (Alpine) | — |
 | `db` | `mariadb:11.8` | Database | 3306 (localhost only) |
 | `redis` | `redis:7-alpine` | Object cache (LRU, no persistence) | — |
 | `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 (localhost only) |
