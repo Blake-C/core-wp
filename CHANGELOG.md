@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file.
 
 - Replaced per-project WordPress `build:` in `compose.yml` with `image: digitalblake/core-wp-wordpress:php8.4-latest`; PHP config files (`xdebug.ini`, `php-opcache-dev.ini`, `www.conf`) are now volume-mounted so all projects share one cached image — `compose.yml`
 - Updated `Dockerfile.prod` stage 3 base from `wordpress:php8.4-fpm-alpine` + `apk upgrade` to `digitalblake/core-wp-wordpress:php8.4-latest` — `docker/wordpress/Dockerfile.prod`
-- Updated `Dockerfile.prod` builder stages from `digitalblake/light-cli:5.0.0` to `6.0.1` — `docker/wordpress/Dockerfile.prod`
+- Updated `Dockerfile.prod` builder stages from `digitalblake/light-cli:5.0.0` to `6.0.2` — `docker/wordpress/Dockerfile.prod`
 
 ### Removed
 
