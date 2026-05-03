@@ -6,7 +6,7 @@ WordPress **block theme** (Full Site Editing). There is no `header.php` or `foot
 
 ## Build system
 
-**Package manager:** pnpm (v9). Run all commands with `pnpm run`, never `npm run` (causes "Unknown env config store-dir" warning).
+**Package manager:** pnpm (v10). Run all commands with `pnpm run`, never `npm run` (causes "Unknown env config store-dir" warning).
 
 **Build commands run from inside the `cli_tools` Docker container** (or locally if Node/pnpm/PHP are installed).
 
@@ -65,7 +65,7 @@ inc/
   includes.php         — Requires all files in inc/ subdirectories
   utility-functions.php — core_wp_cache_bust(), core_wp_print_pre(), core_wp_theme_error_log()
   components/          — Filters and small functional hooks
-  custom-admin-functions/ — Login/admin page customisations
+  custom-admin-functions/ — Login/admin page customizations
   shortcodes/          — [button], [div], [row], [column], [copyright]
   template-tags/       — Output helpers (posted-on, entry-footer, search meta description)
   classes/             — PHP classes (empty by default)
@@ -74,7 +74,7 @@ theme_components/      — Source files (edit these, not assets/)
   js/                  — JS source
   fonts/               — Font files (copied to assets/)
   icons/               — Favicon files (copied to assets/)
-  images/              — Image source (optimised to assets/)
+  images/              — Image source (optimized to assets/)
 assets/                — Compiled output (gitignored, rebuilt on each build)
 phpcs/                 — Custom PHPCS sniffs (excluded from linting)
 scripts/               — POSIX sh build pipeline scripts
@@ -97,9 +97,16 @@ patterns/              — Block patterns (content-* for post/page/search/none; 
 - `webpack.config.mjs` uses native ESM — no `@babel/register` needed.
 - `chokidar-cli` handles file watching (replaced nodemon). Supports `{path}` substitution for per-file PHPCS runs.
 
+## Security scanning
+
+- Always run `snyk_code_scan` for new or modified first-party PHP and JS files.
+- If issues are found, fix them using the Snyk results as context, then rescan.
+- Repeat until no new issues remain.
+- Run `snyk_sca_scan` when adding or upgrading dependencies.
+
 ## Developer Notes
 
-- When making commits, always check the readme.md and changelog.md files at root of project for any needed updates.
+- When making commits, always check the README.md and CHANGELOG.md files at root of project for any needed updates.
 - Always check for accessibility when developing new features.
 - Always check for security when developing new features.
 - When creating new blocks check for the pattern used on previous blocks and follow those patterns.
