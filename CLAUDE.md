@@ -84,7 +84,7 @@ Global styles (colors, layout, font scale) live in `theme.json`, not `functions.
 | Browser-Sync 3 | Live reload proxy with CSS injection |
 | ImageMagick | Image optimization via `mogrify` |
 
-Browser-Sync inside container: `http://localhost:3000` — outside container: `http://localhost:3010`.
+Browser-Sync inside container: `http://localhost:3000` (proxy UI: `http://localhost:3001`) — outside container: `http://localhost:3010`.
 
 ## CLI Tools (`digitalblake/light-cli:6.0.2`)
 
@@ -92,10 +92,38 @@ PHP 8.4 / Node 24 / pnpm 10 / WP-CLI 2.12 / Composer 2 / ImageMagick 7 / zsh
 
 Shell aliases inside container: `theme` (cd to theme root), `theme_components` (cd to theme_components/).
 
+## Build Commands
+
+All build commands run inside the `cli_tools` container from the theme root (`theme` alias to cd there).
+
+| Command | Purpose |
+| --- | --- |
+| `pnpm run serve` | Start Browser-Sync + watch JS, SCSS, images, static assets |
+| `pnpm run serve:all` | Same as above, also watches PHP via phpcs |
+| `pnpm run build` | Full dev build (JS, SCSS, images, static assets) |
+| `pnpm run build:prod` | Production build (minified, optimized) |
+| `pnpm run styles:lint` | Format + lint SCSS with Prettier and Stylelint |
+| `pnpm run phpcs` | Run PHPCS against theme PHP files |
+| `pnpm run phpcs:fix` | Auto-fix PHPCS violations with phpcbf |
+| `pnpm run images` | Copy and optimize images from theme_components/ |
+| `pnpm run clean` | Delete compiled assets/ directory |
+
+## WordPress standards
+
+- Prefer native WordPress APIs over custom solutions — hooks, REST API, block API, etc.
+- Avoid jQuery; use vanilla JS or the block editor's React / `wp.*` packages instead.
+
+## Security scanning
+
+- Always run `snyk_code_scan` for new or modified first-party code (PHP and JS).
+- If issues are found, fix them using the Snyk results as context, then rescan.
+- Repeat until no new issues remain.
+- Run `snyk_sca_scan` when adding or upgrading dependencies.
+
 ## Developer Notes
 
 - When making commits, always check the README.md and CHANGELOG.md files at root of project for any needed updates.
-- Always check for accessibility when developing new features.
+- Always check for accessibility (WCAG 2.1 AA) when developing new features.
 - Always check for security when developing new features.
 - When creating new blocks check for the pattern used on previous blocks and follow those patterns.
 - When making CSS/SCSS follow the BEM naming convention.
