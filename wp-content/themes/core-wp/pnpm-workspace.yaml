@@ -1,0 +1,21 @@
+packages:
+  - '.'
+
+confirmModulesPurge: false
+frozenLockfile: true
+auditLevel: moderate
+saveExact: true
+verifyStoreIntegrity: true
+strictDeprecatedDependencies: warn
+blockExoticSubdeps: true
+minimumReleaseAge: 10080
+fetchTimeout: 60000
+fetchRetries: 5
+fetchRetryMintimeout: 1000
+fetchRetryMaxtimeout: 30000
+# Explicit build script allowlist.
+# @parcel/watcher is a native addon required by chokidar-cli; it must build.
+# core-js postinstall is a donation banner only — blocked, has no effect on functionality.
+allowBuilds:
+  '@parcel/watcher': true
+  core-js: false

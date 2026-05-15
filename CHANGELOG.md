@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ### Security
 
+- Upgraded pnpm from v10 to v11.1.2 — mitigates Mini Shai-Hulud supply chain attack vector; pnpm v11's `allowBuilds` allowlist now blocks all postinstall/preinstall scripts by default — `wp-content/themes/core-wp/package.json`, `wp-content/themes/core-wp/pnpm-workspace.yaml`
+- Created `pnpm-workspace.yaml` with explicit security settings: `frozenLockfile`, `verifyStoreIntegrity`, `blockExoticSubdeps`, `minimumReleaseAge` (7 days), `allowBuilds: []` — `wp-content/themes/core-wp/pnpm-workspace.yaml`
+- Migrated pnpm security config from `.npmrc` to `pnpm-workspace.yaml` (required for pnpm v11) — `wp-content/themes/core-wp/.npmrc`
+- Updated `cli_tools` container from `digitalblake/light-cli:6.0.2` to `6.1.0` (pnpm 11.1.2 pre-installed) — `compose.yml`
+
 ### Added
 
 ### Changed

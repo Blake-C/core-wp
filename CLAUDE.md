@@ -13,7 +13,7 @@ A WordPress development environment running in Docker. The theme and plugin sour
 | `db` | `mariadb:11.8` | Database | 3306 (localhost only) |
 | `redis` | `redis:7-alpine` | Object cache (LRU, no persistence) | — |
 | `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 (localhost only) |
-| `cli_tools` | `digitalblake/light-cli:6.0.2` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
+| `cli_tools` | `digitalblake/light-cli:6.1.0` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
 
 **Start everything:** `docker compose up -d`
 
@@ -86,9 +86,9 @@ Global styles (colors, layout, font scale) live in `theme.json`, not `functions.
 
 Browser-Sync inside container: `http://localhost:3000` (proxy UI: `http://localhost:3001`) — outside container: `http://localhost:3010`.
 
-## CLI Tools (`digitalblake/light-cli:6.0.2`)
+## CLI Tools (`digitalblake/light-cli:6.1.0`)
 
-PHP 8.4 / Node 24 / pnpm 10 / WP-CLI 2.12 / Composer 2 / ImageMagick 7 / zsh
+PHP 8.4 / Node 24 / pnpm 11 / WP-CLI 2.12 / Composer 2 / ImageMagick 7 / zsh
 
 Shell aliases inside container: `theme` (cd to theme root), `theme_components` (cd to theme_components/).
 

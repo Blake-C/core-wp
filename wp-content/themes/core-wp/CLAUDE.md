@@ -6,7 +6,7 @@ WordPress **block theme** (Full Site Editing). There is no `header.php` or `foot
 
 ## Build system
 
-**Package manager:** pnpm (v10). Run all commands with `pnpm run`, never `npm run` (causes "Unknown env config store-dir" warning).
+**Package manager:** pnpm (v11). Run all commands with `pnpm run`, never `npm run` (causes "Unknown env config store-dir" warning).
 
 **Build commands run from inside the `cli_tools` Docker container** (or locally if Node/pnpm/PHP are installed).
 
