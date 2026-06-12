@@ -1,6 +1,11 @@
 packages:
   - '.'
 
+# Force a patched transitive ws (pulled in by browser-sync via socket.io).
+# Fixes CVE-2026-45736 (use of uninitialized resource); fixed in ws >= 8.20.1.
+overrides:
+  ws: '^8.20.1'
+
 confirmModulesPurge: false
 frozenLockfile: true
 auditLevel: moderate
