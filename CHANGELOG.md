@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Added `MAINTENANCE.md` — an update/upgrade runbook for pnpm and Composer packages, the `light-cli` and `core-wp-wordpress` images, WordPress, and base images, plus the SemVer and changelog conventions to follow — `MAINTENANCE.md`, `README.md`, `CLAUDE.md`
+
 ### Changed
 
 - Updated theme dependencies (patch/minor): `@babel/preset-env` 7.29.0→7.29.5, `@wordpress/stylelint-config` 23.33.0→23.37.0, `autoprefixer` 10.4.27→10.5.0, `core-js` 3.48.0→3.49.0, `eslint` 10.0.3→10.3.0, `globals` 17.4.0→17.6.0, `postcss` 8.5.10→8.5.14, `prettier` 3.8.1→3.8.3, `sass` 1.98.0→1.99.0, `webpack` 5.105.4→5.106.2, `webpack-cli` 7.0.0→7.0.2 — `wp-content/themes/core-wp/package.json`

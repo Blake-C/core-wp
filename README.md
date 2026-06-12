@@ -85,6 +85,12 @@ To deploy updates: `git pull && ./deploy.sh`
 
 ---
 
+## Maintenance & Updates
+
+Keeping dependencies and Docker images current? See **[MAINTENANCE.md](MAINTENANCE.md)** — a step-by-step runbook for updating pnpm and Composer packages, the `light-cli` and `core-wp-wordpress` images, WordPress, and the base images, with the versioning and changelog conventions to follow.
+
+---
+
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md).

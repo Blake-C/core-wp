@@ -4,6 +4,10 @@
 
 A WordPress development environment running in Docker. The theme and plugin source live in `wp-content/`. WordPress core is mounted read-only from `./wordpress/` (not committed — pulled via Composer or downloaded separately).
 
+## Maintaining & updating
+
+Updating dependencies, Docker images, or WordPress? Follow **[MAINTENANCE.md](MAINTENANCE.md)** — the runbook covering pnpm, Composer, the `light-cli` and `core-wp-wordpress` images, WordPress, and base images, plus the SemVer/changelog discipline and the project-specific gotchas (`frozenLockfile`, `minimumReleaseAge`, Corepack pinning, the WordPress core bind-mount, the nginx healthcheck, etc.).
+
 ## Docker stack (`compose.yml`)
 
 | Service | Image | Purpose | Ports |
@@ -13,7 +17,7 @@ A WordPress development environment running in Docker. The theme and plugin sour
 | `db` | `mariadb:11.8` | Database | 3306 (localhost only) |
 | `redis` | `redis:7-alpine` | Object cache (LRU, no persistence) | — |
 | `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 (localhost only) |
-| `cli_tools` | `digitalblake/light-cli:6.1.0` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
+| `cli_tools` | `digitalblake/light-cli:6.2.0` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
 
 **Start everything:** `docker compose up -d`
 
