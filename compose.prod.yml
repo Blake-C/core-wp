@@ -15,7 +15,10 @@ services:
             wordpress:
                 condition: service_healthy
         healthcheck:
-            test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/ > /dev/null 2>&1 || exit 1"]
+            # Domain-agnostic: the prod canonical host is unknown here, so treat any
+            # served HTTP response (200, or a WordPress canonical 301/302 redirect) as
+            # healthy. A connection failure or 5xx yields no match and fails the check.
+            test: ["CMD-SHELL", "wget -S -O /dev/null http://127.0.0.1/ 2>&1 | grep -qE 'HTTP/[0-9.]+ (200|301|302)'"]
             interval: 30s
             timeout: 10s
             retries: 3
