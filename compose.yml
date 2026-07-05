@@ -1,6 +1,6 @@
 services:
     cli_tools:
-        image: digitalblake/light-cli:6.2.0
+        image: digitalblake/light-cli:6.3.0
         volumes:
             - ./wp-content:/home/webdev/www/public_html/wp-content
             - ./functions.zsh:/home/webdev/.config/zsh/functions.zsh
@@ -23,7 +23,7 @@ services:
             WORDPRESS_CONFIG_EXTRA: "define( 'WP_REDIS_HOST', getenv_docker('WP_REDIS_HOST', '127.0.0.1') ); define( 'WP_REDIS_DISABLED', true );"
 
     nginx:
-        image: nginx:1.29-alpine
+        image: nginx:1.31-alpine
         restart: always
         ports:
             - 80:80
@@ -101,7 +101,7 @@ services:
             start_period: 30s
 
     redis:
-        image: redis:7-alpine
+        image: redis:8-alpine
         restart: always
         # Cap memory, evict least-recently-used keys when full, disable RDB persistence.
         # This is correct for a pure object cache — no durability needed.
