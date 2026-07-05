@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Created `pnpm-workspace.yaml` with explicit security settings: `frozenLockfile`, `verifyStoreIntegrity`, `blockExoticSubdeps`, `minimumReleaseAge` (7 days), `allowBuilds: []` — `wp-content/themes/core-wp/pnpm-workspace.yaml`
 - Migrated pnpm security config from `.npmrc` to `pnpm-workspace.yaml` (required for pnpm v11) — `wp-content/themes/core-wp/.npmrc`
 - Forced transitive `ws` to 8.21.0 via pnpm `overrides` — fixes CVE-2026-45736 (use of uninitialized resource) in the `ws` pulled by `browser-sync` through `socket.io` — `wp-content/themes/core-wp/pnpm-workspace.yaml`
+- Forced transitive `js-yaml` to ≥ 4.2.0 (CVE-2026-53550, inefficient algorithmic complexity) and `postcss-selector-parser` to ≥ 6.1.3 (CVE-2026-9358, uncontrolled recursion) via pnpm `overrides` — both flagged by Snyk in the build toolchain — `wp-content/themes/core-wp/pnpm-workspace.yaml`
 
 ### Added
 
@@ -17,15 +18,16 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Updated theme dependencies (patch/minor): `@babel/preset-env` 7.29.0→7.29.5, `@wordpress/stylelint-config` 23.33.0→23.37.0, `autoprefixer` 10.4.27→10.5.0, `core-js` 3.48.0→3.49.0, `eslint` 10.0.3→10.3.0, `globals` 17.4.0→17.6.0, `postcss` 8.5.10→8.5.14, `prettier` 3.8.1→3.8.3, `sass` 1.98.0→1.99.0, `webpack` 5.105.4→5.106.2, `webpack-cli` 7.0.0→7.0.2 — `wp-content/themes/core-wp/package.json`
-- Updated theme dependencies (patch/minor): `@babel/core` 7.29.0→7.29.7, `@babel/preset-env` 7.29.5→7.29.7, `@wordpress/stylelint-config` 23.37.0→23.40.0, `eslint` 10.3.0→10.4.1, `eslint-plugin-prettier` 5.5.5→5.5.6, `postcss` 8.5.14→8.5.15, `sass` 1.99.0→1.100.0, `webpack` 5.106.2→5.107.2, `webpack-cli` 7.0.2→7.0.3 — `wp-content/themes/core-wp/package.json`
-- Updated `cssnano` and `cssnano-preset-advanced` 7.x→8.0.1 (major) — requires Node ≥ 24.11 and PostCSS ≥ 8.5.14, both satisfied; production build pipeline verified — `wp-content/themes/core-wp/package.json`
-- Updated `wp-plugin/wordpress-seo` 27.6→27.8 — `wp-content/composer.json`
-- Held `stylelint` at 16.x (`@wordpress/stylelint-config@23.40.0` requires `stylelint ^16.8.2`) and `squizlabs/php_codesniffer` at 3.x (WPCS 3.x is not compatible with PHP_CodeSniffer 4.0)
-- Updated `digitalblake/light-cli` image to `6.2.0` (Alpine 3.23.4→3.24.0, Node 24.14→24.16, PHP 8.4.21→8.4.22, Composer 2.9.8→2.10.1, pnpm standardized at 11.6.0) — bumped the dev `cli_tools` reference and both `Dockerfile.prod` builder stages (previously a stale 6.0.2) — `compose.yml`, `docker/wordpress/Dockerfile.prod`
-- Standardized pnpm on 11.6.0 across the image and theme — pinned it deterministically in the image via Corepack (`COREPACK_DEFAULT_TO_LATEST=0`) and bumped the theme's `packageManager` field — `wp-content/themes/core-wp/package.json`
+- Updated theme dependencies (patch/minor): `@wordpress/stylelint-config` 23.33.0→23.41.0, `autoprefixer` 10.4.27→10.5.2, `core-js` 3.48.0→3.49.0, `eslint` 10.0.3→10.6.0, `eslint-plugin-prettier` 5.5.5→5.5.6, `globals` 17.4.0→17.7.0, `postcss` 8.5.10→8.5.15, `prettier` 3.8.1→3.9.1, `sass` 1.98.0→1.101.0, `webpack` 5.105.4→5.108.1, `webpack-cli` 7.0.0→7.1.0 — `wp-content/themes/core-wp/package.json`
+- Upgraded Babel to 8: `@babel/core` and `@babel/preset-env` 7.29.0→8.0.x. Babel 8 removed the preset-env `useBuiltIns`/`corejs` options, so the equivalent usage-based corejs3 polyfilling now runs through `babel-plugin-polyfill-corejs3` (`method: usage-global`); JS bundle output is unchanged — `wp-content/themes/core-wp/package.json`, `wp-content/themes/core-wp/babel.config.json`
+- Updated `cssnano` and `cssnano-preset-advanced` 7.x→8.0.2 (major) — requires Node ≥ 24.11 and PostCSS ≥ 8.5.14, both satisfied; production build pipeline verified — `wp-content/themes/core-wp/package.json`
+- Updated Composer plugins: `wp-plugin/wordpress-seo` 27.6→27.9, `wp-plugin/redirection`→5.8.1, `wp-plugin/query-monitor`→4.0.7 — `wp-content/composer.lock`
+- Held `stylelint` at 16.x (`@wordpress/stylelint-config@23.41.0` requires `stylelint ^16.8.2`), `squizlabs/php_codesniffer` at 3.x (WPCS 3.x is not compatible with PHP_CodeSniffer 4.0), and `postcss` at 8.5.15 (8.5.16 blocked by the 7-day `minimumReleaseAge` gate)
+- Updated `digitalblake/light-cli` image to `6.3.0` (Alpine 3.24.0→3.24.1, Node 24.16→24.17, PHP 8.4.22→8.4.23, Composer 2.10.1→2.10.2, pnpm 11.6.0→11.10.0) — bumped the dev `cli_tools` reference and both `Dockerfile.prod` builder stages — `compose.yml`, `docker/wordpress/Dockerfile.prod`
+- Standardized pnpm on 11.10.0 across the image and theme — pinned it deterministically in the image via Corepack (`COREPACK_DEFAULT_TO_LATEST=0`) and bumped the theme's `packageManager` field — `wp-content/themes/core-wp/package.json`
 - Fixed the nginx healthcheck so a WordPress canonical 301 redirect from `127.0.0.1` no longer reports the container as unhealthy — dev sends `Host: localhost` for a direct 200; prod accepts any served `200/301/302` response since its canonical host is unknown at build time — `compose.yml`, `compose.prod.yml`
-- Updated the WordPress environment to 7.0 (from 6.9.4) via the rebuilt `digitalblake/core-wp-wordpress` image (now XDebug 3.4.7); the rolling `php8.4-latest` tag is unchanged, so the upgrade lands on rebuild/pull — `compose.yml`, `docker/wordpress/Dockerfile.prod`
+- Bumped base images: `nginx` 1.29-alpine→1.31-alpine and `redis` 7-alpine→8-alpine (`mariadb` held at 11.8 LTS) — `compose.yml`, `compose.prod.yml`
+- Updated the WordPress environment to 7.0 via the rebuilt `digitalblake/core-wp-wordpress` image `php8.4-1.2.0` (Alpine 3.24.1, PHP 8.4.23, XDebug 3.4.7→3.5.3, `apk upgrade` for base CVEs); the rolling `php8.4-latest` tag is unchanged, so the upgrade lands on rebuild/pull — `compose.yml`, `docker/wordpress/Dockerfile.prod`
 
 ### Removed
 
