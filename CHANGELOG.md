@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Migrated pnpm security config from `.npmrc` to `pnpm-workspace.yaml` (required for pnpm v11) — `wp-content/themes/core-wp/.npmrc`
 - Forced transitive `ws` to 8.21.0 via pnpm `overrides` — fixes CVE-2026-45736 (use of uninitialized resource) in the `ws` pulled by `browser-sync` through `socket.io` — `wp-content/themes/core-wp/pnpm-workspace.yaml`
 - Forced transitive `js-yaml` to ≥ 4.2.0 (CVE-2026-53550, inefficient algorithmic complexity) and `postcss-selector-parser` to ≥ 6.1.3 (CVE-2026-9358, uncontrolled recursion) via pnpm `overrides` — both flagged by Snyk in the build toolchain — `wp-content/themes/core-wp/pnpm-workspace.yaml`
+- Forced transitive `brace-expansion` to ≥ 5.0.7 (CVE-2026-13149, inefficient algorithmic complexity) and `fast-uri` to ≥ 3.1.3 (CVE-2026-13676, interpretation conflict) via pnpm `overrides` — HIGH-severity Snyk findings whose fixes were previously blocked by the 7-day `minimumReleaseAge` gate and have now aged in — `wp-content/themes/core-wp/pnpm-workspace.yaml`
 
 ### Added
 
