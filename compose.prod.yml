@@ -50,8 +50,8 @@ services:
             # (https://wordpress.org/plugins/redis-cache/) to be installed and activated.
             WP_REDIS_HOST: redis
         volumes:
-            # webroot is populated from the image on first start by Docker.
-            # On redeploy: docker compose down -v && docker compose up -d
+            # Docker fills webroot from the image only when the volume is created.
+            # deploy.sh recreates webroot on each deploy and leaves db_data and uploads alone.
             - webroot:/var/www/html
             - uploads:/var/www/html/wp-content/uploads
         depends_on:

@@ -43,7 +43,7 @@ Run inside the `cli_tools` container (`docker compose exec cli_tools zsh`, then 
 
 | Command | Description |
 | --- | --- |
-| `pnpm run build` | Full build — styles, scripts, images, static assets |
+| `pnpm run build` | Full build: styles, scripts, images, static assets |
 | `pnpm run watch` | Watch mode |
 | `pnpm run serve` | Watch + Browser-Sync livereload |
 | `pnpm run serve:all` | Same as `serve` plus PHP and HTML watching |
@@ -81,13 +81,13 @@ chmod 600 .env
 
 To deploy updates: `git pull && ./deploy.sh`
 
-`deploy.sh` pulls the latest base images, rebuilds the WordPress image, and restarts services.
+`deploy.sh` rebuilds the WordPress image on its latest base image, recreates the `webroot` volume from the new image, and restarts services. The database and uploads volumes are kept. Never redeploy with `docker compose down -v`, because it deletes the database and uploads volumes too.
 
 ---
 
 ## Maintenance & Updates
 
-Keeping dependencies and Docker images current? See **[MAINTENANCE.md](MAINTENANCE.md)** — a step-by-step runbook for updating pnpm and Composer packages, the `light-cli` and `core-wp-wordpress` images, WordPress, and the base images, with the versioning and changelog conventions to follow.
+**[MAINTENANCE.md](MAINTENANCE.md)** is the step-by-step runbook for updating pnpm and Composer packages, the `light-cli` and `core-wp-wordpress` images, WordPress, and the base images, with the versioning and changelog conventions to follow.
 
 ---
 
