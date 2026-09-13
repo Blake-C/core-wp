@@ -1,9 +1,10 @@
 # Stage 1: Compile theme assets (same tools as dev environment)
 FROM digitalblake/light-cli:6.3.0 AS theme-builder
 WORKDIR /theme
-COPY wp-content/themes/core-wp/package.json wp-content/themes/core-wp/pnpm-lock.yaml ./
+# pnpm-workspace.yaml holds the overrides recorded in the lockfile and the supply-chain settings.
+COPY --chown=webdev wp-content/themes/core-wp/package.json wp-content/themes/core-wp/pnpm-lock.yaml wp-content/themes/core-wp/pnpm-workspace.yaml wp-content/themes/core-wp/.npmrc ./
 RUN pnpm install --frozen-lockfile
-COPY wp-content/themes/core-wp/ ./
+COPY --chown=webdev wp-content/themes/core-wp/ ./
 RUN pnpm run build && find ./assets -name '*.map' -delete
 
 # Stage 2: Install PHP production dependencies (same tools as dev environment)
