@@ -67,12 +67,13 @@ services:
             start_period: 30s
 
     db:
-        image: mariadb:11.8
+        image: mariadb:12.3
         restart: always
         volumes:
             - db_data:/var/lib/mysql
             - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf:ro
         environment:
+            MARIADB_AUTO_UPGRADE: 1
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
             MYSQL_USER: ${WORDPRESS_DB_USER}
