@@ -14,10 +14,10 @@ Updating dependencies, Docker images, or WordPress? Follow **[MAINTENANCE.md](MA
 |---|---|---|---|
 | `nginx` | `nginx:1.31-alpine` | Reverse proxy + static file serving | 80 |
 | `wordpress` | `digitalblake/core-wp-wordpress:php8.4-latest` | PHP-FPM 8.4 + XDebug (Alpine) | — |
-| `db` | `mariadb:11.8` | Database | 3306 (localhost only) |
+| `db` | `mariadb:12.3` | Database | 3306 (localhost only) |
 | `redis` | `redis:8-alpine` | Object cache (LRU, no persistence) | — |
 | `phpmyadmin` | `phpmyadmin` | DB GUI | 8000 (localhost only) |
-| `cli_tools` | `digitalblake/light-cli:6.3.0` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
+| `cli_tools` | `digitalblake/light-cli:6.4.0` | Node/pnpm/PHP CLI, browser-sync | 3000, 3001 |
 
 **Start everything:** `docker compose up -d`
 
@@ -90,9 +90,9 @@ Global styles (colors, layout, font scale) live in `theme.json`, not `functions.
 
 Browser-Sync inside container: `http://localhost:3000` (proxy UI: `http://localhost:3001`) — outside container: `http://localhost:3010`.
 
-## CLI Tools (`digitalblake/light-cli:6.3.0`)
+## CLI Tools (`digitalblake/light-cli:6.4.0`)
 
-PHP 8.4 / Node 24 / pnpm 11 / WP-CLI 2.12 / Composer 2 / ImageMagick 7 / zsh
+PHP 8.4 / Node 24 / pnpm 12 / WP-CLI 2.12 / Composer 2 / ImageMagick 7 / zsh
 
 Shell aliases inside container: `theme` (cd to theme root), `theme_components` (cd to theme_components/).
 

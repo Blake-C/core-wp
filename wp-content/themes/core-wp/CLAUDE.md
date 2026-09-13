@@ -6,7 +6,7 @@ WordPress **block theme** (Full Site Editing). There is no `header.php` or `foot
 
 ## Build system
 
-**Package manager:** pnpm (v11). Run all commands with `pnpm run`, never `npm run` (causes "Unknown env config store-dir" warning).
+**Package manager:** pnpm (v12). Run all commands with `pnpm run`, never `npm run` (causes "Unknown env config store-dir" warning).
 
 **Build commands run from inside the `cli_tools` Docker container** (or locally if Node/pnpm/PHP are installed).
 
@@ -93,9 +93,11 @@ patterns/              — Block patterns (content-* for post/page/search/none; 
 
 ## Dependencies of note
 
-- `stylelint` is held at **16.x** — `@wordpress/stylelint-config` requires `^16.8.2` and is not yet compatible with v17.
-- `webpack.config.mjs` uses native ESM — no `@babel/register` needed.
-- `chokidar-cli` handles file watching (replaced nodemon). Supports `{path}` substitution for per-file PHPCS runs.
+- `stylelint` is held at **16.x** because `@wordpress/stylelint-config` 24.x requires `^16.8.2`. `@wordpress/stylelint-config` 25.0.0 moves to stylelint 17 and becomes installable under the 7-day `minimumReleaseAge` on 2026-09-17.
+- `cssnano` and `cssnano-preset-advanced` are held at **8.0.10**. Every 9.0.x release dropped the maintainer publish approval that 8.0.3 to 8.0.10 carried, so `trustPolicy: no-downgrade` rejects every 9.0.x release.
+- `pnpm-workspace.yaml` must contain only settings pnpm 12 recognizes. pnpm 12 fails the command on an unknown key because `packageManager` pins the running version.
+- `webpack.config.mjs` uses native ESM, so it does not need `@babel/register`.
+- `chokidar-cli` handles file watching in place of nodemon, and it supports `{path}` substitution for per-file PHPCS runs.
 
 ## Security scanning
 
