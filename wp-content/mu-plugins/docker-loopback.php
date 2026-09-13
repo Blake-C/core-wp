@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * In Docker, the wordpress (PHP-FPM) container cannot reach port 80 on
- * localhost — that port belongs to the nginx container. Rewrite any internal
+ * In Docker, the PHP-FPM container cannot reach port 80 on localhost, because
+ * that port belongs to the nginx container. Rewrite any internal
  * loopback request URL to use the nginx service hostname so it routes
  * correctly inside the Docker network.
  *
@@ -39,9 +39,9 @@ add_filter(
 		$rewrite_pattern = '#^(https?://)(localhost|127\.0\.0\.1)(:\d+)?#';
 		$rewritten_url   = preg_replace( $rewrite_pattern, '$1nginx', $url );
 
-		$original_host   = parse_url( $url, PHP_URL_HOST );
-		$original_port   = parse_url( $url, PHP_URL_PORT );
-		$host_header     = $original_host;
+		$original_host = wp_parse_url( $url, PHP_URL_HOST );
+		$original_port = wp_parse_url( $url, PHP_URL_PORT );
+		$host_header   = $original_host;
 		if ( $original_port && 80 !== (int) $original_port ) {
 			$host_header .= ':' . $original_port;
 		}
