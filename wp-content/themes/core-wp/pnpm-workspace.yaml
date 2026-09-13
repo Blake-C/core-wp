@@ -14,21 +14,32 @@ overrides:
   brace-expansion: '^5.0.7'
   fast-uri: '^3.1.3'
 
-confirmModulesPurge: false
 frozenLockfile: true
-auditLevel: moderate
 saveExact: true
 verifyStoreIntegrity: true
-strictDeprecatedDependencies: warn
+# Sets the minimum severity for `pnpm audit` only. An install does not run an audit.
+audit:
+  level: moderate
+# node_modules is shared between the host and the cli_tools container, so a mismatch
+# with the lockfile stops `pnpm run` and `pnpm exec` instead of running an install first.
+verifyDepsBeforeRun: error
+# Applies the engines check to dependencies. The theme's own engines range is checked with or without it.
+engineStrict: true
 blockExoticSubdeps: true
 minimumReleaseAge: 10080
+# A release with weaker publisher trust evidence than an earlier release of the same package
+# fails the install, which still blocks a stolen maintainer account's release after minimumReleaseAge.
+trustPolicy: no-downgrade
+# browser-sync requires ua-parser-js ^1. The same maintainer publishes the MIT 1.x line without
+# provenance and the AGPL 2.x line with it, so each 1.x release reads as a downgrade by publish date.
+trustPolicyExclude:
+  - 'ua-parser-js@1.0.41'
 fetchTimeout: 60000
 fetchRetries: 5
 fetchRetryMintimeout: 1000
 fetchRetryMaxtimeout: 30000
-# Explicit build script allowlist.
-# @parcel/watcher is a native addon required by chokidar-cli; it must build.
-# core-js postinstall is a donation banner only — blocked, has no effect on functionality.
+# @parcel/watcher is a native addon that sass installs as an optional dependency, and its install script builds it.
+# The core-js postinstall only prints a donation banner.
 allowBuilds:
   '@parcel/watcher': true
   core-js: false
