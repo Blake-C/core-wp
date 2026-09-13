@@ -16,6 +16,9 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 # Stage 3: Production image
 FROM digitalblake/core-wp-wordpress:php8.4-latest
 
+# The base image enables XDebug for development, and with no mode set it runs in develop mode.
+RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 # Copy wp-content (themes source, patterns, inc, etc.)
 COPY wp-content/ /var/www/html/wp-content/
 
