@@ -48,9 +48,9 @@ PHPCS `installed_paths` for WordPress and PHPCompatibility standards is configur
 
 ## XDebug
 
-The `wordpress` service has XDebug 3 installed and configured (`docker/wordpress/xdebug.ini`). It connects back to the host on port 9003. The VSCode "Listen for XDebug" launch configuration in `.vscode/launch.json` is pre-configured. XDebug is dev-only — `Dockerfile.prod` does not configure it.
+The `digitalblake/core-wp-wordpress` image installs XDebug 3 and loads it through `docker-php-ext-xdebug.ini`. `docker/wordpress/xdebug.ini` holds the settings only and must not add a `zend_extension` line, because PHP then warns that XDebug is already loaded. It connects back to the host on port 9003. The VSCode "Listen for XDebug" launch configuration in `.vscode/launch.json` is pre-configured. XDebug is dev-only: `Dockerfile.prod` deletes `docker-php-ext-xdebug.ini`, so production PHP never loads it.
 
-XDebug defaults to `off` in `xdebug.ini`. It is enabled in `compose.yml` via `XDEBUG_MODE=debug`. Comment that line out when you don't need it to avoid the PHP performance overhead.
+XDebug defaults to `off`. `compose.yml` passes `XDEBUG_MODE` from `.env` (`${XDEBUG_MODE:-off}`), so set `XDEBUG_MODE=debug` in `.env` and recreate the `wordpress` container to start debugging.
 
 ## Path mappings (for debugging / reference)
 
@@ -143,6 +143,6 @@ All build commands run inside the `cli_tools` container from the theme root (`th
 - **Build fails with missing packages:** Run `pnpm install` from the theme directory first.
 - **Hooks not running:** Run `git config core.hooksPath .githooks` once per clone.
 - **PHPCS hook fails:** Run `composer install` from `wp-content/` first.
-- **XDebug breakpoints not hit:** Confirm `XDEBUG_MODE: debug` is set in `compose.yml` and "Listen for XDebug" is active in VSCode before loading the page.
+- **XDebug breakpoints not hit:** Confirm `XDEBUG_MODE=debug` is set in `.env`, the `wordpress` container was recreated after the change, and "Listen for XDebug" is active in VSCode before loading the page.
 - **`wp` commands not found:** WP-CLI runs inside `cli_tools` — `docker compose exec cli_tools zsh`.
 - **Site not loading after DB import:** Run `wp search-replace https://production.com http://localhost --precise --all-tables`.
