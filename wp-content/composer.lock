@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e71d663bbe8475cbfdea0cfbf5c5e94b",
+    "content-hash": "f40f7a3fc8390fc9d71f42a055118282",
     "packages": [
         {
             "name": "composer/installers",
@@ -154,15 +154,15 @@
         },
         {
             "name": "wp-plugin/redirection",
-            "version": "5.8.1",
+            "version": "5.10.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/redirection/",
-                "reference": "tags/5.8.1"
+                "reference": "tags/5.10.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/redirection.5.8.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/redirection.5.10.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -181,7 +181,7 @@
                 "issues": "https://wordpress.org/support/plugin/redirection",
                 "source": "https://plugins.svn.wordpress.org/redirection"
             },
-            "time": "2026-07-01T18:36:00+00:00"
+            "time": "2026-08-29T15:21:27+00:00"
         },
         {
             "name": "wp-plugin/redis-cache",
@@ -216,15 +216,15 @@
         },
         {
             "name": "wp-plugin/wordfence",
-            "version": "8.2.2",
+            "version": "9.0.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordfence/",
-                "reference": "tags/8.2.2"
+                "reference": "tags/9.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordfence.8.2.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordfence.9.0.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -243,19 +243,19 @@
                 "issues": "https://wordpress.org/support/plugin/wordfence",
                 "source": "https://plugins.svn.wordpress.org/wordfence"
             },
-            "time": "2026-05-13T15:46:44+00:00"
+            "time": "2026-09-08T15:41:22+00:00"
         },
         {
             "name": "wp-plugin/wordpress-seo",
-            "version": "27.9",
+            "version": "28.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/27.9"
+                "reference": "tags/28.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.27.9.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.28.4.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -267,26 +267,26 @@
                     "name": "Yoast"
                 }
             ],
-            "description": "Improve your SEO with real-time feedback, schema, and clear guidance. Upgrade for AI tools, Google Docs integration, and 24/7 support, no hidden fees.",
+            "description": "Real-time SEO guidance, schema, and AI built in. Help search engines and AI systems understand your content. All AI tools included, no hidden fees.",
             "homepage": "https://yoa.st/1uj",
             "support": {
                 "changelog": "https://wordpress.org/plugins/wordpress-seo/#developers",
                 "issues": "https://wordpress.org/support/plugin/wordpress-seo",
                 "source": "https://plugins.svn.wordpress.org/wordpress-seo"
             },
-            "time": "2026-06-23T11:25:53+00:00"
+            "time": "2026-09-03T13:06:31+00:00"
         },
         {
             "name": "wp-plugin/wps-hide-login",
-            "version": "1.9.18",
+            "version": "1.9.19",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.9.18"
+                "reference": "tags/1.9.19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.9.18.zip"
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.9.19.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -304,7 +304,7 @@
                 "issues": "https://wordpress.org/support/plugin/wps-hide-login",
                 "source": "https://plugins.svn.wordpress.org/wps-hide-login"
             },
-            "time": "2026-03-23T19:23:21+00:00"
+            "time": "2026-08-13T08:36:23+00:00"
         }
     ],
     "packages-dev": [

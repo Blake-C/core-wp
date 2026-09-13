@@ -2,10 +2,10 @@
 	"require": {
 		"php": "~8.3",
 		"composer/installers": "^2.3",
-		"wp-plugin/redirection": "^5.7",
-		"wp-plugin/wordfence": "^8.1",
-		"wp-plugin/wordpress-seo": "^27.1",
-		"wp-plugin/wps-hide-login": "^1.9",
+		"wp-plugin/redirection": "^5.10",
+		"wp-plugin/wordfence": "^9.0",
+		"wp-plugin/wordpress-seo": "^28.4",
+		"wp-plugin/wps-hide-login": "^1.9.19",
 		"wp-plugin/redis-cache": "^2.7"
 	},
 	"require-dev": {
