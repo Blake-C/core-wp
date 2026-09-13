@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added `MAINTENANCE.md`, an update and upgrade runbook for pnpm and Composer packages, the `light-cli` and `core-wp-wordpress` images, WordPress, and base images, with the SemVer and changelog conventions to follow (`MAINTENANCE.md`, `README.md`, `CLAUDE.md`)
+- Added a troubleshooting entry and a gotcha for the VS Code Prettier extension failing with "Cannot find module" after `pnpm install` deletes the Prettier version the extension has loaded (`CLAUDE.md`, `MAINTENANCE.md`)
 
 ### Changed
 

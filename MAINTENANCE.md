@@ -382,6 +382,7 @@ Re-test these on each pass, and update a package once the reason in its row no l
 - **pnpm 12 unknown settings** → any unrecognized key in `pnpm-workspace.yaml` fails the command.
 - **`trustPolicy: no-downgrade`** → inspect the registry trust evidence before excluding or holding a package.
 - **pnpm 12 lockfile** has two YAML documents; Snyk needs a copy with only the second one.
+- **VS Code after `pnpm install`** → the Prettier extension keeps the old Prettier version loaded and fails with "Cannot find module" once `pnpm install` deletes that version from `node_modules/.pnpm`. Run **Developer: Reload Window**.
 - **`Dockerfile.prod` theme stage** must copy `pnpm-workspace.yaml` and `.npmrc` with the lockfile, owned by `webdev`, or the frozen install fails.
 - **`packageManager` field** in the theme overrides the image's pnpm; bump with
   `corepack use pnpm@<ver>` to get the right hash.

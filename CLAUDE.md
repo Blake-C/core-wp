@@ -146,3 +146,4 @@ All build commands run inside the `cli_tools` container from the theme root (`th
 - **XDebug breakpoints not hit:** Confirm `XDEBUG_MODE=debug` is set in `.env`, the `wordpress` container was recreated after the change, and "Listen for XDebug" is active in VSCode before loading the page.
 - **`wp` commands not found:** WP-CLI runs inside `cli_tools` — `docker compose exec cli_tools zsh`.
 - **Site not loading after DB import:** Run `wp search-replace https://production.com http://localhost --precise --all-tables`.
+- **VS Code Prettier fails with "Cannot find module" for an older Prettier version:** A `pnpm install` in `cli_tools` deleted the Prettier version that the VS Code extension host still has loaded. Run **Developer: Reload Window** in VS Code.
