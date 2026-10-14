@@ -1,7 +1,7 @@
 @use '../helpers' as *;
 
 body {
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .hidden {

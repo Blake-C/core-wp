@@ -44,11 +44,11 @@
     "phpcs:watch": "chokidar '**/*.php' --ignore 'node_modules/**' --ignore 'vendor/**' --ignore 'assets/**' -c 'php ../../vendor/bin/phpcbf --standard=phpcs.xml --basepath=./ {path} ; php ../../vendor/bin/phpcs --standard=phpcs.xml --basepath=./ {path} && pnpm run reload'"
   },
   "devDependencies": {
-    "@babel/core": "8.0.1",
-    "@babel/preset-env": "8.0.2",
+    "@babel/core": "8.0.6",
+    "@babel/preset-env": "8.0.6",
     "@eslint/js": "10.0.1",
-    "@wordpress/stylelint-config": "24.3.0",
-    "autoprefixer": "10.5.5",
+    "@wordpress/stylelint-config": "26.0.0",
+    "autoprefixer": "10.6.1",
     "babel-loader": "10.1.1",
     "babel-plugin-polyfill-corejs3": "1.0.0",
     "browser-sync": "3.0.4",
@@ -56,22 +56,22 @@
     "core-js": "3.50.0",
     "cssnano": "8.0.10",
     "cssnano-preset-advanced": "8.0.10",
-    "eslint": "10.10.0",
+    "eslint": "10.12.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.6",
-    "globals": "17.12.0",
-    "postcss": "8.5.28",
+    "globals": "17.13.0",
+    "postcss": "8.5.29",
     "postcss-cli": "12.0.0",
     "postcss-scss": "4.0.9",
-    "prettier": "3.9.6",
-    "sass": "1.104.0",
-    "stylelint": "16.26.1",
+    "prettier": "3.9.9",
+    "sass": "1.105.1",
+    "stylelint": "17.16.0",
     "stylelint-order": "8.1.1",
-    "webpack": "5.110.3",
+    "webpack": "5.111.1",
     "webpack-cli": "7.2.3"
   },
   "dependencies": {
     "prismjs": "1.30.0"
   },
-  "packageManager": "pnpm@12.3.4+sha512.961aa41fb077da3a04a441d9f8e15ebc0c96da8ef710b2eb67bf9ee7cb0610eabd48f1fd85f51cffe73846785fa0f87c56a3a872a1d893f8446741b5cce45457"
+  "packageManager": "pnpm@12.10.1+sha512.ba40a37eb1a370d60fea8c4cf1d364c13bcccef518e98ad2bcee954f539d38da37458e58261a3fa55e06523450ea0ffff9f497b135be41f2c15c1642bacace6c"
 }
