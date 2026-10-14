@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f40f7a3fc8390fc9d71f42a055118282",
+    "content-hash": "475571e4dbf91841bf8341aaf23f6249",
     "packages": [
         {
             "name": "composer/installers",
@@ -154,15 +154,15 @@
         },
         {
             "name": "wp-plugin/redirection",
-            "version": "5.10.0",
+            "version": "5.10.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/redirection/",
-                "reference": "tags/5.10.0"
+                "reference": "tags/5.10.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/redirection.5.10.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/redirection.5.10.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -181,19 +181,19 @@
                 "issues": "https://wordpress.org/support/plugin/redirection",
                 "source": "https://plugins.svn.wordpress.org/redirection"
             },
-            "time": "2026-08-29T15:21:27+00:00"
+            "time": "2026-09-19T13:51:12+00:00"
         },
         {
             "name": "wp-plugin/redis-cache",
-            "version": "2.8.0",
+            "version": "3.0.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/redis-cache/",
-                "reference": "tags/2.8.0"
+                "reference": "tags/3.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/redis-cache.2.8.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/redis-cache.3.0.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -212,19 +212,19 @@
                 "issues": "https://wordpress.org/support/plugin/redis-cache",
                 "source": "https://plugins.svn.wordpress.org/redis-cache"
             },
-            "time": "2026-05-04T18:40:49+00:00"
+            "time": "2026-09-18T18:36:32+00:00"
         },
         {
             "name": "wp-plugin/wordfence",
-            "version": "9.0.1",
+            "version": "9.0.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordfence/",
-                "reference": "tags/9.0.1"
+                "reference": "tags/9.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordfence.9.0.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordfence.9.0.2.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -243,19 +243,19 @@
                 "issues": "https://wordpress.org/support/plugin/wordfence",
                 "source": "https://plugins.svn.wordpress.org/wordfence"
             },
-            "time": "2026-09-08T15:41:22+00:00"
+            "time": "2026-09-30T15:31:24+00:00"
         },
         {
             "name": "wp-plugin/wordpress-seo",
-            "version": "28.4",
+            "version": "28.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/28.4"
+                "reference": "tags/28.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.28.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.28.7.zip"
             },
             "require": {
                 "composer/installers": "~1.0|~2.0"
@@ -274,7 +274,7 @@
                 "issues": "https://wordpress.org/support/plugin/wordpress-seo",
                 "source": "https://plugins.svn.wordpress.org/wordpress-seo"
             },
-            "time": "2026-09-03T13:06:31+00:00"
+            "time": "2026-10-13T08:57:15+00:00"
         },
         {
             "name": "wp-plugin/wps-hide-login",

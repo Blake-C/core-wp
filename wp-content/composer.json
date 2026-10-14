@@ -6,7 +6,7 @@
 		"wp-plugin/wordfence": "^9.0",
 		"wp-plugin/wordpress-seo": "^28.4",
 		"wp-plugin/wps-hide-login": "^1.9.19",
-		"wp-plugin/redis-cache": "^2.7"
+		"wp-plugin/redis-cache": "^3.0"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.13.6",
