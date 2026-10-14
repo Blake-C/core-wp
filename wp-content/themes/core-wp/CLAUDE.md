@@ -93,7 +93,7 @@ patterns/              — Block patterns (content-* for post/page/search/none; 
 
 ## Dependencies of note
 
-- `stylelint` is held at **16.x** because `@wordpress/stylelint-config` 24.x requires `^16.8.2`. `@wordpress/stylelint-config` 25.0.0 moves to stylelint 17 and becomes installable under the 7-day `minimumReleaseAge` on 2026-09-17.
+- `stylelint` 17 with `@wordpress/stylelint-config` 26 reports deprecated properties such as `word-wrap` and `clip` through the `property-no-deprecated` rule.
 - `cssnano` and `cssnano-preset-advanced` are held at **8.0.10**. Every 9.0.x release dropped the maintainer publish approval that 8.0.3 to 8.0.10 carried, so `trustPolicy: no-downgrade` rejects every 9.0.x release.
 - `pnpm-workspace.yaml` must contain only settings pnpm 12 recognizes. pnpm 12 fails the command on an unknown key because `packageManager` pins the running version.
 - `webpack.config.mjs` uses native ESM, so it does not need `@babel/register`.
@@ -101,10 +101,11 @@ patterns/              — Block patterns (content-* for post/page/search/none; 
 
 ## Security scanning
 
-- Always run `snyk_code_scan` for new or modified first-party PHP and JS files.
+- Snyk runs in a container through the `snyk` shell function from `digitalblake-system-setup`. See the root MAINTENANCE.md §8 for the commands.
+- Always run `snyk code test` for new or modified first-party PHP and JS files.
 - If issues are found, fix them using the Snyk results as context, then rescan.
 - Repeat until no new issues remain.
-- Run `snyk_sca_scan` when adding or upgrading dependencies.
+- Run `snyk test` when adding or upgrading dependencies.
 
 ## Developer Notes
 

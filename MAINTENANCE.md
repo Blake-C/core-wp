@@ -73,7 +73,7 @@ Do this for **every** change, in this order, before committing:
 
 | Repo | Scheme | Bump rules |
 |---|---|---|
-| `core-wp` | `CHANGELOG.md` under `## [#.#.#] - Next`; sections Security/Added/Changed/Removed | No release tags cut yet; accumulate under "Next" |
+| `core-wp` | `CHANGELOG.md`, one `## [X.Y.Z] - YYYY-MM-DD` block per change set; sections Security/Added/Changed/Removed | Each change set gets a new version dated the day it is committed. Before 1.0, added capability or a breaking toolchain change raises MINOR, and dependency updates and fixes raise PATCH |
 | `light-cli` | Image tag `6.x.x` (semver-ish). Version recorded in `README.md` table (no CHANGELOG) | MINOR for tooling/base refresh; PATCH for a rebuild only |
 | `core-wp-wordpress` | Image tag `php{PHP}-{MAJOR}.{MINOR}.{PATCH}`; Keep a Changelog `CHANGELOG.md` | **MAJOR** = PHP line change (8.4→8.5); **MINOR** = new capability / XDebug bump; **PATCH** = security/WordPress rebuild, no Dockerfile change |
 
@@ -218,8 +218,15 @@ This rewrites `packageManager` with the correct integrity hash. pnpm 12 keeps
 `lockfileVersion 9.0`, so an existing lockfile still installs. pnpm 12 also adds a
 first YAML document to `pnpm-lock.yaml` that pins pnpm's own binaries by hash.
 
-**Release path:** `light-cli` has no documented CI tag workflow. Build locally
-and `docker push digitalblake/light-cli:<tag>` (and `:latest` if appropriate).
+**Release path:** `light-cli` has no CI workflow. Build locally, then push the
+versioned tag and `latest` together, so `latest` never points at an older build:
+
+```sh
+docker tag digitalblake/light-cli:<tag> digitalblake/light-cli:latest
+docker push digitalblake/light-cli:<tag> && docker push digitalblake/light-cli:latest
+```
+
+The published tags are `linux/arm64` only, built on Apple silicon.
 
 ---
 
@@ -278,9 +285,18 @@ curl -s -o /dev/null -w "HTTP %{http_code}\n" http://localhost/
 In production, the entrypoint fills the `webroot` named volume from the image only
 when the volume is empty, so the same rule applies there.
 
-**Release path:** per the repo's README, the publish flow is CI-driven. Update
-CHANGELOG, commit, push, then `git tag php8.4-<X.Y.Z> && git push origin
-php8.4-<X.Y.Z>`; GitHub Actions builds and pushes to Docker Hub.
+**Release path:** GitHub Actions publishes the image. A push to `main` publishes
+`latest`, and a tag push publishes `php8.4-<X.Y.Z>` and `php8.4-latest`. Update the
+CHANGELOG, commit, then push the branch and the tag in one command:
+
+```sh
+git tag php8.4-<X.Y.Z>
+git push origin main php8.4-<X.Y.Z>
+```
+
+Pushing `main` without the tag moves `latest` and leaves `php8.4-latest` on the
+previous build, which is what happened when the `php8.4-1.2.1` commit was pushed without its tag. After both runs finish,
+confirm on Docker Hub that `latest`, `php8.4-latest`, and `php8.4-<X.Y.Z>` share one digest.
 
 The compose reference (`php8.4-latest`) is rolling and **does not change**, so no
 edit is needed in this repo for a WordPress bump (though note it in this repo's
@@ -325,9 +341,9 @@ Run after **any** dependency or image change (inside `cli_tools`, theme dir):
 
 | Check | Command | Confirms |
 |---|---|---|
-| Security (deps) | `snyk_sca_scan` on the theme (see note below) and on `wp-content` with `file: composer.lock` | no new CVEs; rescan after fixes |
-| Security (code) | `snyk_code_scan` on the theme and `wp-content/plugins/core-wp` | no issues outside `node_modules` |
-| Security (images) | `snyk_container_scan` on each image that changed | no new OS or app CVEs |
+| Security (deps) | `snyk test --all-projects --dev` on the theme copy (see note below), and `snyk test --file=composer.lock` in `wp-content` | only the known items in §9; rescan after fixes |
+| Security (code) | `snyk code test` in the theme and in `wp-content/plugins/core-wp` | no issues outside `node_modules` |
+| Security (images) | Snyk dashboard after publishing | no new OS or app CVEs in the changed images |
 | Advisories | `pnpm audit`, `composer audit` | only the known items in §9 |
 | Registry signatures | `pnpm audit signatures` | every installed package has a verified signature |
 | Frozen install | `pnpm install --frozen-lockfile` | lockfile passes the supply-chain policies |
@@ -340,18 +356,29 @@ Run after **any** dependency or image change (inside `cli_tools`, theme dir):
 | Compose | `docker compose [-f compose.prod.yml] config` | YAML parses |
 | Health | `docker compose ps` | services `(healthy)`; `curl http://localhost/` → 200 |
 
+**Snyk runs in a container.** No Snyk binary is installed on the host. The `snyk`
+shell function from `digitalblake-system-setup` (`snyk/scan.sh`) runs the CLI in the
+`digitalblake/snyk` image with the git top level of the current directory mounted
+read-only, so the files to scan have to live inside this repo. The container has no
+Docker socket and no registry access, so it cannot scan images. Image findings come
+from the Snyk dashboard, because the `core-wp-wordpress` workflow runs `snyk monitor` on each
+published build and Snyk scans the `light-cli` Dockerfile through its GitHub project. `snyk_mcp_enable` in the project adds the same container as an MCP server.
+
 **Snyk and the pnpm 12 lockfile:** Snyk fails on `pnpm-lock.yaml` with "expected a single
 document in the stream" because of the first YAML document pnpm 12 adds. Scan a copy that
-holds only the second document:
+holds only the second document. Snyk asks for `--all-projects` when it finds
+`pnpm-workspace.yaml`, and it skips devDependencies without `--dev`:
 
 ```sh
-mkdir -p "$TMPDIR/snyk-theme" && cp package.json pnpm-workspace.yaml "$TMPDIR/snyk-theme/"
-awk 'n>=2; /^---$/{n++}' pnpm-lock.yaml > "$TMPDIR/snyk-theme/pnpm-lock.yaml"
-# then snyk_sca_scan on $TMPDIR/snyk-theme
+# from the repo root
+mkdir .snyk-theme-scan && cp wp-content/themes/core-wp/{package.json,pnpm-workspace.yaml} .snyk-theme-scan/
+awk 'n>=2; /^---$/{n++}' wp-content/themes/core-wp/pnpm-lock.yaml > .snyk-theme-scan/pnpm-lock.yaml
+(cd .snyk-theme-scan && snyk test --all-projects --dev)
+rm -rf .snyk-theme-scan
 ```
 
-Project policy is to run `snyk_code_scan` for modified first-party PHP/JS and
-`snyk_sca_scan` when changing dependencies, then fix and rescan until clean.
+Project policy is to run `snyk code test` for modified first-party PHP/JS and
+`snyk test` when changing dependencies, then fix and rescan until clean.
 
 ---
 
@@ -359,14 +386,13 @@ Project policy is to run `snyk_code_scan` for modified first-party PHP/JS and
 
 | Package | Held at | Reason |
 |---|---|---|
-| `stylelint` | 16.x | `@wordpress/stylelint-config` 24.x peer-requires `stylelint ^16.8.2`. 25.0.0 (2026-09-10) moves to stylelint 17 and reaches the 7-day `minimumReleaseAge` on 2026-09-17 |
-| `cssnano`, `cssnano-preset-advanced` | 8.0.10 | Releases 8.0.3 to 8.0.10 were published with a maintainer approval and every 9.0.x release was not, so `trustPolicy: no-downgrade` rejects 9.x. Move when a 9.x release carries the approval again |
+| `cssnano`, `cssnano-preset-advanced` | 8.0.10 | Releases 8.0.3 to 8.0.10 were published with a maintainer approval, and no 9.x release through `cssnano` 9.8.0 and `cssnano-preset-advanced` 9.7.0 (2026-10-12) carries one, so `trustPolicy: no-downgrade` rejects 9.x. Move when a 9.x release carries the approval again |
 | `squizlabs/php_codesniffer` | 3.x | WordPress Coding Standards 3.x requires PHP_CodeSniffer `^3.13.5` and does not support 4.0 |
 | `phpcompatibility/php-compatibility` | 9.3.5 | 10.x is still alpha |
 | `ua-parser-js` | 1.0.41 (in `trustPolicyExclude`) | browser-sync requires `^1`. The MIT 1.x line has no provenance and the AGPL 2.x line does, so 1.x reads as a trust downgrade |
-| `immutable` (via browser-sync) | 3.8.4 | `pnpm audit` still reports GHSA-v56q-mh7h-f735 because that record predates 3.8.4. The 3.8.4 release notes port the fixes for CVE-2026-59879 and CVE-2026-59880, and Snyk reports it fixed |
-| `undici` inside npm and pnpm (`light-cli`) | 6.28.0 | Bundled through `node-gyp` in npm 11.19.1 and pnpm 12.3.4. The fix, 6.28.1, was published after both releases, so the finding clears once the next npm and pnpm releases are older than the 7-day `minimumReleaseAge` |
-| `util-linux` in `nginx:1.31-alpine` and `redis:8-alpine` | upstream | Snyk reports high findings fixed in Alpine's `util-linux` 2.42.3 and 2.41.6. Re-pull the official images on the next pass |
+| `braces` (via chokidar and micromatch) | 3.0.3 | `pnpm audit` and Snyk report GHSA-vfj7-8cjw-p6xm (SNYK-JS-BRACES-19963945, stack exhaustion from nested patterns). 3.0.3 is the newest release and no patched version exists. It is used only by the dev file watchers and stylelint |
+| `uri-js` (via eslint and ajv 6) | 4.4.1 | Snyk reports SNYK-JS-URIJS-19963963 (high), SNYK-JS-URIJS-20341609, and SNYK-JS-URIJS-19963961. 4.4.1 (2021-01-10) is the final release, and ajv 6.15.0 still depends on it. It is used only by ESLint |
+| `undici` inside npm (`light-cli`) | 6.28.0 | npm 11.21.0 and npm 12.2.0 both bundle 6.28.0, so no npm release has the fix yet. pnpm 12.10.1 bundles 6.29.0 |
 | Any package fix < 7 days old | current | Blocked by `minimumReleaseAge` (see [§3](#3-update-pnpm-packages-theme-build-toolchain)); revisit after it ages 7 days |
 
 Re-test these on each pass, and update a package once the reason in its row no longer applies.
@@ -394,6 +420,9 @@ Re-test these on each pass, and update a package once the reason in its row no l
   in dev, status-tolerant in prod).
 - **`cli_tools` paths** differ from the `wordpress` container's `/var/www/html`.
 - **npm-registry timeouts** during `docker build` are transient; retry the build.
+- **Docker Hub push timeouts** on large `light-cli` layers are transient; rerun `docker push`, which skips the layers already uploaded.
+- **Versioned and `latest` image tags** are always pushed together. `light-cli:<tag>` is pushed with `light-cli:latest`, and the `core-wp-wordpress` `main` branch is pushed with its `php8.4-<X.Y.Z>` tag. Do not add a `latest` tag to an image that does not already publish one.
+- **pnpm overrides and direct pins**: a pnpm override also replaces the theme's own `package.json` pin, so an override floor below the pinned version holds the direct dependency back.
 
 ---
 

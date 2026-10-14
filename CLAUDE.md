@@ -84,7 +84,7 @@ Global styles (colors, layout, font scale) live in `theme.json`, not `functions.
 | PostCSS + cssnano | CSS autoprefixing and minification |
 | Prettier | JS + SCSS formatting |
 | ESLint 10 | JS linting (flat config) |
-| Stylelint 16 | SCSS linting |
+| Stylelint 17 | SCSS linting |
 | Browser-Sync 3 | Live reload proxy with CSS injection |
 | ImageMagick | Image optimization via `mogrify` |
 
@@ -119,10 +119,11 @@ All build commands run inside the `cli_tools` container from the theme root (`th
 
 ## Security scanning
 
-- Always run `snyk_code_scan` for new or modified first-party code (PHP and JS).
+- Snyk runs in a container through the `snyk` shell function from `digitalblake-system-setup`. See MAINTENANCE.md §8 for the commands.
+- Always run `snyk code test` for new or modified first-party code (PHP and JS).
 - If issues are found, fix them using the Snyk results as context, then rescan.
 - Repeat until no new issues remain.
-- Run `snyk_sca_scan` when adding or upgrading dependencies.
+- Run `snyk test` when adding or upgrading dependencies.
 
 ## Developer Notes
 

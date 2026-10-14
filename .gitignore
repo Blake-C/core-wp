@@ -95,3 +95,6 @@ object-cache.php
 .idea
 .pnpm-store
 .aider*
+
+# Temporary copy of the theme manifests for Snyk (MAINTENANCE.md section 8)
+.snyk-theme-scan/

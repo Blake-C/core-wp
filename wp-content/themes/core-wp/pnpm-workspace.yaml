@@ -21,8 +21,7 @@ packages:
 # source-map-js: GHSA-68fv-2mgg-jv7q (event-loop DoS from indexed source map offsets); fixed in >= 1.2.2.
 # colord: GHSA-2wm5-q62r-hmrv (slow malformed color parsing); fixed in >= 2.9.4.
 # immutable@5 (via sass): GHSA-v56q-mh7h-f735 and GHSA-xvcm-6775-5m9r; fixed in >= 5.1.8.
-# immutable@3 (via browser-sync): 3.8.4 ports the fixes for CVE-2026-59879 and CVE-2026-59880 onto 3.x. The
-#   GHSA-v56q-mh7h-f735 record predates 3.8.4 and still lists only 4.3.9 as patched, so pnpm audit reports it.
+# immutable@3 (via browser-sync): 3.8.4 ports the fixes for CVE-2026-59879 and CVE-2026-59880 onto 3.x.
 overrides:
   ws: '^8.20.1'
   js-yaml: '^4.3.2'

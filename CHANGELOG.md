@@ -2,7 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
-## [#.#.#] - Next
+## [0.1.1] - 2026-10-14
+
+### Security
+
+- Updated `digitalblake/light-cli` to `6.8.0` (Alpine 3.24.2, npm 11.21.0, pnpm 12.10.1). pnpm 12.10.1 bundles `undici` 6.29.0, and npm 11.21.0 still bundles `undici` 6.28.0 (`compose.yml`, `docker/wordpress/Dockerfile.prod`, `CLAUDE.md`)
+- Rebuilt `digitalblake/core-wp-wordpress` as `php8.4-1.2.2` (WordPress 7.1.3, PHP 8.4.26, Alpine 3.24.2, XDebug 3.5.3). The `php8.4-1.2.1` tag was never pushed, so until this release `php8.4-latest` still pointed at the `php8.4-1.2.0` build from 2026-07-05. `latest`, `php8.4-latest`, and `php8.4-1.2.2` now share one digest
+- Re-pulled `nginx:1.31-alpine`, `redis:8-alpine`, `mariadb:12.3`, and `phpmyadmin`. The `nginx` image now has `util-linux` 2.42.3 libraries
+- Raised and added pnpm `overrides` for advisories published since the last update (`wp-content/themes/core-wp/pnpm-workspace.yaml`, `wp-content/themes/core-wp/pnpm-lock.yaml`):
+  - `postcss-selector-parser` 6.1.3 to 7.1.6 or later (GHSA-rj75-hqrm-r3gf). Every dependent now requests 7.x, and the 6.x floor had forced stylelint 17 onto 6.1.4
+  - `brace-expansion` 5.0.12 or later (GHSA-6j4f-fj2g-mc7p, GHSA-qhr7-859c-m2p7, GHSA-q2hr-2g5m-vwhr)
+  - `fast-uri` 3.1.8 or later (GHSA-hrr3-gc8f-f4qj)
+  - `engine.io` 6.6.10 or later (GHSA-2gc4-cqfq-p2gv)
+  - `source-map-js` 1.2.2 or later (GHSA-68fv-2mgg-jv7q)
+  - `postcss` 8.5.29 or later. An override also replaces the theme's direct pin, so the floor has to match `package.json`
+
+### Changed
+
+- Updated theme dependencies (`wp-content/themes/core-wp/package.json`, `wp-content/themes/core-wp/pnpm-lock.yaml`):
+  - `@babel/core` 8.0.1 to 8.0.6
+  - `@babel/preset-env` 8.0.2 to 8.0.6
+  - `autoprefixer` 10.5.5 to 10.6.1
+  - `eslint` 10.10.0 to 10.12.0
+  - `globals` 17.12.0 to 17.13.0
+  - `postcss` 8.5.28 to 8.5.29
+  - `prettier` 3.9.6 to 3.9.9
+  - `sass` 1.104.0 to 1.105.1
+  - `webpack` 5.110.3 to 5.111.1
+- Updated `stylelint` 16.26.1 to 17.16.0 and `@wordpress/stylelint-config` 24.3.0 to 26.0.0. stylelint 17 reports `word-wrap` and `clip` as deprecated, so `body` now uses `overflow-wrap` and the `element-invisible` mixin hides content with `clip-path` alone (`wp-content/themes/core-wp/theme_components/sass/partials/_generic-styles.scss`, `wp-content/themes/core-wp/theme_components/sass/helpers/_mixins.scss`)
+- Updated pnpm to 12.10.1 in the theme's `packageManager` field to match `light-cli` 6.8.0 (`wp-content/themes/core-wp/package.json`)
+- Updated Composer plugins (`wp-content/composer.json`, `wp-content/composer.lock`):
+  - `wp-plugin/redirection` 5.10.0 to 5.10.1
+  - `wp-plugin/wordfence` 9.0.1 to 9.0.2
+  - `wp-plugin/wordpress-seo` 28.4 to 28.7
+  - `wp-plugin/redis-cache` 2.8.0 to 3.0.0, with the `composer.json` range raised to `^3.0`
+- Changed the changelog to give each change set its own SemVer version and date (`CHANGELOG.md`, `MAINTENANCE.md`)
+- Documented that a versioned image tag and its `latest` tag are always pushed together, and moved the Snyk steps to the containerized Snyk CLI (`MAINTENANCE.md`, `CLAUDE.md`, `wp-content/themes/core-wp/CLAUDE.md`)
+
+## [0.1.0] - 2026-09-13
 
 ### Security
 
@@ -78,8 +115,6 @@ All notable changes to this project will be documented in this file.
 - Fixed the nginx healthcheck so the container no longer reports unhealthy when WordPress answers the check with a canonical 301 redirect away from `127.0.0.1`. The dev check sends `Host: localhost` so WordPress returns a 200, and the prod check accepts any served `200/301/302` response because its canonical host is unknown at build time (`compose.yml`, `compose.prod.yml`)
 - Bumped base images: `nginx` 1.29-alpine→1.31-alpine, `redis` 7-alpine→8-alpine, and `mariadb` 11.8→12.3 LTS. Both compose files set `MARIADB_AUTO_UPGRADE` so the image runs `mariadb-upgrade` on an existing data directory (`compose.yml`, `compose.prod.yml`)
 - Updated the WordPress environment to 7.1 through the rebuilt `digitalblake/core-wp-wordpress` image `php8.4-1.2.1` (Alpine 3.24.1, PHP 8.4.25, XDebug 3.4.7→3.5.3, `apk upgrade` for base CVEs). The rolling `php8.4-latest` tag is unchanged. The image entrypoint copies core only into an empty `./wordpress` directory, so an existing install updates through `wp core update` or WordPress automatic updates (`compose.yml`, `docker/wordpress/Dockerfile.prod`)
-
-### Removed
 
 ## [0.0.3] - 2026-04-30
 
